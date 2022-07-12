@@ -7,7 +7,8 @@ function pondswitch(id) {
         console.log(ponds.active[id])
         document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
         document.getElementById("pond-btn-" + id).style = "border: 1px solid rgba(255, 255, 255, 0);"
-    
+        updateponds();
+
     } else {
         if (ponds.pondslimit > ponds.activeponds) {
             ponds.activeponds += 1;
@@ -15,11 +16,12 @@ function pondswitch(id) {
             console.log(ponds.active[id])
             document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
             document.getElementById("pond-btn-" + id).style = "border: 1px solid rgba(255, 255, 255, 0); border-image: linear-gradient(90deg, var(--color-1), var(--color-2)) 1;"
-
+            updateponds();
 
 
         }else if (ponds.pondslimit == ponds.activeponds) {
             document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
+            updateponds();
 
 
 
@@ -27,6 +29,19 @@ function pondswitch(id) {
     }
 }
 
+function updateponds() {
+  for (i = 0; i < ponds.unlocked.length; i++) {
+    if (ponds.unlocked[i] == false) {
+      document.getElementById("pond-btn-" + ponds.id[i]).style.display = 'none';
+    } else if (ponds.unlocked[i] == true) {
+      document.getElementById("pond-btn-" + ponds.id[i]).style.display = '';
+
+    }
+  }
+  document.getElementById("pond-curactiv").innerHTML = ponds.activeponds;
+  document.getElementById("pond-maxactiv").innerHTML = ponds.pondslimit;
+
+}
 
 
 setInterval(function() {
@@ -63,7 +78,7 @@ function pondtabswitch(id) {
     }
   }
 }
-/*  INVENTORY SYSTEM */
+/*  INFO SYSTEM */
 
 function updateInventory() {
   for (i = 0; i < fish.name.length; i++) {
@@ -72,23 +87,48 @@ function updateInventory() {
   }
 }
 
+function infotabswitch(id) {
+  if (infotab.active[id] == false) {
+    for (i = 0; i < infotab.active.length; i++) {
+      if (infotab.active[i] == true) {
+        document.getElementById("info-tab-" + infotab.name[i]).style.display = 'none';
+        infotab.active[i] = false;
+        document.getElementById("info-tab-" + infotab.name[i]).style.animation = 'windowfadeout var(--animationtime)'
+
+      } else if (infotab.active[i] == false & infotab.name[i] == infotab.name[id]) {
+        document.getElementById("info-tab-" + infotab.name[id]).style.display = '';
+        infotab.active[id] = true;
+        document.getElementById("info-tab-" + infotab.name[id]).style.animation = 'windowfadein var(--animationtime)'
+      }
+    }
+  }
+}
+
+function updateinfotab() {
+  for (i = 0; i < infotab.active.length; i++) {
+    if (infotab.active[i] == false) {
+      document.getElementById("info-tab-" + infotab.name[i]).style.display = 'none';
+    }
+    
+  }
+  document.getElementById("shop-ponds-buynextpond").innerHTML = ponds.nextpondprice;
+}
+
+
 /* time */
 
 setInterval(function() {
   if (gameTDM.minute < 59) {
     gameTDM.minute += 1;
-    console.log(gameTDM.hour + ':' + gameTDM.minute)
     displayclock()
   }else if (gameTDM.minute == 59 || gameTDM.minute > 59) {
     if (gameTDM.hour < 24) {
       gameTDM.minute = 0;
       gameTDM.hour += 1;
-      console.log(gameTDM.hour + ':' + gameTDM.minute)
       displayclock()
     }else if (gameTDM.hour == 24 & gameTDM.minute == 59) {
       gameTDM.hour = 0;
       gameTDM.minute = 0;
-      console.log(gameTDM.hour + ':' + gameTDM.minute)
       displayclock()
     }
   }
@@ -173,6 +213,27 @@ function updateshoptab() {
     if (shoptab.active[i] == false) {
       document.getElementById("shop-tab-" + shoptab.name[i]).style.display = 'none';
     }
+    
+  }
+  document.getElementById("shop-ponds-buynextpond").innerHTML = ponds.nextpondprice;
+}
+
+function buyPond() {
+  console.log('1');
+  if (ponds.nextpondprice <= game.money) {
+    console.log('2');
+    game.money -= ponds.nextpondprice;
+    ponds.active[ponds.nextpondid] = true;
+    ponds.nextpondid += 1;
+    ponds.nextpondprice = ponds.nextpondprice * 4;
+    updateshoptab();
+    updateponds();
   }
 }
-updateshoptab()
+
+
+
+
+updateshoptab();
+updateponds();
+updateinfotab();

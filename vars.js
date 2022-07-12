@@ -1,5 +1,5 @@
 var game = {
-    
+    money: 101,
 }
 
 var gameTDM = {
@@ -58,6 +58,18 @@ var shoptab = {
     ],
 }
 
+var infotab = {
+    name: [
+        'inventory',
+        'weather',
+        'stats',
+    ],
+    active: [
+        true,
+        false,
+        false,
+    ]
+}
 var ponds = {
     name: [
         'shallow-pond',
@@ -75,6 +87,13 @@ var ponds = {
         1,
         1,
     ],
+    unlocked: [
+        true, /* DO NOT CHANGE */
+        false,
+    ],
+    nextpondprice: 150,
+    nextpondid: 1,
+
     activeponds: 0,
     pondslimit: 1,
     interval: 1,

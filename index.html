@@ -25,7 +25,7 @@
         <div class="dropdown-content">
           <a onclick="openwindow(0)">welcome message</a>
           <a onclick="openwindow(1)">ponds</a>
-          <a onclick="openwindow(3)">inventory</a>
+          <a onclick="openwindow(3)">info</a>
           <a onclick="openwindow(4)">market</a>
 
         </div>
@@ -85,7 +85,7 @@
 
   </div>
   <div id="pond-fishing-tab" class="pond-fishing-tab">
-      
+      <h1 class="pond-stats">active: <span id="pond-curactiv">0</span>/<span id="pond-maxactiv">1</span></h1>
   </div>
   
 </div>
@@ -118,11 +118,28 @@
 
 <div id="win-3" class="window" style="height: 25% !important; width: 20% !important; height: 25% !important; width: 20% !important;left: 40%;top: 30%;"> 
   <div id="" class="windowbar">
-      inventory<button class="win-close" onclick="closewindow(3);">x</button><button class="win-close win-minimise" onclick="minimisewindow(3);">-</button> 
+      info<button class="win-close" onclick="closewindow(3);">x</button><button class="win-close win-minimise" onclick="minimisewindow(3);">-</button> 
   </div>
   <div id="win-cont-3" class="content">
-    <h1 class="inventory-text">Cod: <span id="cod-inv-text">0</span></h1>
-    <h1 class="inventory-text">Bass: <span id="bass-inv-text">0</span></h1>
+    <div class="pond-tab-div">
+      <button class="pond-tab-switcher" onclick="infotabswitch(0)">inventory</button>
+      <button class="pond-tab-switcher" onclick="infotabswitch(1)">weather</button>
+      <button class="pond-tab-switcher" onclick="infotabswitch(2)">stats</button>
+
+    </div>
+    <div id="info-tab-inventory">
+      <h1 class="inventory-text">Cod: <span id="cod-inv-text">0</span></h1>
+      <h1 class="inventory-text">Bass: <span id="bass-inv-text">0</span></h1>
+    </div>
+
+    <div id="info-tab-weather">
+      weather  
+    </div>
+
+
+    <div id="info-tab-stats">
+      stats
+    </div>
 
   </div>
 </div>
@@ -142,7 +159,7 @@
       <div class="shop-section">
         <center>
         <h1 class="shop-section-text">ponds</h1>
-        <button class="shop-button">buy next pond </br>$<span id="shop-ponds-buynextpond">100</span></button>
+        <button class="shop-button" onclick="buyPond();">buy next pond </br>$<span id="shop-ponds-buynextpond">100</span></button>
         </br>
         <button class="shop-button">more pond slots </br>$<span id="shop-ponds-buymorepondslots">500</span></button>
 
@@ -151,13 +168,14 @@
       <div class="shop-section">
         <center>
         <h1 class="shop-section-text">ponds</h1>
-          <button class="shop-button">buy next pond $<span id="shop-ponds-buynextpond">100</span></button>
+          <button class="shop-button" >buy next pond $<span id="shop-ponds-buynextpond">100</span></button>
           </center>
         </div>
 
     </div>
     <div id="shop-tab-sell">
-      sell
+      <button class="shop-button">sell all fish </button>
+
     </div>
     <div id="shop-tab-shipments">
       shipments

@@ -23,6 +23,7 @@ function makeDraggable (elmnt) {
     let currentPosX = 0, currentPosY = 0, previousPosX = 0, previousPosY = 0;
     if (elmnt.querySelector('.windowbar')) {
         elmnt.querySelector('.windowbar').onmousedown = dragMouseDown;
+        
     } 
     else {
         elmnt.onmousedown = dragMouseDown;
@@ -34,6 +35,7 @@ function makeDraggable (elmnt) {
         previousPosY = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
+
     }
 
     function elementDrag (e) {

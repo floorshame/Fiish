@@ -130,10 +130,12 @@
     <div id="info-tab-inventory">
       <h1 class="inventory-text">Cod: <span id="cod-inv-text">0</span></h1>
       <h1 class="inventory-text">Bass: <span id="bass-inv-text">0</span></h1>
+      <h1 class="inventory-text">Money: <span id="money-inv-text">0</span></h1>
+
     </div>
 
     <div id="info-tab-weather">
-      weather  
+      <h1 id="weather-current"></h1>  
     </div>
 
 
@@ -174,8 +176,15 @@
 
     </div>
     <div id="shop-tab-sell">
-      <button class="shop-button">sell all fish </button>
-
+      <div class="shop-section">
+      <select class="shop-drpdwn" id="shop-sell-fish">
+        <option value="0">Cod</option>
+        <option value="1">Bass</option>
+      </select>
+      <center>
+      <button onclick="sellfish();" class="shop-button">sell fish </button>
+    </center>
+      </div>
     </div>
     <div id="shop-tab-shipments">
       shipments

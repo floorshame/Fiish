@@ -61,7 +61,11 @@ html {
 
 }
 
-
+.shop-drpdwn {
+ background-color: var(--color-3); 
+ border: ;
+ width: 100%;
+}
 #win-cont-4 {
 }
 .pond-tab-switcher:hover {
@@ -107,6 +111,7 @@ html {
     color: white;
     font-size: 100%;
     text-shadow: 2px 2px black;
+    
 }
 
 .win-close {

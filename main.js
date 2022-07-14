@@ -43,6 +43,37 @@ function updateponds() {
 
 }
 
+function updateweather() {
+  if (gameTDM.hour < 6 || gameTDM.hour > 18) {
+    gameTDM.currentweather = 3;
+    console.log(gameTDM.currentweather);
+    gameTDM.weatherset = false;
+  }else if (gameTDM.hour >= 6 && gameTDM.hour <= 18 && gameTDM.weatherset == false) {
+    let x = Math.floor((Math.random() * 3) + 1);
+    switch(x) {
+      case 1:
+        gameTDM.weatherset = true;
+        gameTDM.currentweather = 0;
+        createNotification('Todays weather is: ' + gameTDM.weatheroptions[gameTDM.currentweather], 10)
+      break;
+      case 2:
+        gameTDM.weatherset = true;
+        gameTDM.currentweather = 1;
+        createNotification('Todays weather is: ' + gameTDM.weatheroptions[gameTDM.currentweather], 10)
+
+      break;
+      case 3:
+        gameTDM.weatherset = true;
+        gameTDM.currentweather = 2;
+        createNotification('Todays weather is: ' + gameTDM.weatheroptions[gameTDM.currentweather], 10)
+
+      break;
+  
+    }
+  }
+  document.getElementById("weather-current").innerHTML = gameTDM.weatheroptions[gameTDM.currentweather]
+
+}
 
 setInterval(function() {
     if (ponds.activeponds >= 1) {
@@ -85,6 +116,8 @@ function updateInventory() {
     var idfishthingmlg = document.getElementById(fish.name[i] + "-inv-text");
     idfishthingmlg.innerHTML = fish.owned[i];
   }
+  document.getElementById("money-inv-text").innerHTML = game.money;
+
 }
 
 function infotabswitch(id) {
@@ -120,16 +153,19 @@ function updateinfotab() {
 setInterval(function() {
   if (gameTDM.minute < 59) {
     gameTDM.minute += 1;
-    displayclock()
+    displayclock();
+    updateweather();
   }else if (gameTDM.minute == 59 || gameTDM.minute > 59) {
     if (gameTDM.hour < 24) {
       gameTDM.minute = 0;
       gameTDM.hour += 1;
       displayclock()
+      updateweather();
     }else if (gameTDM.hour == 24 & gameTDM.minute == 59) {
       gameTDM.hour = 0;
       gameTDM.minute = 0;
-      displayclock()
+      displayclock();
+      updateweather();
     }
   }
 }, 1000);
@@ -231,9 +267,25 @@ function buyPond() {
   }
 }
 
+function sellfish() {
+  var fishownedtmp = fish.owned[document.getElementById("shop-sell-fish").value]
+  if (fishownedtmp >= 1) {
+    game.money = game.money + fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti
+    createNotification('Sold: ' + fishownedtmp + ' Fish', 3)
+    fish.owned[document.getElementById("shop-sell-fish").value] = 0;
+    updateInventory();
+  } else {
+    createNotification("You don't have any fish!", 1)
 
+  }
+}
 
 
 updateshoptab();
 updateponds();
 updateinfotab();
+updateweather();
+updateInventory();
+function hello() {
+  
+}

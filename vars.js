@@ -1,18 +1,20 @@
 var game = {
-    money: 101,
+    money: 100,
 }
 
 var gameTDM = {
     weatheroptions: [
-        'sunny',
-        'cloudy',
-        'rainy',
-        'night'
+        'Sunny', /* 0 */
+        'Cloudy',
+        'Rainy',
+        'Night' /* 3 */
     ],
     currentweather: 0,
     hour: 6,
     minute: 00,
     displayminute: 00,
+    weatherset: false,
+    weathernotifactions: true,
 }
 
 var fish = {
@@ -31,7 +33,12 @@ var fish = {
     owned: [
         0,
         0,
-    ]
+    ],
+    sellprice: [
+        1,
+        10,
+    ],
+    sellmulti: 1,
 }
 
 var pondtab = {

@@ -38,8 +38,8 @@ function updateponds() {
 
     }
   }
-  document.getElementById("pond-curactiv").innerHTML = ponds.activeponds;
-  document.getElementById("pond-maxactiv").innerHTML = ponds.pondslimit;
+  document.getElementById("pond-curactiv").innerHTML = ponds.activeponds; //* DO NOT SHORTEN THESE *//
+  document.getElementById("pond-maxactiv").innerHTML = ponds.pondslimit; //* DO NOT SHORTEN THESE *//
 
 }
 
@@ -113,11 +113,10 @@ function pondtabswitch(id) {
 
 function updateInventory() {
   for (i = 0; i < fish.name.length; i++) {
-    var idfishthingmlg = document.getElementById(fish.name[i] + "-inv-text");
-    idfishthingmlg.innerHTML = fish.owned[i];
-  }
-  document.getElementById("money-inv-text").innerHTML = game.money;
+    shortennum(fish.owned[i], fish.name[i] + "-inv-text");
 
+  }
+  shortennum(game.money, "money-inv-text")
 }
 
 function infotabswitch(id) {
@@ -144,7 +143,6 @@ function updateinfotab() {
     }
     
   }
-  document.getElementById("shop-ponds-buynextpond").innerHTML = ponds.nextpondprice;
 }
 
 
@@ -251,8 +249,10 @@ function updateshoptab() {
     }
     
   }
-  document.getElementById("shop-ponds-buynextpond").innerHTML = ponds.nextpondprice;
+  shortennum(ponds.nextpondprice, "shop-ponds-buynextpond");
+
 }
+
 
 function buyPond() {
   console.log('1');
@@ -281,9 +281,9 @@ function sellfish() {
 }
 
 
-updateshoptab();
-updateponds();
-updateinfotab();
+updateshoptab(); ////
+updateponds(); ////
+updateinfotab(); ////
 updateweather();
 updateInventory();
 function hello() {

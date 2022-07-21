@@ -11,8 +11,8 @@ var windowsopened = {
         false,
         false,
         false,
-        false,
         true,
+        false,
         true,
     ],
     /*minimised: [

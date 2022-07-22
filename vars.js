@@ -9,6 +9,19 @@ var gameTDM = {
         'Rainy',
         'Night' /* 3 */
     ],
+    weathericon: [
+        "&#xe518",
+        "&#xe2bd",
+        "&#xf176",
+        "&#xe51c",
+
+    ],
+    weatherid: [
+        0,
+        1,
+        2,
+        3,
+    ],
     currentweather: 0,
     hour: 6,
     minute: 00,
@@ -38,6 +51,10 @@ var fish = {
         1,
         10,
     ],
+    fishmulti: [
+        1,
+        1,
+    ],
     sellmulti: 1,
 }
 
@@ -50,6 +67,7 @@ var pondtab = {
         true,
         false,
     ],
+    
 }
 
 var shoptab = {
@@ -98,6 +116,11 @@ var ponds = {
         true, /* DO NOT CHANGE */
         false,
     ],
+    weatherboost: [
+        0,
+        3
+    ],
+
     nextpondprice: 150,
     nextpondid: 1,
 

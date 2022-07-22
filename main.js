@@ -6,7 +6,7 @@ function pondswitch(id) {
         ponds.active[id] = false;
         console.log(ponds.active[id])
         document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
-        document.getElementById("pond-btn-" + id).style = "border: 1px solid rgba(255, 255, 255, 0);"
+        document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid rgba(255, 255, 255, 0);"
         updateponds();
 
     } else {
@@ -15,7 +15,7 @@ function pondswitch(id) {
             ponds.active[id] = true;
             console.log(ponds.active[id])
             document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
-            document.getElementById("pond-btn-" + id).style = "border: 1px solid rgba(255, 255, 255, 0); border-image: linear-gradient(90deg, var(--color-1), var(--color-2)) 1;"
+            document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid var(--color-1);"
             updateponds();
 
 
@@ -33,9 +33,13 @@ function updateponds() {
   for (i = 0; i < ponds.unlocked.length; i++) {
     if (ponds.unlocked[i] == false) {
       document.getElementById("pond-btn-" + ponds.id[i]).style.display = 'none';
+      
+      document.getElementById("pond-weather-" + ponds.id[i]).innerHTML =  gameTDM.weathericon[ponds.weatherboost[i]];
+
     } else if (ponds.unlocked[i] == true) {
       document.getElementById("pond-btn-" + ponds.id[i]).style.display = '';
 
+      document.getElementById("pond-weather-" + ponds.id[i]).innerHTML =  gameTDM.weathericon[ponds.weatherboost[i]];
     }
   }
   document.getElementById("pond-curactiv").innerHTML = ponds.activeponds; //* DO NOT SHORTEN THESE *//
@@ -48,6 +52,8 @@ function updateweather() {
     gameTDM.currentweather = 3;
     console.log(gameTDM.currentweather);
     gameTDM.weatherset = false;
+    document.getElementById("cur-weather-icon").innerHTML = gameTDM.weathericon[3]
+
   }else if (gameTDM.hour >= 6 && gameTDM.hour <= 18 && gameTDM.weatherset == false) {
     let x = Math.floor((Math.random() * 3) + 1);
     switch(x) {
@@ -55,17 +61,20 @@ function updateweather() {
         gameTDM.weatherset = true;
         gameTDM.currentweather = 0;
         createNotification('Todays weather is: ' + gameTDM.weatheroptions[gameTDM.currentweather], 10)
-      break;
+        document.getElementById("cur-weather-icon").innerHTML = gameTDM.weathericon[0]
+        break;
       case 2:
         gameTDM.weatherset = true;
         gameTDM.currentweather = 1;
         createNotification('Todays weather is: ' + gameTDM.weatheroptions[gameTDM.currentweather], 10)
+        document.getElementById("cur-weather-icon").innerHTML = gameTDM.weathericon[1]
 
       break;
       case 3:
         gameTDM.weatherset = true;
         gameTDM.currentweather = 2;
         createNotification('Todays weather is: ' + gameTDM.weatheroptions[gameTDM.currentweather], 10)
+        document.getElementById("cur-weather-icon").innerHTML = gameTDM.weathericon[2]
 
       break;
   
@@ -80,8 +89,20 @@ setInterval(function() {
         for (i = 0; i < fish.pond.length; i++) { /* every fish */
             var fishpondactive = fish.pond[i] /* gets the fish pond */
             if (ponds.active[fishpondactive] == true) { /* need to check to see if that pond is active */
-                fish.owned[i] += 1;
-                updateInventory();
+                if (ponds.weatherboost[fishpondactive] == gameTDM.currentweather) {
+                  let x = Math.floor((Math.random() * 10) + 1);
+                  if (x == 5) {
+                    fish.owned[i] += 1 * fish.fishmulti[i] * 2;
+                    updateInventory();
+                    
+                  } else {
+                    fish.owned[i] += 1 * fish.fishmulti[i];
+                    updateInventory();  
+                  }
+                } else {
+                  fish.owned[i] += 1 * fish.fishmulti[i];
+                  updateInventory();
+                }
             }
         }
     }

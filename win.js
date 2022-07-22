@@ -9,9 +9,9 @@ var windowsopened = {
     ],
     active: [
         false,
-        false,
-        false,
         true,
+        false,
+        false,
         false,
         true,
     ],

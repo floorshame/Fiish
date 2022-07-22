@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="css.css">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <title>fiish</title>
 <html>
@@ -31,7 +31,8 @@
         </div>
       </div>   
       <h1 class="clock-text">
-        <span  id="clock-text">6:00</span>
+        <span style="display: inline-block;"  id="clock-text">6:00</span> <span style="display: inline-block;" id="cur-weather-icon" class="material-symbols-outlined">&#xE87C;</span>
+
     
     </h1>
     
@@ -72,11 +73,13 @@
       <div class="pondbutton">
 
         <button onclick="pondswitch(0)" id="pond-btn-0" class="pond-selectbtn">
-          Shallow Pond
+          Shallow Pond </br>
+          <span tooltip="hi" style="display: inline-block;" id="pond-weather-0" class="material-symbols-outlined">&#xE87C;</span>
         </button>
 
         <button onclick="pondswitch(1)" id="pond-btn-1" class="pond-selectbtn">
-          Calm Pond
+          Calm Pond</br>
+          <span tooltip="hi" style="display: inline-block;" id="pond-weather-1" class="material-symbols-outlined">&#xE87C;</span>
         </button>
 
       </div>

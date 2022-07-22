@@ -271,11 +271,15 @@ border: 1px solid var(--color-2);
   font-size: 15px;
   margin: 5px;
   transition: 0.3s;
+  border-radius:var(--borderradius);
+  width: 30%;
 }
 
 .pond-selectbtn:hover {
   cursor: pointer;
   color: var(--color-1);
+  border: var(--borderwith) var(--color-2) solid;
+
 }
 
 .Notification {
@@ -365,7 +369,13 @@ border: 1px solid var(--color-2);
 
 
 
-
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
 
 
 

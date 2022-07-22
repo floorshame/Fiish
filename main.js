@@ -5,7 +5,6 @@ function pondswitch(id) {
         ponds.activeponds -= 1;
         ponds.active[id] = false;
         console.log(ponds.active[id])
-        document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
         document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid rgba(255, 255, 255, 0);"
         updateponds();
 
@@ -14,13 +13,11 @@ function pondswitch(id) {
             ponds.activeponds += 1;
             ponds.active[id] = true;
             console.log(ponds.active[id])
-            document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
             document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid var(--color-1);"
             updateponds();
 
 
         }else if (ponds.pondslimit == ponds.activeponds) {
-            document.getElementById("ponds-active-span").innerHTML = ponds.activeponds;
             updateponds();
 
 

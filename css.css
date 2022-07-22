@@ -78,6 +78,15 @@ color: white;
 .shop-drpdwn:hover {
 border: 1px solid var(--color-2);
 }
+
+.fish-bar {
+  margin-left: 1px;
+  width: 98%;
+  bottom: 0;
+  position: fixed;
+  margin-bottom: 5px;
+}
+
 #win-cont-4 {
 }
 .pond-tab-switcher:hover {

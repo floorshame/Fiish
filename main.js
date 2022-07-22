@@ -94,20 +94,35 @@ setInterval(function() {
                   if (x == 5) {
                     fish.owned[i] += 1 * fish.fishmulti[i] * 2;
                     updateInventory();
+                    document.getElementById("fish-bar").value = 0;
+
                     
                   } else {
                     fish.owned[i] += 1 * fish.fishmulti[i];
                     updateInventory();  
+                    document.getElementById("fish-bar").value = 0;
+
                   }
                 } else {
                   fish.owned[i] += 1 * fish.fishmulti[i];
                   updateInventory();
+                  document.getElementById("fish-bar").value = 0;
+
                 }
             }
         }
     }
 }, ponds.interval * 1000);
 
+setInterval(function() {
+  if (ponds.activeponds >= 1) {
+  document.getElementById("fish-bar").value += 10;
+  } else {
+    document.getElementById("fish-bar").value = 0;
+
+  }
+
+}, ponds.interval * 10);
 
 document.getElementById("pond-fishing-tab").style.display = 'none';
 

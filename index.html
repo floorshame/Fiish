@@ -74,17 +74,17 @@
 
         <button onclick="pondswitch(0)" id="pond-btn-0" class="pond-selectbtn">
           Shallow Pond </br>
-          <span tooltip="hi" style="display: inline-block;" id="pond-weather-0" class="material-symbols-outlined">&#xE87C;</span>
+          <span title="Weather boost" style="display: inline-block;" id="pond-weather-0" class="material-symbols-outlined">&#xE87C;</span>
         </button>
 
         <button onclick="pondswitch(1)" id="pond-btn-1" class="pond-selectbtn">
           Calm Pond</br>
-          <span tooltip="hi" style="display: inline-block;" id="pond-weather-1" class="material-symbols-outlined">&#xE87C;</span>
+          <span title="Weather boost" style="display: inline-block;" id="pond-weather-1" class="material-symbols-outlined">&#xE87C;</span>
         </button>
 
       </div>
       <span id="ponds-active-span">0</span>
-
+      <progress class="fish-bar" id="fish-bar" value="0" max="1000"></progress>
 
   </div>
   <div id="pond-fishing-tab" class="pond-fishing-tab">

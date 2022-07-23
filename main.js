@@ -285,13 +285,10 @@ function updateshoptab() {
 
 }
 
-
 function buyPond() {
-  console.log('1');
   if (ponds.nextpondprice <= game.money) {
-    console.log('2');
     game.money -= ponds.nextpondprice;
-    ponds.active[ponds.nextpondid] = true;
+    ponds.unlocked[ponds.nextpondid] = true;
     ponds.nextpondid += 1;
     ponds.nextpondprice = ponds.nextpondprice * 4;
     updateshoptab();

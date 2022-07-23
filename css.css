@@ -99,7 +99,6 @@ border: 1px solid var(--color-2);
 .pond-tab-div {
   border-bottom: var(--borderwith) solid white;
   border-image: linear-gradient(120deg, var(--color-1), var(--color-2)) 1;
-
 }
 .inventory-text {
   color: white;
@@ -308,6 +307,7 @@ border: 1px solid var(--color-2);
 
   font-family: 'Comfortaa', cursive;
   padding: 0px;
+  z-index: 999;
 }
 /* pond tab */
 

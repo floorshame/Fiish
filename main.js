@@ -78,7 +78,7 @@ function updateweather() {
     }
   }
   document.getElementById("weather-current").innerHTML = gameTDM.weatheroptions[gameTDM.currentweather]
-
+  document.getElementById("cur-weather-icon").innerHTML = gameTDM.weathericon[gameTDM.currentweather]
 }
 
 setInterval(function() {
@@ -253,7 +253,6 @@ function createNotification(text, seconds){
 
   
 }
-createNotification('game has loaded', 2)
 
 
 /* SHOP SYSTEM */
@@ -314,11 +313,128 @@ function sellfish() {
 }
 
 
-updateshoptab(); ////
-updateponds(); ////
-updateinfotab(); ////
-updateweather();
-updateInventory();
-function hello() {
-  
+// * SOUNDS * //
+
+var SOUNDrain = new Audio('sdns/rain.wav'); 
+SOUNDrain.loop = true;
+
+
+setInterval(function() {
+  if (document.getElementById("settings-ESounds").checked == true) {
+    if (gameTDM.currentweather == 2) {
+      
+      SOUNDrain.addEventListener('ended', function() {
+        SOUNDrain.currentTime = 0;
+        SOUNDrain.play();
+      }, true);
+      SOUNDrain.play();
+
+    }
+
+  } else   if (document.getElementById("settings-ESounds").checked == false) {
+    SOUNDrain.pause();
+    SOUNDrain.currentTime = 0;
+    
+  }
+}), 100;
+
+
+function saveGame() {
+  var gamedata = {
+      /* main vars*/
+      money: game.money,
+
+      /* weather time */
+      currentWeather: gameTDM.currentweather,
+      currentHour: gameTDM.hour,
+      currentMinute: gameTDM.minute,
+      currentWeatherSet: gameTDM.weatherset,
+      currentWeatherNotications: gameTDM.weathernotifactions,
+
+      /* fish data */
+      fishOwned: fish.owned,
+      fishSellPrice: fish.sellprice,
+      fishMulti: fish.fishmulti,
+      fishSellMulti: fish.sellmulti,
+
+      /* ponds data */
+      pondsActive: ponds.active,
+      pondsFishPer: ponds.fishper,
+      pondsUnlocked: ponds.unlocked,
+      pondsNPP: ponds.nextpondprice,
+      pondsNPID: ponds.nextpondid,
+      pondsActive: ponds.activeponds,
+      pondsLimit: ponds.pondsLimit,
+      pondsInterval: ponds.interval
+  };
+  localStorage.setItem("gamedata", JSON.stringify(gamedata));
+  createNotification('Game has been saved', 3)
+
 }
+function loadGame() {
+  var gamedata =  JSON.parse(localStorage.getItem("gamedata"));
+  if (localStorage.getItem("gamedata") !== null) {
+      if (typeof gamedata.money !== "undefined") game.money = gamedata.money;    
+      
+      if (typeof gamedata.currentWeather !== "undefined") gameTDM.currentweather = gamedata.currentWeather;    
+      if (typeof gamedata.currentHour !== "undefined") gameTDM.hour = gamedata.currentHour;    
+      if (typeof gamedata.currentMinute !== "undefined") gameTDM.minute = gamedata.currentMinute;    
+      if (typeof gamedata.currentWeatherSet !== "undefined") gameTDM.weatherset = gamedata.currentWeatherSet;    
+      if (typeof gamedata.currentWeatherNotications !== "undefined") gameTDM.weathernotifactions = gamedata.currentWeatherNotications;    
+      if (typeof gamedata.fishSellMulti !== "undefined") fish.sellmulti = gamedata.fishSellMulti;    
+      if (typeof gamedata.pondsNPP !== "undefined") ponds.nextpondprice = gamedata.pondsNPP;    
+      if (typeof gamedata.pondsNPID !== "undefined") ponds.nextpondid = gamedata.pondsNPID;    
+      if (typeof gamedata.pondsActive !== "undefined") ponds.activeponds = gamedata.pondsActive;    
+      if (typeof gamedata.pondsLimit !== "undefined") ponds.pondslimit = gamedata.pondsLimit;    
+      if (typeof gamedata.pondsInterval !== "undefined") ponds.interval = gamedata.pondsInterval;    
+
+
+      if (typeof gamedata.fishOwned !== "undefined") {
+          for (i = 0; i < gamedata.fishOwned.length; i++) {
+              fish.owned[i] = gamedata.fishOwned[i];
+          }
+      }
+
+      if (typeof gamedata.fishSellPrice !== "undefined") {
+          for (i = 0; i < gamedata.fishSellPrice.length; i++) {
+              fish.sellprice[i] = gamedata.fishSellPrice[i];
+          }
+      }
+
+      if (typeof gamedata.fishMulti !== "undefined") {
+          for (i = 0; i < gamedata.fishMulti.length; i++) {
+              fish.fishmulti[i] = gamedata.fishMulti[i];
+          }
+      }
+
+
+
+      if (typeof gamedata.pondsActive !== "undefined") {
+          for (i = 0; i < gamedata.pondsActive.length; i++) {
+              ponds.active[i] = gamedata.pondsActive[i];
+          }
+      }
+
+      if (typeof gamedata.pondsFishPer !== "undefined") {
+          for (i = 0; i < gamedata.pondsFishPer.length; i++) {
+              ponds.fishper[i] = gamedata.pondsFishPer[i];
+          }
+      }
+
+      if (typeof gamedata.pondsUnlocked !== "undefined") {
+          for (i = 0; i < gamedata.pondsUnlocked.length; i++) {
+              ponds.unlocked[i] = gamedata.pondsUnlocked[i];
+          }
+      }
+      }
+      updateall();
+      createNotification('game has loaded', 2)
+}
+function updateall() {
+  updateshoptab(); ////
+  updateponds(); ////
+  updateinfotab(); ////
+  updateweather();
+  updateInventory();
+}
+

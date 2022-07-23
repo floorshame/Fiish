@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="css.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="icon" href="img/fiish.png">
 
 <title>fiish</title>
 <html>
@@ -12,7 +13,7 @@
           
         </button>
         <div class="dropdown-content">
-          <a>save</a>
+          <a onclick="saveGame()">save</a>
           <a>load</a>
           <a onclick="openwindow(2)">settings</a>
 
@@ -114,11 +115,13 @@
   </br>
   shadow color: <input class="input-color-picker" type="color" 
   data-id="4" name="Colors" value="#000000">
+</br>
+  <input type="checkbox" id="settings-ESounds" checked> Enviromental Sounds 
 
   </div>
 </div>
 
-<div id="win-3" class="window" style="height: 45% !important; width: 45% !important; width: 20% !important;left: 40%;top: 30%;"> 
+<div id="win-3" class="window" style="height: 45% !important; width: 45% !important; left: 40%;top: 30%;"> 
   <div id="" class="windowbar">
       info<button class="win-close" onclick="closewindow(3);">x</button><button class="win-close win-minimise" onclick="minimisewindow(3);">-</button> 
   </div>
@@ -194,15 +197,30 @@
   </div>
 </div>
 
+<div id="win-5" class="window" style="height: 45% !important; width: 45% !important;left: 40%;top: 30%;"> 
+  <div id="" class="windowbar">
+      actions<button class="win-close" onclick="closewindow(5);">x</button><button class="win-close win-minimise" onclick="minimisewindow(5);">-</button> 
+  </div>
+  <div id="win-cont-5" class="content">
+    <div class="pond-tab-div">
+      <button class="pond-tab-switcher" onclick="shoptabswitch(0)">buy</button>
+      <button class="pond-tab-switcher" onclick="shoptabswitch(1)">sell</button>
+      <button class="pond-tab-switcher" onclick="shoptabswitch(2)">shipments</button>
+
+    </div>
+  </div>
+</div>
 
 
 <div id="Noti" class="Notification">
 </div>
+
 
 </html>
 <script type="text/javascript" src="num.js"></script>
 <script type="text/javascript" src="vars.js"></script>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="win.js"></script>
+<script type="text/javascript" src="saveload.js"></script>
 
 

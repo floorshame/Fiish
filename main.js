@@ -389,7 +389,7 @@ setInterval(function() {
     SOUNDrain.currentTime = 0;
     
   }
-}), 100;
+}, 100);
 
 
 function saveGame() {
@@ -485,6 +485,17 @@ function loadGame() {
       updateall();
       createNotification('game has loaded', 2)
 }
+
+document.addEventListener("keydown", function(event) {
+  if (event.ctrlKey && event.which == 83) { //ctrl + s //
+      event.preventDefault();
+      saveGame();
+  }
+}, false);
+
+setInterval(function() {
+  saveGame();
+}, 30000);
 function updateall() {
   updateshoptab(); ////
   updateponds(); ////

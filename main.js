@@ -493,6 +493,14 @@ document.addEventListener("keydown", function(event) {
   }
 }, false);
 
+function resetGame() {
+  if (confirm("Are you sure!")) {
+    var gamedata = {} ;
+    localStorage.setItem("gamedata", JSON.stringify(gamedata));
+    location.reload();
+}
+}
+
 setInterval(function() {
   saveGame();
 }, 30000);

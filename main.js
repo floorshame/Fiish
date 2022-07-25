@@ -1,4 +1,51 @@
 /* POND CODE */
+
+document.getElementById('command-bar').style.display = 'none';
+
+const cmdbardiv = document.getElementById('command-bar');
+const cmdbarinp = document.getElementById('cmd-bar-input');
+
+document.addEventListener("keydown", function(event) {
+  if (event.which == 191) { 
+      event.preventDefault();
+      commandbar();
+  }
+}, false);
+
+function commandbar() {
+
+  cmdbardiv.style.display = '';
+  cmdbarinp.value = '';
+  cmdbarinp.focus();
+
+}
+
+document.addEventListener('click', function handleClickOutsideBox(event) {
+  if (!cmdbardiv.contains(event.target)) {
+    cmdbardiv.style.display = 'none';
+    cmdbarinp.value = '';
+
+  }
+});
+
+cmdbarinp.addEventListener("keydown", function (e) {
+    if (e.keyCode == 13) {
+      cmdansw(e);
+    }
+});
+
+function cmdansw(e) {
+  var cmdtext = cmdbarinp.value;
+  if(cmdtext == "discord") {
+    window.open("https://discord.gg/mDyTKs63x7");
+  } else if(cmdtext == "sex") {
+    window.open("https://pornhub.com/gay");
+  } 
+  cmdbarinp.value = '';
+
+}
+
+
 function pondswitch(id) {
     console.log('0')
     if (ponds.active[id] == true) {
@@ -243,13 +290,13 @@ const NotificationConst = document.querySelector('.Notification')
 
 function createNotification(text, seconds){
   const NotificationN = document.createElement('div')
-  document.getElementById('Noti').style.animation = 'slidenotifaction var(--animationtime) forwards'
+  document.getElementById('Noti').style.animation = 'slidenotifaction 0.3s forwards'
   NotificationN.classList.add('toast')
   NotificationN.innerText = text
   NotificationN.style = 'padding: 10px; backdrop-filter: blur(8px); border-bottom-left-radius: var(--borderradius); border-bottom-right-radius: var(--borderradius);';
   NotificationConst.appendChild(NotificationN);
-  
-  setTimeout(() => {NotificationN.remove();}, seconds * 1000)
+
+  setTimeout(() => {NotificationN.remove(); }, seconds * 1000)
 
   
 }
@@ -309,6 +356,15 @@ function sellfish() {
   }
 }
 
+// * ACTIONS * //
+function updateactions() {
+  shortennum(ponds.nextpondprice, "actions-searchforpondp");
+
+}
+
+function actionSearch(searchitem, price, timehours) {
+
+}
 
 // * SOUNDS * //
 
@@ -340,6 +396,7 @@ function saveGame() {
   var gamedata = {
       /* main vars*/
       money: game.money,
+      dev: game.dev,
 
       /* weather time */
       currentWeather: gameTDM.currentweather,
@@ -384,6 +441,7 @@ function loadGame() {
       if (typeof gamedata.pondsActive !== "undefined") ponds.activeponds = gamedata.pondsActive;    
       if (typeof gamedata.pondsLimit !== "undefined") ponds.pondslimit = gamedata.pondsLimit;    
       if (typeof gamedata.pondsInterval !== "undefined") ponds.interval = gamedata.pondsInterval;    
+      if (typeof gamedata.dev !== "undefined") game.dev = gamedata.dev;    
 
 
       if (typeof gamedata.fishOwned !== "undefined") {
@@ -433,5 +491,6 @@ function updateall() {
   updateinfotab(); ////
   updateweather();
   updateInventory();
+  updateactions();
 }
 

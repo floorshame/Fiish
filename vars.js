@@ -1,5 +1,6 @@
 var game = {
     money: 0,
+    dev: false,
 }
 
 var gameTDM = {
@@ -49,7 +50,7 @@ var fish = {
     ],
     sellprice: [
         1,
-        10,
+        3,
     ],
     fishmulti: [
         1,
@@ -128,3 +129,4 @@ var ponds = {
     pondslimit: 1,
     interval: 1,
 }
+

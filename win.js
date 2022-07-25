@@ -9,7 +9,7 @@ var windowsopened = {
     ],
     active: [
         false,
-        true,
+        false,
         false,
         false,
         false,

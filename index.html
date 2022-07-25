@@ -206,8 +206,13 @@
       <button class="pond-tab-switcher" onclick="shoptabswitch(0)">buy</button>
       <button class="pond-tab-switcher" onclick="shoptabswitch(1)">sell</button>
       <button class="pond-tab-switcher" onclick="shoptabswitch(2)">shipments</button>
-
     </div>
+
+    <div class="action-left">
+      <button onclick="actionSearch(searchforpond, ponds.nextpondprice, 6);" class="action-btn">search for pond</br>$<span id="actions-searchforpondp">50</span></br>6 hours</button>
+      <button onclick="actionSearch(searchforpond, ponds.nextpondprice, 6);" class="action-btn">search for pond</br>$<span id="actions-searchforpondp">50</span></br>6 hours</button>
+    </div>
+
   </div>
 </div>
 
@@ -215,6 +220,9 @@
 <div id="Noti" class="Notification">
 </div>
 
+<div class="command-bar" id="command-bar">
+<input type="text" id="cmd-bar-input" class="cmd-bar-type" placeholder="type your command">
+</div>
 
 </html>
 <script type="text/javascript" src="num.js"></script>

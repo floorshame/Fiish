@@ -39,7 +39,9 @@ function cmdansw(e) {
   if(cmdtext == "discord") {
     window.open("https://discord.gg/mDyTKs63x7");
   } else if(cmdtext == "sex") {
-    window.open("https://pornhub.com/gay");
+    if (confirm("Are you over 18? (translation: do you wana see sex)")) {
+      window.open("https://pornhub.com/gay");
+    }
   } 
   cmdbarinp.value = '';
 
@@ -47,11 +49,9 @@ function cmdansw(e) {
 
 
 function pondswitch(id) {
-    console.log('0')
     if (ponds.active[id] == true) {
         ponds.activeponds -= 1;
         ponds.active[id] = false;
-        console.log(ponds.active[id])
         document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid rgba(255, 255, 255, 0);"
         updateponds();
 
@@ -59,7 +59,6 @@ function pondswitch(id) {
         if (ponds.pondslimit > ponds.activeponds) {
             ponds.activeponds += 1;
             ponds.active[id] = true;
-            console.log(ponds.active[id])
             document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid var(--color-1);"
             updateponds();
 
@@ -91,10 +90,21 @@ function updateponds() {
 
 }
 
+function updateponds2() {
+  for (i = 0; i < ponds.active.length; i++) {
+    if (ponds.active[i] == true) {
+      document.getElementById("pond-btn-" + i).style = "border: var(--borderwith) solid var(--color-1);"
+
+    } else if (ponds.active[i] == false) {
+      document.getElementById("pond-btn-" + i).style = "border: var(--borderwith) solid rgba(255, 255, 255, 0);"
+
+    }
+  }
+}
+
 function updateweather() {
   if (gameTDM.hour < 6 || gameTDM.hour > 18) {
     gameTDM.currentweather = 3;
-    console.log(gameTDM.currentweather);
     gameTDM.weatherset = false;
     document.getElementById("cur-weather-icon").innerHTML = gameTDM.weathericon[3]
 
@@ -274,7 +284,6 @@ const colorUpdate = (cssVars) => {
 colorPicker.forEach((item) => {
   item.addEventListener("input", (e) => {
     const cssPropName = `--color-${e.target.getAttribute("data-id")}`;
-    console.log(cssPropName);
     colorUpdate({
       [cssPropName]: e.target.value
     });
@@ -359,12 +368,35 @@ function sellfish() {
 // * ACTIONS * //
 function updateactions() {
   shortennum(ponds.nextpondprice, "actions-searchforpondp");
-
+  for (i = 0; i < actiontab.active.length; i++) {
+    if (actiontab.active[i] == false) {
+      document.getElementById("action-tab-" + actiontab.name[i]).style.display = 'none';
+    }
+    
+  }
 }
 
 function actionSearch(searchitem, price, timehours) {
 
 }
+
+function actiontabswitch(id) {
+  if (actiontab.active[id] == false) {
+    for (i = 0; i < actiontab.active.length; i++) {
+      if (actiontab.active[i] == true) {
+        document.getElementById("action-tab-" + actiontab.name[i]).style.display = 'none';
+        actiontab.active[i] = false;
+        document.getElementById("action-tab-" + actiontab.name[i]).style.animation = 'windowfadeout var(--animationtime)'
+
+      } else if (actiontab.active[i] == false & actiontab.name[i] == actiontab.name[id]) {
+        document.getElementById("action-tab-" + actiontab.name[id]).style.display = '';
+        actiontab.active[id] = true;
+        document.getElementById("action-tab-" + actiontab.name[id]).style.animation = 'windowfadein var(--animationtime)'
+      }
+    }
+  }
+}
+
 
 // * SOUNDS * //
 
@@ -412,12 +444,10 @@ function saveGame() {
       fishSellMulti: fish.sellmulti,
 
       /* ponds data */
-      pondsActive: ponds.active,
       pondsFishPer: ponds.fishper,
       pondsUnlocked: ponds.unlocked,
       pondsNPP: ponds.nextpondprice,
       pondsNPID: ponds.nextpondid,
-      pondsActive: ponds.activeponds,
       pondsLimit: ponds.pondsLimit,
       pondsInterval: ponds.interval
   };
@@ -438,7 +468,6 @@ function loadGame() {
       if (typeof gamedata.fishSellMulti !== "undefined") fish.sellmulti = gamedata.fishSellMulti;    
       if (typeof gamedata.pondsNPP !== "undefined") ponds.nextpondprice = gamedata.pondsNPP;    
       if (typeof gamedata.pondsNPID !== "undefined") ponds.nextpondid = gamedata.pondsNPID;    
-      if (typeof gamedata.pondsActive !== "undefined") ponds.activeponds = gamedata.pondsActive;    
       if (typeof gamedata.pondsLimit !== "undefined") ponds.pondslimit = gamedata.pondsLimit;    
       if (typeof gamedata.pondsInterval !== "undefined") ponds.interval = gamedata.pondsInterval;    
       if (typeof gamedata.dev !== "undefined") game.dev = gamedata.dev;    
@@ -459,14 +488,6 @@ function loadGame() {
       if (typeof gamedata.fishMulti !== "undefined") {
           for (i = 0; i < gamedata.fishMulti.length; i++) {
               fish.fishmulti[i] = gamedata.fishMulti[i];
-          }
-      }
-
-
-
-      if (typeof gamedata.pondsActive !== "undefined") {
-          for (i = 0; i < gamedata.pondsActive.length; i++) {
-              ponds.active[i] = gamedata.pondsActive[i];
           }
       }
 

@@ -96,6 +96,20 @@ var infotab = {
         false,
     ]
 }
+var actiontab = {
+    name: [
+        'ponds',
+        'workers',
+        'science',
+        'activejobs',
+    ],
+    active: [
+    true,
+    false,
+    false,
+    false,
+    ],
+}
 var ponds = {
     name: [
         'shallow-pond',

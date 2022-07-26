@@ -123,7 +123,7 @@ border: 1px solid var(--color-2);
     border: 2px solid var(--color-1);
         border-radius: var(--borderradius);
         box-shadow: 0px 0px var(--shadowwidth) var(--color-4);
-
+  
 
 }
 .windowbar {
@@ -363,8 +363,26 @@ border: 1px solid var(--color-2);
     margin: 5px;
     transition: 0.3s;
     border-radius:var(--borderradius);
-    width: 25%;
+    width: 45%;
 
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.action-left {
+  border: var(--borderwith) solid var(--color-1);
+  width: 75%;
+  border-radius: var(--borderradius);
+  display: inline-block;
+  margin-left: 5%;
+  margin-top: 3%;
+  padding: 5px;
+  vertical-align: top;
+  overflow:scroll;
+  height: 89%;
 }
 
 .command-bar { 
@@ -397,6 +415,9 @@ border: 1px solid var(--color-2);
   border: var(--borderwith) var(--color-2) solid;
 
 }
+
+
+
 
 @keyframes slidenotifaction {
   100% { right: 0; }

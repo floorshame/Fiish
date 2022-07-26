@@ -341,17 +341,6 @@ function updateshoptab() {
 
 }
 
-function buyPond() {
-  if (ponds.nextpondprice <= game.money) {
-    game.money -= ponds.nextpondprice;
-    ponds.unlocked[ponds.nextpondid] = true;
-    ponds.nextpondid += 1;
-    ponds.nextpondprice = ponds.nextpondprice * 4;
-    updateshoptab();
-    updateponds();
-  }
-}
-
 function sellfish() {
   var fishownedtmp = fish.owned[document.getElementById("shop-sell-fish").value]
   if (fishownedtmp >= 1) {
@@ -367,7 +356,7 @@ function sellfish() {
 
 // * ACTIONS * //
 function updateactions() {
-  shortennum(ponds.nextpondprice, "actions-searchforpondp");
+  shortennum(actionssearch.price[0], "actions-searchforponds");
   for (i = 0; i < actiontab.active.length; i++) {
     if (actiontab.active[i] == false) {
       document.getElementById("action-tab-" + actiontab.name[i]).style.display = 'none';
@@ -376,9 +365,36 @@ function updateactions() {
   }
 }
 
-function actionSearch(searchitem, price, timehours) {
+function actionSearch(searchid) {
+  if (searchid == 0) {
+    if (game.money >= actionssearch.price[searchid] && actionssearch.activejob[searchid] == false) {
+      actionssearch.activejob[searchid] = true;
+      game.money -= actionssearch.price[searchid];
+      actionssearch.price[searchid] *= 6;
+      updateInventory();
 
+    } else {
+      createNotification("Your unable to search", 3);
+    }
+  }
 }
+
+setInterval(function() {
+  for (i = 0; i < actionssearch.activejob.length; i++) {
+    if (actionssearch.activejob[i] == true && actionssearch.timeleft[i] !== actionssearch.timeneeded[i]) {
+      actionssearch.timeleft[i] += 1;
+    } else if (actionssearch.timeleft[i] == actionssearch.timeneeded[i]) {
+      if (i == 0) {
+        ponds.unlocked[actionssearch.nextpondid] = true;
+        actionssearch.nextpondid += 1;
+        actionssearch.activejob[i] = false;
+        actionssearch.timeleft[i] = 0;
+        updateactions();
+        updateponds();
+      }
+    }
+  }
+}, 60000);
 
 function actiontabswitch(id) {
   if (actiontab.active[id] == false) {
@@ -446,10 +462,17 @@ function saveGame() {
       /* ponds data */
       pondsFishPer: ponds.fishper,
       pondsUnlocked: ponds.unlocked,
-      pondsNPP: ponds.nextpondprice,
       pondsNPID: ponds.nextpondid,
       pondsLimit: ponds.pondsLimit,
-      pondsInterval: ponds.interval
+      pondsInterval: ponds.interval,
+
+      /* action search */
+      actionsSearchPrice: actionssearch.price,
+      actionsSearchTimeL: actionssearch.timeleft,
+      actionsSearchActive: actionssearch.activejob,
+      actionsNextPondID: actionssearch.nextpondid,
+
+
   };
   localStorage.setItem("gamedata", JSON.stringify(gamedata));
   createNotification('Game has been saved', 3)
@@ -466,11 +489,11 @@ function loadGame() {
       if (typeof gamedata.currentWeatherSet !== "undefined") gameTDM.weatherset = gamedata.currentWeatherSet;    
       if (typeof gamedata.currentWeatherNotications !== "undefined") gameTDM.weathernotifactions = gamedata.currentWeatherNotications;    
       if (typeof gamedata.fishSellMulti !== "undefined") fish.sellmulti = gamedata.fishSellMulti;    
-      if (typeof gamedata.pondsNPP !== "undefined") ponds.nextpondprice = gamedata.pondsNPP;    
       if (typeof gamedata.pondsNPID !== "undefined") ponds.nextpondid = gamedata.pondsNPID;    
       if (typeof gamedata.pondsLimit !== "undefined") ponds.pondslimit = gamedata.pondsLimit;    
       if (typeof gamedata.pondsInterval !== "undefined") ponds.interval = gamedata.pondsInterval;    
       if (typeof gamedata.dev !== "undefined") game.dev = gamedata.dev;    
+      if (typeof gamedata.actionsNextPondID !== "undefined") actionssearch.nextpondid = gamedata.actionsNextPondID;    
 
 
       if (typeof gamedata.fishOwned !== "undefined") {
@@ -502,6 +525,26 @@ function loadGame() {
               ponds.unlocked[i] = gamedata.pondsUnlocked[i];
           }
       }
+
+      if (typeof gamedata.actionsSearchPrice !== "undefined") {
+        for (i = 0; i < gamedata.actionsSearchPrice.length; i++) {
+          actionssearch.price[i] = gamedata.actionsSearchPrice[i];
+        }
+    }
+
+    if (typeof gamedata.actionsSearchTimeL !== "undefined") {
+      for (i = 0; i < gamedata.actionsSearchTimeL.length; i++) {
+        actionssearch.timeleft[i] = gamedata.actionsSearchTimeL[i];
+      }
+   }
+
+   if (typeof gamedata.actionsSearchActive !== "undefined") {
+    for (i = 0; i < gamedata.actionsSearchActive.length; i++) {
+      actionssearch.activejob[i] = gamedata.actionsSearchActive[i];
+    }
+  }
+
+
       }
       updateall();
       createNotification('game has loaded', 2)

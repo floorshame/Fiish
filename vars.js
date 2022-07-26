@@ -1,5 +1,5 @@
 var game = {
-    money: 0,
+    money: 150,
     dev: false,
 }
 
@@ -110,6 +110,26 @@ var actiontab = {
     false,
     ],
 }
+
+var actionssearch = {
+    name: [
+        "searchforponds",
+    ],
+    activejob: [
+        false,
+    ],
+    timeleft: [ 
+        0,
+    ],
+    price: [
+        150,
+    ],
+    timeneeded: [ //* hours in game, minutes in real time *//
+        5, // * change the time 1 lower then the time needed *//
+    ],
+    nextpondid: 1,
+}
+
 var ponds = {
     name: [
         'shallow-pond',
@@ -136,8 +156,6 @@ var ponds = {
         3
     ],
 
-    nextpondprice: 150,
-    nextpondid: 1,
 
     activeponds: 0,
     pondslimit: 1,

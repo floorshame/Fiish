@@ -128,7 +128,7 @@ var actionssearch = {
         "searchforponds",
     ],
     activejob: [
-        false,
+        false,  
     ],
     timeleft: [ 
         0,
@@ -138,6 +138,9 @@ var actionssearch = {
     ],
     timeneeded: [ //* hours in game, minutes in real time *//
         5, // * change the time 1 lower then the time needed *//
+    ],
+    ajset: [
+        false,
     ],
     nextpondid: 1,
 }

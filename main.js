@@ -361,7 +361,31 @@ function updateactions() {
     if (actiontab.active[i] == false) {
       document.getElementById("action-tab-" + actiontab.name[i]).style.display = 'none';
     }
-    
+    if (actionssearch.activejob[i] == true && actionssearch.ajset[i] == false) {
+      actAJ("create", actionssearch.name[i] + "ajTEMP", i, actionssearch.name[i]);
+    }
+    if (actionssearch.activejob[i] == false && actionssearch.ajset[i] == true) {
+      actAJ("destroy", actionssearch.name[i] + "ajTEMP", i, actionssearch.name[i]);
+    }
+  }
+}
+
+function actAJ(createordestroy, nameofaction, id, actionanme) {
+  if (createordestroy == "create") {
+    var eleeement = document.createElement("p");
+    eleeement.id = nameofaction;
+    eleeement.className = "action-aj";
+    var text = document.createTextNode(actionanme);
+    eleeement.appendChild(text);
+    var element = document.getElementById("action-tab-activejobs");
+    element.appendChild(eleeement);
+
+    actionssearch.ajset[i] = true;
+  } else if (createordestroy == "destroy") {
+    var deeeestroy = document.getElementById(nameofaction);
+    deeeestroy.remove();
+    actionssearch.ajset[i] = false;
+
   }
 }
 
@@ -372,17 +396,21 @@ function actionSearch(searchid) {
       game.money -= actionssearch.price[searchid];
       actionssearch.price[searchid] *= 6;
       updateInventory();
-
+      updateactions();
     } else {
       createNotification("Your unable to search", 3);
+      updateactions();
+
     }
   }
 }
+
 
 setInterval(function() {
   for (i = 0; i < actionssearch.activejob.length; i++) {
     if (actionssearch.activejob[i] == true && actionssearch.timeleft[i] !== actionssearch.timeneeded[i]) {
       actionssearch.timeleft[i] += 1;
+    console.log(actionssearch.timeleft[i])
     } else if (actionssearch.timeleft[i] == actionssearch.timeneeded[i]) {
       if (i == 0) {
         ponds.unlocked[actionssearch.nextpondid] = true;

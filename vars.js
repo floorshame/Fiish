@@ -35,24 +35,36 @@ var fish = {
     name: [
         'cod',
         'bass',
+        'salmon',
+        'tuna',
     ],
     id: [
         0,
         1,
+        2,
+        3,
     ],
     pond: [ /* ponds.id */
         0,
         1,
+        2,
+        3,
     ],
     owned: [
+        0,
+        0,
         0,
         0,
     ],
     sellprice: [
         1,
         3,
+        5,
+        8,
     ],
     fishmulti: [
+        1,
+        1,
         1,
         1,
     ],
@@ -134,26 +146,38 @@ var ponds = {
     name: [
         'shallow-pond',
         'calm-pond',
+        'deep-pond',
+        'groovy-pond'
     ],
     id: [
         0,
         1,
+        2,
+        3,
     ],
     active: [
+        false,
+        false,
         false,
         false,
     ],
     fishper: [
         1,
         1,
+        1,
+        1,
     ],
     unlocked: [
         true, /* DO NOT CHANGE */
         false,
+        false,
+        false,
     ],
     weatherboost: [
         0,
-        3
+        3,
+        2,
+        0,
     ],
 
 

@@ -40,7 +40,7 @@ function cmdansw(e) {
     window.open("https://discord.gg/mDyTKs63x7");
   } else if(cmdtext == "sex") {
     if (confirm("Are you over 18? (translation: do you wana see sex)")) {
-      window.open("https://pornhub.com/gay");
+      window.open("https://www.reddit.com/r/yiff/");
     }
   } 
   cmdbarinp.value = '';

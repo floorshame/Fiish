@@ -204,7 +204,17 @@ function pondtabswitch(id) {
 function updateInventory() {
   for (i = 0; i < fish.name.length; i++) {
     shortennum(fish.owned[i], fish.name[i] + "-inv-text");
+  }
+  for (i = 0; i < ponds.unlocked.length; i++) {
+    if (ponds.unlocked[i] == false) {
+      document.getElementById(fish.name[ponds.id[i]] + "-inv-text").style.display = 'none';
+      document.getElementById(fish.name[ponds.id[i]] + "-outer-text").style.display = 'none';
 
+    } else if (ponds.unlocked[i] == true) {
+      document.getElementById(fish.name[ponds.id[i]] + "-inv-text").style.display = '';
+      document.getElementById(fish.name[ponds.id[i]] + "-outer-text").style.display = '';
+
+    }
   }
   shortennum(game.money, "money-inv-text")
 }

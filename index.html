@@ -143,10 +143,10 @@
 
     </div>
     <div id="info-tab-inventory">
-      <h1 class="inventory-text">Cod: <span id="cod-inv-text">0</span></h1>
-      <h1 class="inventory-text">Bass: <span id="bass-inv-text">0</span></h1>
-      <h1 class="inventory-text">Salmon: <span id="salmon-inv-text">0</span></h1>
-      <h1 class="inventory-text">Tuna: <span id="tuna-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="cod-outer-text">Cod: <span id="cod-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="bass-outer-text">Bass: <span id="bass-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="salmon-outer-text">Salmon: <span id="salmon-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="tuna-outer-text">Tuna: <span id="tuna-inv-text">0</span></h1>
       <h1 class="inventory-text">Money: <span id="money-inv-text">0</span></h1>
 
     </div>
@@ -197,6 +197,9 @@
       <select class="shop-drpdwn" id="shop-sell-fish">
         <option value="0">Cod</option>
         <option value="1">Bass</option>
+        <option value="2">Salmon</option>
+        <option value="3">Tuna</option>
+
       </select>
       <center>
       <button onclick="sellfish();" class="shop-button">sell fish </button>

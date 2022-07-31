@@ -453,7 +453,7 @@ function updateworkers() {
     console.log(workers.newcost[i]);
     shortennum(workers.basecost[i], "workprice-" + workers.id[i]);
     shortennum(workers.newcost[i], "workerupfront-" + workers.id[i]);
-    shortennum(workers.owned[i], "workerowned-" + workers.id[i]);
+    shortennum(workers.owned  [i], "workerowned-" + workers.id[i]);
 
   }
 }

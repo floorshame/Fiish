@@ -354,7 +354,8 @@ function updateshoptab() {
 function sellfish() {
   var fishownedtmp = fish.owned[document.getElementById("shop-sell-fish").value]
   if (fishownedtmp >= 1) {
-    game.money = game.money + fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti
+    game.money = game.money + fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti;
+    game.totalmoney += fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti;
     createNotification('Sold: ' + fishownedtmp + ' Fish', 3)
     fish.owned[document.getElementById("shop-sell-fish").value] = 0;
     updateInventory();
@@ -477,6 +478,59 @@ setInterval(function() {
   }
 }, 100);
 
+
+// * WORKERS * //
+
+function updateworkers() {
+
+  for (i = 0; i < workers.basecost.length; i++) {
+    if (workers.owned >= 1) {
+      workers.newcost[i] = workers.basecost[i] * ponds.nextpondid * workers.owned[i]; //* NEEDS TO BE CHANGED IN THE FUTURE FOR BALANCING
+      shortennum(workers.newcost[i], "workprice-" + workers.id[i]);
+    }
+  }
+  shortennum(workers.newcost[i], "workprice-" + workers.id[i]);
+
+
+}
+
+function workeraction(workerid) {
+  if (workers.firemode == false && game.money >= workers.newcost[workerid]) {
+    workers.owned[workerid] += 1;
+    game.money -= workers.newcost[workerid];
+    updateInventory();
+  }
+}
+
+setInterval(function() {
+  if (workers.owned >= 1) {
+    for (i = 0; i < workers.newcost.length; i++) {
+      if (game.money >= workers.newcost[i] * workers.owned[i]) {
+        game.money -= workers.newcost[i] * workers.owned[i];
+        updateInventory();
+        createNotification("Your workers have been paid for!", 1)
+      } else {
+        workers.owned[i] = 0;
+        createNotification("You didn't have enough money to pay for your workers!", 5);
+        updateInventory();
+      }
+    }
+  }
+}, 60000);
+
+
+function workerfiretoggle() {
+  if (workers.firemode) {
+    document.getElementById('worker-fire-btn').style = ';'
+
+    workers.firemode = false;
+
+  } else if (workers.firemode == false) {
+    document.getElementById('worker-fire-btn').style = 'border: 2px solid red;'
+    workers.firemode = true;
+
+  }
+}
 
 function saveGame() {
   var gamedata = {

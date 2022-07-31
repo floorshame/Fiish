@@ -1,6 +1,7 @@
 var game = {
-    money: 0,
+    money: 300,
     dev: false,
+    totalmoney: 0,
 }
 
 var gameTDM = {
@@ -189,3 +190,23 @@ var ponds = {
     interval: 1,
 }
 
+var workers = {
+    name: [
+        'fishermen',
+    ],
+    id: [
+        0,
+    ],
+    basecost: [
+        150,
+    ],
+    newcost: [
+        150,
+    ],
+    owned: [
+        0,
+    ],
+
+    firemode: false,
+
+}

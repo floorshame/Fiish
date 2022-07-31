@@ -464,7 +464,7 @@ function workeraction(workerid) {
     game.money -= workers.newcost[workerid];
     updateInventory();
     updateworkers();
-  } else if (workers.firemode == true) {
+  } else if (workers.firemode == true && workers.owned[workerid] >= 1) {
     workers.owned[workerid] -= 1;
     updateInventory();
     updateworkers();

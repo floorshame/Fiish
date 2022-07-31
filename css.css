@@ -55,6 +55,12 @@ html {
   border-bottom-left-radius: 0px;
 
 }
+.worker-fire-btn {
+  bottom: 0;
+  position: fixed;
+  width: 100px !important;
+  right: 0;
+}
 .clock-text {
   font-family: 'Comfortaa', cursive;
   color: white;

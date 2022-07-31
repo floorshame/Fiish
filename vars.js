@@ -1,5 +1,5 @@
 var game = {
-    money: 0,
+    money: 150,
     dev: false,
     totalmoney: 0,
 }

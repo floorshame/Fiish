@@ -10,5 +10,6 @@ function shortennum(value, idname) {
     }else {
         document.getElementById(idname).innerText = value;
     }
+
 }
 

@@ -27,16 +27,16 @@ function pondswitch(id) {
 }
 
 function updateponds() {
-  for (i = 0; i < ponds.unlocked.length; i++) {
-    if (ponds.unlocked[i] == false) {
-      document.getElementById("pond-btn-" + ponds.id[i]).style.display = 'none';
+  for (v = 0; v < ponds.unlocked.length; v++) {
+    if (ponds.unlocked[v] == false) {
+      document.getElementById("pond-btn-" + ponds.id[v]).style.display = 'none';
       
-      document.getElementById("pond-weather-" + ponds.id[i]).innerHTML =  gameTDM.weathericon[ponds.weatherboost[i]];
+      document.getElementById("pond-weather-" + ponds.id[v]).innerHTML =  gameTDM.weathericon[ponds.weatherboost[v]];
 
-    } else if (ponds.unlocked[i] == true) {
-      document.getElementById("pond-btn-" + ponds.id[i]).style.display = '';
+    } else if (ponds.unlocked[v] == true) {
+      document.getElementById("pond-btn-" + ponds.id[v]).style.display = '';
 
-      document.getElementById("pond-weather-" + ponds.id[i]).innerHTML =  gameTDM.weathericon[ponds.weatherboost[i]];
+      document.getElementById("pond-weather-" + ponds.id[v]).innerHTML =  gameTDM.weathericon[ponds.weatherboost[v]];
     }
   }
   document.getElementById("pond-curactiv").innerHTML = ponds.activeponds; //* DO NOT SHORTEN THESE *//
@@ -301,7 +301,7 @@ function updateshoptab() {
     }
     
   }
-  shortennum(ponds.nextpondprice, "shop-ponds-buynextpond");
+  shortennum(actionssearch.price, "shop-ponds-buynextpond");
 
 }
 
@@ -437,15 +437,25 @@ setInterval(function() {
 
 function updateworkers() {
 
-  for (i = 0; i < workers.basecost.length; i++) {
-    if (workers.owned >= 1) {
-      workers.newcost[i] = workers.basecost[i] * ponds.nextpondid * workers.owned[i]; //* NEEDS TO BE CHANGED IN THE FUTURE FOR BALANCING
-      shortennum(workers.newcost[i], "workprice-" + workers.id[i]);
+  for (i = 0; i < workers.id.length; i++) {
+    if (workers.owned[i] >= 1) {
+      workers.newcost[i] = workers.basecost[i] * actionssearch.nextpondid * workers.owned[i] * 3; //* NEEDS TO BE CHANGED IN THE FUTURE FOR BALANCING
+    } else {
+      workers.newcost[i] = workers.basecost[i];
     }
+    
+    if (i == 0) {
+      ponds.pondslimit = 1 + workers.owned[i];
+      updateponds();
+
+    }
+
+    console.log(workers.newcost[i]);
+    shortennum(workers.basecost[i], "workprice-" + workers.id[i]);
+    shortennum(workers.newcost[i], "workerupfront-" + workers.id[i]);
+    shortennum(workers.owned[i], "workerowned-" + workers.id[i]);
+
   }
-  shortennum(workers.newcost[i], "workprice-" + workers.id[i]);
-
-
 }
 
 function workeraction(workerid) {
@@ -453,6 +463,12 @@ function workeraction(workerid) {
     workers.owned[workerid] += 1;
     game.money -= workers.newcost[workerid];
     updateInventory();
+    updateworkers();
+  } else if (workers.firemode == true) {
+    workers.owned[workerid] -= 1;
+    updateInventory();
+    updateworkers();
+
   }
 }
 
@@ -462,11 +478,14 @@ setInterval(function() {
       if (game.money >= workers.newcost[i] * workers.owned[i]) {
         game.money -= workers.newcost[i] * workers.owned[i];
         updateInventory();
-        createNotification("Your workers have been paid for!", 1)
+        createNotification("Your workers have been paid for!", 1);
+        updateworkers();
+
       } else {
         workers.owned[i] = 0;
         createNotification("You didn't have enough money to pay for your workers!", 5);
         updateInventory();
+        updateworkers();
       }
     }
   }
@@ -494,5 +513,7 @@ function updateall() {
   updateweather();
   updateInventory();
   updateactions();
+  updateworkers();
+
 }
 

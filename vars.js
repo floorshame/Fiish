@@ -159,7 +159,7 @@ var actionssearch = {
         150,
     ],
     timeneeded: [ //* hours in game, minutes in real time *//
-        5, // * change the time 1 lower then the time needed *//
+        1, // * change the time 1 lower then the time needed *//
     ],
     ajset: [
         false,

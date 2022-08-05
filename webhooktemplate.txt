@@ -1,0 +1,15 @@
+{
+  "content": null,
+  "embeds": [
+    {
+      "title": "0.0.0.0 - BETA",
+      "description": "``` - catagory - ```\n+ something\n- something\n? something\n\n``` - catagory - ```",
+      "url": "https://futuregithublink.wowza",
+      "color": 37065,
+      "image": {
+        "url": "https://imgur.com/7bAJC6A.png"
+      }
+    }
+  ],
+  "attachments": []
+}

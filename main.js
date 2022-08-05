@@ -101,6 +101,11 @@ setInterval(function() {
                   let x = Math.floor((Math.random() * 10) + 1);
                   if (x == 5) {
                     fish.owned[i] += 1 * fish.fishmulti[i] * 2;
+                    let g = Math.floor((Math.random() * 3) + 0);
+
+                    roboparts.owned[g] += 1; 
+                    console.log("outcome number " + g + " part name: " + roboparts.name[g] + " parts owned: " + roboparts.owned[g])
+                    roboparts.unlocked[g] = true;
                     updateInventory();
                     document.getElementById("fish-bar").value = 0;
 
@@ -171,6 +176,20 @@ function updateInventory() {
     }
   }
   shortennum(game.money, "money-inv-text")
+  for (r = 0; r < roboparts.name.length; r++) {
+    if (roboparts.unlocked[r] == false) {
+      document.getElementById(roboparts.name[r] + "-inv-text").style.display = 'none';
+      document.getElementById(roboparts.name[r] + "-outer-text").style.display = 'none';
+
+    } else if (roboparts.unlocked[r] == true) {
+      document.getElementById(roboparts.name[r] + "-inv-text").style.display = '';
+      document.getElementById(roboparts.name[r] + "-outer-text").style.display = '';
+
+    }
+    shortennum(roboparts.owned[r], roboparts.name[r] + "-inv-text");
+  }
+  shortennum(game.totalmoney, "stats-totalmoney");
+
 }
 
 function infotabswitch(id) {
@@ -301,7 +320,18 @@ function updateshoptab() {
     }
     
   }
-  shortennum(actionssearch.price, "shop-ponds-buynextpond");
+
+  var fishvaluediv = document.getElementById("shop-sell-fish");
+  for (k = 0; k < fish.set.length; k++)
+    if (fish.set[k] == false) {
+      var fishvaluedropdown = document.createElement("option");
+      document.getElementById("shop-sell-fish").appendChild(fishvaluedropdown);
+      fishvaluedropdown.value = k;
+      fishvaluedropdown.innerText = fish.name[k];
+      fish.set[k] = true;
+      console.log(fish.name[k] + fish.set[k])
+    }
+
 
 }
 
@@ -356,7 +386,7 @@ function actAJ(createordestroy, nameofaction, id, actionanme) {
 
 function actionSearch(searchid) {
   if (searchid == 0) {
-    if (game.money >= actionssearch.price[searchid] && actionssearch.activejob[searchid] == false) {
+    if (game.money >= actionssearch.price[searchid] && actionssearch.activejob[searchid] == false && actionssearch.nextpondid <= ponds.totalponds) {
       actionssearch.activejob[searchid] = true;
       game.money -= actionssearch.price[searchid];
       actionssearch.price[searchid] *= 6;
@@ -473,25 +503,40 @@ function workeraction(workerid) {
 }
 
 setInterval(function() {
-  if (workers.owned >= 1) {
-    for (i = 0; i < workers.newcost.length; i++) {
-      if (game.money >= workers.newcost[i] * workers.owned[i]) {
-        game.money -= workers.newcost[i] * workers.owned[i];
-        updateInventory();
-        createNotification("Your workers have been paid for!", 1);
-        updateworkers();
 
-      } else {
-        workers.owned[i] = 0;
-        createNotification("You didn't have enough money to pay for your workers!", 5);
-        updateInventory();
-        updateworkers();
+    for (i = 0; i < workers.newcost.length; i++) {
+      if (workers.owned[i] >= 1) {
+        if (game.money >= workers.newcost[i] * workers.owned[i]) {
+          game.money -= workers.newcost[i] * workers.owned[i];
+          updateInventory();
+          createNotification("Your workers have been paid for!", 1);
+          updateworkers();
+
+        } else {
+          workers.owned[i] = 0;
+          createNotification("You didn't have enough money to pay for your workers!", 5);
+          updateInventory();
+          updateworkers();
+        }
       }
     }
-  }
 }, 60000);
 
+setInterval(function() {
+  if (workers.owned[1] >= 1) {
+    for (c = 0; c < fish.owned.length; c++) {
+      if (fish.owned[c] >= 1) {
+        game.money = game.money + fish.owned[c] * fish.sellprice[c] * fish.sellmulti;
+        game.totalmoney = game.money + fish.owned[c] * fish.sellprice[c] * fish.sellmulti;
+        fish.owned[c] = 0;
 
+        updateInventory();
+        updateponds();
+      }
+    }
+}
+
+}, 10000);
 function workerfiretoggle() {
   if (workers.firemode) {
     document.getElementById('worker-fire-btn').style = ';'
@@ -505,6 +550,41 @@ function workerfiretoggle() {
   }
 }
 
+// * navbar *//
+
+function updatenavbar() {
+  document.getElementById('settings-navbar').checked = game.navdrop;
+  if (game.navdrop == true) {
+  
+    document.getElementById('nav-dropdown').style.display = '';
+    document.getElementById('nav-sing').style.display = 'none';
+
+  } else {
+  
+
+    document.getElementById('nav-sing').style.display = '';
+    document.getElementById('nav-dropdown').style.display = 'none';
+
+  }
+}
+
+function changenavbar() {
+  game.navdrop = document.getElementById('settings-navbar').checked;
+  updatenavbar();
+}
+
+//* craftables *//
+function updateCraftable() {
+  if (craftable.pondset == false) {
+    var fishvaluedropdown = document.createElement("option");
+    document.getElementById("shop-sell-fish").appendChild(fishvaluedropdown);
+    fishvaluedropdown.value = k;
+    fishvaluedropdown.innerText = fish.name[k];
+    fish.set[k] = true;
+    console.log(fish.name[k] + fish.set[k])
+}
+
+}
 
 function updateall() {
   updateshoptab(); ////
@@ -514,6 +594,7 @@ function updateall() {
   updateInventory();
   updateactions();
   updateworkers();
+  updatenavbar();
 
 }
 

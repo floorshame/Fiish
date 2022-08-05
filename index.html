@@ -2,10 +2,23 @@
 <link rel="stylesheet" href="css.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="icon" href="img/fiish.png">
-<title>fiiish</title>
-<html>
+<title>fiish</title>
+<meta content="fiish" property="og:title" />
+<meta content="Game." property="og:description" />
+<meta content="https://doeskitty.xyz" property="og:url" />
+<meta content="https://imgur.com/7bAJC6A.png" property="og:image" />
+<meta content="#0090c9" data-react-helmet="true" name="theme-color" />
 
+<html>
+  <h1 class="inventory-text money-text">Money: <span id="money-inv-text">0</span></h1>
+  <h1 class="clock-text">
+    <span style="display: inline-block; z-index: 999;"  id="clock-text">6:00</span> <span style="display: inline-block;" id="cur-weather-icon" class="material-symbols-outlined">&#xE87C;</span>
+  
+  
+  </h1>
+  
 <div class="navbar"> 
+    <div id="nav-dropdown">
     <div class="dropdown">
         <button class="dropbtn">game 
           <i class="fa fa-caret-down"></i>
@@ -19,26 +32,52 @@
         </div>
       </div>       
       <div class="dropdown">
-        <button class="dropbtn">other 
+        <button class="dropbtn">main 
           <i class="fa fa-caret-down"></i>
         </button>
+        
         <div class="dropdown-content">
-          <a onclick="openwindow(0)">welcome message</a>
           <a onclick="openwindow(1)">ponds</a>
           <a onclick="openwindow(3)">info</a>
           <a onclick="openwindow(4)">market</a>
+          <a onclick="openwindow(5)">actions</a>
 
         </div>
       </div>   
-      <h1 class="clock-text">
-        <span style="display: inline-block;"  id="clock-text">6:00</span> <span style="display: inline-block;" id="cur-weather-icon" class="material-symbols-outlined">&#xE87C;</span>
+      <div class="dropdown">
+        <button class="dropbtn">extra 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        
+        <div class="dropdown-content">
+          <a onclick="openwindow(0)">welcome message</a>
 
-    
-    </h1>
-    
-    </br>
+        </div>
+      </div>   
+    </div>
+    <div id="nav-sing">
+      <div class="dropdown">
+        <button class="dropbtn">game 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        
+        <div class="dropdown-content">
+          <a onclick="saveGame()">save</a>
+          <a onclick="resetGame()">reset</a>
+          <a onclick="openwindow(2)">settings</a>
+
+        </div>
+      </div>   
+    <button class="dropbtn" onclick="openwindow(1)">ponds</button>
+      <button class="dropbtn" onclick="openwindow(3)">info</button>
+      <button class="dropbtn" onclick="openwindow(4)">market</button>
+      <button class="dropbtn" onclick="openwindow(5)">actions</button>
+
+    </div>
     
 </div>
+
+</br>
 
 
 
@@ -48,12 +87,16 @@
     </div>
     <div id="win-cont-0" class="content">
         <center>
-            <h1 class="welcometext">fiiish</h1>
-            <a href="https://discord.gg/mDyTKs63x7">
-                <img  class="welcomeicons" src="img/discord.png" width="10%">
-                <img  class="welcomeicons" src="img/discord.png" width="10%">
-
+            <h1 class="welcometext">fiish</h1>
+            <h1 class="betatext">BETA</h1>
+        </br>
+            <a class="outdivs" href="https://discord.gg/eMfGfM6qyc">
+              <img  class="welcomeicons" src="img/discord.png" width="10%">
             </a>
+            <a class="outdivs" href="https://reddit.com/r/fiish">
+              <img  class="welcomeicons" src="img/reddit.png" width="10%">
+          </a>
+
         </center>
     </div>
 </div>
@@ -75,6 +118,7 @@
         <button onclick="pondswitch(0)" id="pond-btn-0" class="pond-selectbtn">
           Shallow Pond </br>
           <span title="Weather boost" style="display: inline-block;" id="pond-weather-0" class="material-symbols-outlined">&#xE87C;</span>
+        
         </button>
 
         <button onclick="pondswitch(1)" id="pond-btn-1" class="pond-selectbtn">
@@ -92,11 +136,21 @@
           <span title="Weather boost" style="display: inline-block;" id="pond-weather-3" class="material-symbols-outlined">&#xE87C;</span>
         </button>
 
+        <button onclick="pondswitch(4)" id="pond-btn-4" class="pond-selectbtn">
+          Cave Pond </br>
+          <span title="Weather boost" style="display: inline-block;" id="pond-weather-4" class="material-symbols-outlined">&#xE87C;</span>
+        </button>
+
+        <button onclick="pondswitch(5)" id="pond-btn-5" class="pond-selectbtn">
+          Generic Pond </br>
+          <span title="Weather boost" style="display: inline-block;" id="pond-weather-5" class="material-symbols-outlined">&#xE87C;</span>
+        </button>
+
       </div>
 
   </div>
   <div id="pond-fishing-tab" class="pond-fishing-tab">
-      <h1 class="pond-stats">active: <span id="pond-curactiv">0</span>/<span id="pond-maxactiv">1</span></h1>
+      <h1 class="stats-text">active: <span class="stats-innertext" id="pond-curactiv">0</span> / <span class="stats-innertext" id="pond-maxactiv">1</span></h1>
   </div>
   <progress class="fish-bar" id="fish-bar" value="0" max="1000"></progress>
 
@@ -125,7 +179,8 @@
   shadow color: <input class="input-color-picker" type="color" 
   data-id="4" name="Colors" value="#000000">
 </br>
-  <input type="checkbox" id="settings-ESounds" checked> Enviromental Sounds 
+  <input type="checkbox" id="settings-ESounds" checked> Enviromental Sounds </br>
+  <input onclick="changenavbar();" type="checkbox" id="settings-navbar" checked> Dropdown Navbar 
 
   </div>
 </div>
@@ -142,11 +197,16 @@
 
     </div>
     <div id="info-tab-inventory">
-      <h1 class="inventory-text" id="cod-outer-text">Cod: <span id="cod-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="bass-outer-text">Bass: <span id="bass-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="salmon-outer-text">Salmon: <span id="salmon-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="tuna-outer-text">Tuna: <span id="tuna-inv-text">0</span></h1>
-      <h1 class="inventory-text">Money: <span id="money-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="cod-outer-text">Cod: <span class="stats-innertext" id="cod-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="bass-outer-text">Bass: <span class="stats-innertext" id="bass-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="salmon-outer-text">Salmon: <span class="stats-innertext" id="salmon-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="tuna-outer-text">Tuna: <span class="stats-innertext" id="tuna-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="shrimp-outer-text">Shrimp: <span class="stats-innertext" id="shrimp-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="brill-outer-text">Brill: <span class="stats-innertext" id="brill-inv-text">0</span></h1>
+
+      <h1 class="inventory-text" id="FMP-outer-text">FMP: <span class="stats-innertext" id="FMP-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="CRP-outer-text">CRP: <span class="stats-innertext" id="CRP-inv-text">0</span></h1>
+      <h1 class="inventory-text" id="ARCP-outer-text">ARCP: <span class="stats-innertext" id="ARCP-inv-text">0</span></h1>
 
     </div>
 
@@ -156,7 +216,7 @@
 
 
     <div id="info-tab-stats">
-      stats
+      <h1 class="stats-text">Total Money: <span class="stats-innertext" id="stats-totalmoney">0</span></h1>
     </div>
 
   </div>
@@ -177,16 +237,13 @@
       <div class="shop-section">
         <center>
         <h1 class="shop-section-text">ponds</h1>
-        <button class="shop-button" onclick="buyPond();">buy next pond </br>$<span id="shop-ponds-buynextpond">100</span></button>
+        <button class="shop-button" onclick="">temp holder</br></button>
         </br>
-        <button class="shop-button">more pond slots </br>$<span id="shop-ponds-buymorepondslots">500</span></button>
-
         </center>
       </div>
       <div class="shop-section">
         <center>
         <h1 class="shop-section-text">ponds</h1>
-          <button class="shop-button" >buy next pond $<span id="shop-ponds-buynextpond">100</span></button>
           </center>
         </div>
 
@@ -194,10 +251,6 @@
     <div id="shop-tab-sell">
       <div class="shop-section">
       <select class="shop-drpdwn" id="shop-sell-fish">
-        <option value="0">Cod</option>
-        <option value="1">Bass</option>
-        <option value="2">Salmon</option>
-        <option value="3">Tuna</option>
 
       </select>
       <center>
@@ -217,9 +270,9 @@
   </div>
   <div id="win-cont-5" class="content">
     <div class="pond-tab-div">
-      <button class="pond-tab-switcher" onclick="actiontabswitch(0)">ponds</button>
+      <button class="pond-tab-switcher" onclick="actiontabswitch(0)">search</button>
       <button class="pond-tab-switcher" onclick="actiontabswitch(1)">workers</button>
-      <button class="pond-tab-switcher" onclick="actiontabswitch(2)">science</button>
+      <button class="pond-tab-switcher" onclick="actiontabswitch(2)">craft</button>
       <button class="pond-tab-switcher" onclick="actiontabswitch(3)">active jobs</button>
 
     </div>
@@ -228,11 +281,28 @@
         <button onclick="actionSearch(0);" class="action-btn">search for pond</br>$<span id="actions-searchforponds">150</span></br>6 hours</button>  
       </div>
       <div id="action-tab-workers">
+        <center>
         <button onclick="workeraction(0);" class="action-btn">worker - fishermen</br>$<span id="workprice-0">150</span> / hour</br>$<span id="workerupfront-0">150</span> - upfront</br><span id="workerowned-0">0</span> - owned</button>  
+        <button onclick="workeraction(1);" class="action-btn">worker - salesmen</br>$<span id="workprice-1">500</span> / hour</br>$<span id="workerupfront-1">500</span> - upfront</br><span id="workerowned-1">0</span> - owned</button>  
+      </center>
         <button onclick="workerfiretoggle();" id="worker-fire-btn" class="action-btn worker-fire-btn">fire workers</button>  
 
       </div>
       <div id="action-tab-science">
+        <div class="shop-section">
+          <select class="shop-drpdwn" id="action-craft-dropdown">
+    
+          </select>
+          <h1 class="stats-text">FMP: <span class="stats-innertext" id="pond-curactiv">0</span></h1>
+          <h1 class="stats-text">CRP: <span class="stats-innertext" id="pond-curactiv">0</span></h1>
+          <h1 class="stats-text">ARCP: <span class="stats-innertext" id="pond-curactiv">0</span></h1>
+
+          <center>
+
+          <button onclick="sellfish();" class="shop-button">craft</button>
+        </center>
+          </div>
+
       </div>
       <div id="action-tab-activejobs">
       </div>

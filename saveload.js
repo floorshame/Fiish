@@ -2,7 +2,9 @@ function saveGame() {
     var gamedata = {
         /* main vars*/
         money: game.money,
+        totalmoney: game.totalmoney,
         dev: game.dev,
+        gameNavSetting: game.navdrop,
   
         /* weather time */
         currentWeather: gameTDM.currentweather,
@@ -30,7 +32,15 @@ function saveGame() {
         actionsSearchActive: actionssearch.activejob,
         actionsNextPondID: actionssearch.nextpondid,
   
-  
+
+        /* workers data */
+        workersNewCost: workers.newcost,
+        workersOwned: workers.owned,
+
+        /* robo parts */
+        robopOwned: roboparts.owned,
+        robopUnlocked: roboparts.unlocked,
+
     };
     localStorage.setItem("gamedata", JSON.stringify(gamedata));
     createNotification('Game has been saved', 3)
@@ -52,7 +62,9 @@ function saveGame() {
         if (typeof gamedata.pondsInterval !== "undefined") ponds.interval = gamedata.pondsInterval;    
         if (typeof gamedata.dev !== "undefined") game.dev = gamedata.dev;    
         if (typeof gamedata.actionsNextPondID !== "undefined") actionssearch.nextpondid = gamedata.actionsNextPondID;    
-  
+        if (typeof gamedata.totalmoney !== "undefined") game.totalmoney = gamedata.totalmoney;    
+        if (typeof gamedata.gameNavSetting !== "undefined") game.navdrop = gamedata.gameNavSetting;    
+
   
         if (typeof gamedata.fishOwned !== "undefined") {
             for (i = 0; i < gamedata.fishOwned.length; i++) {
@@ -102,7 +114,30 @@ function saveGame() {
       }
     }
   
-  
+    if (typeof gamedata.robopOwned !== "undefined") {
+      for (i = 0; i < gamedata.robopOwned.length; i++) {
+        roboparts.owned[i] = gamedata.robopOwned[i];
+      }
+    }
+
+    if (typeof gamedata.robopUnlocked !== "undefined") {
+      for (i = 0; i < gamedata.robopUnlocked.length; i++) {
+        roboparts.unlocked[i] = gamedata.robopUnlocked[i];
+      }
+    }
+
+    if (typeof gamedata.workersNewCost !== "undefined") {
+      for (i = 0; i < gamedata.workersNewCost.length; i++) {
+        workers.newcost[i] = gamedata.workersNewCost[i];
+      }
+    }
+
+    if (typeof gamedata.workersOwned !== "undefined") {
+      for (i = 0; i < gamedata.workersOwned.length; i++) {
+        workers.owned[i] = gamedata.workersOwned[i];
+      }
+    }
+
         }
         updateall();
         createNotification('game has loaded', 2)

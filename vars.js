@@ -1,7 +1,8 @@
 var game = {
-    money: 150,
+    money: 500,
     dev: false,
     totalmoney: 0,
+    navdrop: true,
 }
 
 var gameTDM = {
@@ -38,20 +39,28 @@ var fish = {
         'bass',
         'salmon',
         'tuna',
+        'shrimp',
+        'brill'
     ],
     id: [
         0,
         1,
         2,
         3,
+        4,
+        5,
     ],
     pond: [ /* ponds.id */
         0,
         1,
         2,
         3,
+        4,
+        5,
     ],
     owned: [
+        0,
+        0,
         0,
         0,
         0,
@@ -62,12 +71,24 @@ var fish = {
         3,
         5,
         8,
+        11,
+        13,
     ],
     fishmulti: [
         1,
         1,
         1,
         1,
+        1,
+        1,
+    ],
+    set: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
     ],
     sellmulti: 1,
 }
@@ -151,15 +172,21 @@ var ponds = {
         'shallow-pond',
         'calm-pond',
         'deep-pond',
-        'groovy-pond'
+        'groovy-pond',
+        'cave-pond',
+        'generic-pond',
     ],
     id: [
         0,
         1,
         2,
         3,
+        4,
+        5,
     ],
     active: [
+        false,
+        false,
         false,
         false,
         false,
@@ -170,43 +197,119 @@ var ponds = {
         1,
         1,
         1,
+        1,
+        1,
     ],
     unlocked: [
         true, /* DO NOT CHANGE */
-        false,
-        false,
-        false,
+        true,
+        true,
+        true,
+        true,
+        true,
     ],
     weatherboost: [
         0,
         3,
         2,
         0,
+        2,
+        1,
     ],
 
 
     activeponds: 0,
     pondslimit: 1,
     interval: 1,
+    totalponds: 6,
 }
 
 var workers = {
     name: [
         'fishermen',
+        'salesmen',
     ],
     id: [
         0,
+        1,
     ],
     basecost: [
         150,
+        500,
     ],
     newcost: [
         150,
+        500,
     ],
     owned: [
+        0,
         0,
     ],
 
     firemode: false,
 
+}
+
+var roboparts = {
+    name: [
+        "FMP", //* fish modifying part *//
+        "CRP", //* chatoic reactive part *//
+        "ARCP", //* anti reactive coolent part*//
+        //* craftable ones past here *//
+    ],
+    owned: [
+        0,
+        0,
+        0,
+    ],
+    unlocked: [
+        false,
+        false,
+        false,
+    ]
+}
+
+var craftable = {
+    name: [
+        "shallow-modifier",
+        "calm-modifier",
+        "deep-modifier",
+        "groovy-modifier",
+        "cave-modifier",
+        "generic-modifier",
+    ],
+    modifier: [
+        "pond",
+        "pond",
+        "pond",
+        "pond",
+        "pond",
+        "pond",
+    ],
+    modsp: [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+    ],
+    modamnt: [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+    ],
+    FMP: [
+        23,
+    ],
+    CRP: [
+        20,
+    ],
+    ARCP: [
+        18,
+    ],
+    pondset: false,
 }

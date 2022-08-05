@@ -38,7 +38,22 @@ function cmdansw(e) {
     window.open("https://discord.gg/mDyTKs63x7");
   } else if(cmdtext == "sex") {
     if (confirm("Are you over 18? (translation: do you wana see sex)")) {
-      window.open("https://www.reddit.com/r/yiff/");
+      let sex = Math.floor((Math.random() * 3) + 1);
+      switch(sex) {
+        case 1:
+          window.open("https://www.reddit.com/r/yiff/");
+
+        break
+        case 2:
+          window.open("https://www.pornhub.com/gay/");
+
+        break
+        case 3:
+          window.open("https://pnrtscr.com/r2k3fw");
+
+        break
+
+      }
     }
   } 
   cmdbarinp.value = '';

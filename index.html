@@ -8,6 +8,10 @@
 <meta content="https://doeskitty.xyz" property="og:url" />
 <meta content="https://imgur.com/7bAJC6A.png" property="og:image" />
 <meta content="#0090c9" data-react-helmet="true" name="theme-color" />
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
 
 <html>
   <h1 class="inventory-text money-text">Money: <span id="money-inv-text">0</span></h1>
@@ -82,9 +86,9 @@
 
 
 <div id="win-0" class="window" style="height: 25% !important; width: 20% !important; left: 40%;top: 30%;"> 
-    <div id="" class="windowbar">
-        welcome<button class="win-close" onclick="closewindow(0);">x</button><button class="win-close win-minimise" onclick="minimisewindow(0);">-</button> 
-    </div>
+  <div onmousedown="winChangeFocus(0)" id="winbar-0" class="windowbar">      
+      welcome<button class="win-close" onclick="closewindow(0);">x</button><button class="win-close win-minimise" onclick="minimisewindow(0);">-</button> 
+  </div>
     <div id="win-cont-0" class="content">
         <center>
             <h1 class="welcometext">fiish</h1>
@@ -102,8 +106,8 @@
 </div>
 
 
-<div id="win-1" class="window" style="height: 45% !important; width: 45% !important; left: 40%;top: 30%;"> 
-  <div id="" class="windowbar">
+<div id="win-1" class="window" style="height: 45% !important; width: 45% !important; left: 0.5%;top: 5%;"> 
+  <div onmousedown="winChangeFocus(1);" id="" class="windowbar">
       ponds<button class="win-close" onclick="closewindow(1);">x</button><button class="win-close win-minimise" onclick="minimisewindow(1);">-</button> 
   </div>
   <div id="win-cont-1" class="content">
@@ -162,8 +166,8 @@
 </div>
 
 
-<div id="win-2" class="window" style="height: 45% !important; width: 45% !important; height: 25% !important; width: 20% !important;left: 40%;top: 30%;"> 
-  <div id="" class="windowbar">
+<div id="win-2" class="window" style="height: 45% !important; width: 45% !important; height: 25% !important; width: 20% !important;left: 0.5%;top: 30%;"> 
+  <div onmousedown="winChangeFocus(2);" id="" class="windowbar">
       settings<button class="win-close" onclick="closewindow(2);">x</button><button class="win-close win-minimise" onclick="minimisewindow(2);">-</button> 
   </div>
   <div id="win-cont-2" class="content">
@@ -185,8 +189,8 @@
   </div>
 </div>
 
-<div id="win-3" class="window" style="height: 45% !important; width: 45% !important; left: 40%;top: 30%;"> 
-  <div id="" class="windowbar">
+<div id="win-3" class="window" style="height: 45% !important; width: 45% !important; right: 0.5%;top: 5%;"> 
+  <div id="" onmousedown="winChangeFocus(3);" class="windowbar">
       info<button class="win-close" onclick="closewindow(3);">x</button><button class="win-close win-minimise" onclick="minimisewindow(3);">-</button> 
   </div>
   <div id="win-cont-3" class="content">
@@ -222,8 +226,8 @@
   </div>
 </div>
 
-<div id="win-4" class="window" style="height: 45% !important; width: 45% !important;left: 40%;top: 30%;"> 
-  <div id="" class="windowbar">
+<div id="win-4" class="window" style="height: 45% !important; width: 45% !important;left: 0.5%;bottom: 0.5%;"> 
+  <div id="" onmousedown="winChangeFocus(4);" class="windowbar">
       market<button class="win-close" onclick="closewindow(4);">x</button><button class="win-close win-minimise" onclick="minimisewindow(4);">-</button> 
   </div>
   <div id="win-cont-4" class="content">
@@ -264,8 +268,8 @@
   </div>
 </div>
 
-<div id="win-5" class="window" style="height: 45% !important; width: 45% !important;left: 40%;top: 30%;"> 
-  <div id="" class="windowbar">
+<div id="win-5" class="window" style="height: 45% !important; width: 45% !important;right: 0.5%;bottom: 0.5%;"> 
+  <div id="" onmousedown="winChangeFocus(5);" class="windowbar">
       actions<button class="win-close" onclick="closewindow(5);">x</button><button class="win-close win-minimise" onclick="minimisewindow(5);">-</button> 
   </div>
   <div id="win-cont-5" class="content">
@@ -315,7 +319,6 @@
 
 <div id="Noti" class="Notification">
 </div>
-
 <div class="command-bar" id="command-bar">
 <input type="text" id="cmd-bar-input" class="cmd-bar-type" placeholder="type your command">
 </div>

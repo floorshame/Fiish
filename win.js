@@ -23,7 +23,6 @@ function makeDraggable (elmnt) {
     let currentPosX = 0, currentPosY = 0, previousPosX = 0, previousPosY = 0;
     if (elmnt.querySelector('.windowbar')) {
         elmnt.querySelector('.windowbar').onmousedown = dragMouseDown;
-        
     } 
     else {
         elmnt.onmousedown = dragMouseDown;
@@ -35,7 +34,6 @@ function makeDraggable (elmnt) {
         previousPosY = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
-
     }
 
     function elementDrag (e) {
@@ -64,6 +62,37 @@ for (i = 0; i < windowsopened.id.length; i++) {
     }
 }
 
+$("#win-0").mousedown(function(evt) {
+    winChangeFocus(0)
+});
+$("#win-1").mousedown(function(evt) {
+    winChangeFocus(1)
+});
+$("#win-2").mousedown(function(evt) {
+    winChangeFocus(2)
+});
+$("#win-3").mousedown(function(evt) {
+    winChangeFocus(3)
+});
+$("#win-4").mousedown(function(evt) {
+    winChangeFocus(4)
+});
+$("#win-5").mousedown(function(evt) {
+    winChangeFocus(5)
+});
+
+
+function winChangeFocus(focusedwin) {
+    console.log("his")
+    for (h = 0; h < windowsopened.id.length; h++) {
+        if (h !== focusedwin) {
+            document.getElementById('win-' + h).style.zIndex = 1;
+
+        } else if (h == focusedwin) {
+            document.getElementById('win-' + focusedwin).style.zIndex = 998;
+        }
+    }
+}
 
 function closewindow(id) {
     var localwindow = document.getElementById("win-" + id);
@@ -97,7 +126,8 @@ function openwindow(id) {
 
     }
 
-}/* 
+}
+/* 
 function minimisewindow(id) {
     var basewindow = document.getElementById("win-" + id);
     var localwindow = document.getElementById("win-cont-" + id);

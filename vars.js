@@ -1,5 +1,5 @@
 var game = {
-    money: 500,
+    money: 0,
     dev: false,
     totalmoney: 0,
     navdrop: true,
@@ -202,11 +202,11 @@ var ponds = {
     ],
     unlocked: [
         true, /* DO NOT CHANGE */
-        true,
-        true,
-        true,
-        true,
-        true,
+        false,
+        false,
+        false,
+        false,
+        false,
     ],
     weatherboost: [
         0,

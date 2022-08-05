@@ -8,12 +8,12 @@ var windowsopened = {
         5,
     ],
     active: [
-        false,
-        false,
-        false,
-        false,
-        false,
         true,
+        false,
+        false,
+        false,
+        false,
+        false,
     ],
     /*minimised: [
         false,

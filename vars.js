@@ -3,7 +3,7 @@ var game = {
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    version: "0.1.2.5"
+    version: "0.1.2.6"
 }
 
 var gameTDM = {

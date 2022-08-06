@@ -171,6 +171,7 @@ function saveGame() {
       var gamedata = {} ;
       localStorage.setItem("gamedata", JSON.stringify(gamedata));
      }
+     location.reload();
   }
   function resetcache() {
     window.location.reload(true);

@@ -3,6 +3,7 @@ var game = {
     dev: false,
     totalmoney: 0,
     navdrop: true,
+    version: "0.1.2.0"
 }
 
 var gameTDM = {
@@ -83,6 +84,14 @@ var fish = {
         1,
     ],
     set: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+    locked: [
         false,
         false,
         false,
@@ -263,6 +272,11 @@ var roboparts = {
         0,
     ],
     unlocked: [
+        false,
+        false,
+        false,
+    ],
+    locked: [
         false,
         false,
         false,

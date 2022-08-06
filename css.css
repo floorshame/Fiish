@@ -28,8 +28,8 @@
 }
 
 :root {
-    --color-1: #006eff; 
-    --color-2: #003f91;
+    --color-1: #5da3ff; 
+    --color-2: #045ccf;
     --color-3: #14141475; /*--divback*/
     --borderradius: 10px;
     --color-4: #000000;
@@ -66,6 +66,24 @@ html {
   width: 100px !important;
   right: 0;
 }
+.clocktext {
+  display: inline-block;
+  bottom: 0;
+  position: fixed;
+  color: white;
+  font-family: 'Comfortaa', cursive;
+  font-size: 10px;
+  margin: 4px;
+  border-radius: var(--borderradius);
+  text-shadow: 2px 2px var(--color-5);
+  z-index: 999;
+  background-color: var(--color-3);
+  backdrop-filter: blur(8px); 
+padding: 10px;
+}
+#money-inv-text {
+  color: var(--color-1);
+}
 .clock-text {
   font-family: 'Comfortaa', cursive;
   color: white;
@@ -74,10 +92,10 @@ html {
   overflow: hidden;
   z-index: 999;
   bottom: 0;
-    position: fixed;
     margin-bottom: 27px;
     text-shadow: 2px 2px var(--color-5);
 margin-left: 5px;
+display: inline-block;
 }
 .betatext {
   color: red;
@@ -146,6 +164,12 @@ border: 1px solid var(--color-2);
   font-size: 20px;
   text-shadow: 2px 2px var(--color-5);
 }
+.settings-text {
+  font-size: 15px;
+  color: white;
+  font-family: 'Comfortaa', cursive;
+  display: inline-block;
+}
 .window {
   position: fixed;
 
@@ -162,6 +186,7 @@ border: 1px solid var(--color-2);
     border: 2px solid var(--color-3);
         border-radius: var(--borderradius);
         border: solid var(--borderwith) var(--color-1); /* !importanté */
+        box-shadow: 0px 0px 10px var(--color-4);
 }
 .windowbar {
     background: var(--color-1);
@@ -208,7 +233,7 @@ border: 1px solid var(--color-2);
   z-index: 999;
   text-shadow: 2px 2px var(--color-5);
   font-size: 20px;
-
+  display: inline-block;
 }
 .content {
     overflow: auto;

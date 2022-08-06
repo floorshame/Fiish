@@ -14,13 +14,11 @@
   crossorigin="anonymous"></script>
 
 <html>
-  <h1 class="inventory-text money-text">Money: <span id="money-inv-text">0</span></h1>
-  <h1 class="clock-text">
-    <span style="display: inline-block; z-index: 999;"  id="clock-text">6:00</span> <span style="display: inline-block;" id="cur-weather-icon" class="material-symbols-outlined">&#xE87C;</span>
-  
-  
-  </h1>
-  
+  <div class="clocktext">
+    
+  <h1 class="">    <span style="color: var(--color-1);"  id="clock-text">6:00</span> <span id="cur-weather-icon" class="material-symbols-outlined">&#xE87C;</span> | Money: <span id="money-inv-text">0</span> </h1>
+
+  </div>
 <div class="navbar"> 
     <div id="nav-dropdown">
     <div class="dropdown">
@@ -94,7 +92,7 @@
             <h1 class="welcometext">fiish</h1>
             <h1 class="betatext">BETA</h1>
         </br>
-        <h1 class="betatext">0.1.1.0</h1>
+        <h1 class="betatext" id="version-text">0.1.1.0</h1>
       </br>
             <a class="outdivs" href="https://discord.gg/eMfGfM6qyc">
               <img  class="welcomeicons" src="img/discord.png" width="10%">
@@ -102,6 +100,9 @@
             <a class="outdivs" href="https://reddit.com/r/fiish">
               <img  class="welcomeicons" src="img/reddit.png" width="10%">
           </a>
+          <a class="outdivs" href="https://github.com/https404/fiish">
+            <img  class="welcomeicons" src="img/github.png" width="10%">
+        </a>
 
         </center>
     </div>
@@ -173,20 +174,20 @@
       settings<button class="win-close" onclick="closewindow(2);">x</button><button class="win-close win-minimise" onclick="minimisewindow(2);">-</button> 
   </div>
   <div id="win-cont-2" class="content">
-    acsent 1: <input class="input-color-picker" type="color" 
+    <h1 class="settings-text">acsent 1:</h1> <input class="input-color-picker" type="color" 
     data-id="1" name="Colors" value="#006eff">
   </br>
-    acsent 2: <input class="input-color-picker" type="color" 
+  <h1 class="settings-text">acsent 2:</h1> <input class="input-color-picker" type="color" 
     data-id="2" name="Colors" value="#003f91">
     </br>
-    window background: <input class="input-color-picker" type="color" 
+    <h1 class="settings-text">window background:</h1> <input class="input-color-picker" type="color" 
     data-id="3" name="Colors" value="#14141475">
   </br>
-  shadow color: <input class="input-color-picker" type="color" 
+  <h1 class="settings-text">shadow color:</h1> <input class="input-color-picker" type="color" 
   data-id="4" name="Colors" value="#000000">
 </br>
-  <input type="checkbox" id="settings-ESounds" checked> Enviromental Sounds </br>
-  <input onclick="changenavbar();" type="checkbox" id="settings-navbar" checked> Dropdown Navbar 
+  <input type="checkbox" id="settings-ESounds" checked> <h1 class="settings-text">Enviromental Sounds</h1> </br>
+  <input onclick="changenavbar();" type="checkbox" id="settings-navbar" checked> <h1 class="settings-text">Dropdown Navbar</h1>
 
   </div>
 </div>
@@ -203,16 +204,16 @@
 
     </div>
     <div id="info-tab-inventory">
-      <h1 class="inventory-text" id="cod-outer-text">Cod: <span class="stats-innertext" id="cod-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="bass-outer-text">Bass: <span class="stats-innertext" id="bass-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="salmon-outer-text">Salmon: <span class="stats-innertext" id="salmon-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="tuna-outer-text">Tuna: <span class="stats-innertext" id="tuna-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="shrimp-outer-text">Shrimp: <span class="stats-innertext" id="shrimp-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="brill-outer-text">Brill: <span class="stats-innertext" id="brill-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(0, 'fish')" class="inventory-text" id="cod-outer-text"><span id="cod-icon" class="material-symbols-outlined">&#xe502;</span> Cod: <span class="stats-innertext" id="cod-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(1, 'fish')" class="inventory-text" id="bass-outer-text"><span id="bass-icon" class="material-symbols-outlined">&#xe502;</span> Bass: <span class="stats-innertext" id="bass-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(2, 'fish')" class="inventory-text" id="salmon-outer-text"><span id="salmon-icon" class="material-symbols-outlined">&#xe502;</span> Salmon: <span class="stats-innertext" id="salmon-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(3, 'fish')" class="inventory-text" id="tuna-outer-text"><span id="tuna-icon" class="material-symbols-outlined">&#xe502;</span> Tuna: <span class="stats-innertext" id="tuna-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(4, 'fish')" class="inventory-text" id="shrimp-outer-text"><span id="shrimp-icon" class="material-symbols-outlined">&#xe502;</span> Shrimp: <span class="stats-innertext" id="shrimp-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(5, 'fish')" class="inventory-text" id="brill-outer-text"><span id="brill-icon" class="material-symbols-outlined">&#xe502;</span> Brill: <span class="stats-innertext" id="brill-inv-text">0</span></h1>
 
-      <h1 class="inventory-text" id="FMP-outer-text">FMP: <span class="stats-innertext" id="FMP-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="CRP-outer-text">CRP: <span class="stats-innertext" id="CRP-inv-text">0</span></h1>
-      <h1 class="inventory-text" id="ARCP-outer-text">ARCP: <span class="stats-innertext" id="ARCP-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(0, 'robo')" class="inventory-text" id="FMP-outer-text"><span id="FMP-icon" class="material-symbols-outlined">&#xf06c;</span> FMP: <span class="stats-innertext" id="FMP-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(1, 'robo')" class="inventory-text" id="CRP-outer-text"><span id="CRP-icon" class="material-symbols-outlined">&#xf06c;</span> CRP: <span class="stats-innertext" id="CRP-inv-text">0</span></h1>
+      <h1 onclick="lockswitch(2, 'robo')" class="inventory-text" id="ARCP-outer-text"><span id="ARCP-icon" class="material-symbols-outlined">&#xf06c;</span> ARCP: <span class="stats-innertext" id="ARCP-inv-text">0</span></h1>
 
     </div>
 

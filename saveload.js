@@ -18,6 +18,7 @@ function saveGame() {
         fishSellPrice: fish.sellprice,
         fishMulti: fish.fishmulti,
         fishSellMulti: fish.sellmulti,
+        fishLocked: fish.locked,
   
         /* ponds data */
         pondsFishPer: ponds.fishper,
@@ -40,6 +41,7 @@ function saveGame() {
         /* robo parts */
         robopOwned: roboparts.owned,
         robopUnlocked: roboparts.unlocked,
+        robopLocked: roboparts.locked,
 
     };
     localStorage.setItem("gamedata", JSON.stringify(gamedata));
@@ -135,6 +137,18 @@ function saveGame() {
     if (typeof gamedata.workersOwned !== "undefined") {
       for (i = 0; i < gamedata.workersOwned.length; i++) {
         workers.owned[i] = gamedata.workersOwned[i];
+      }
+    }
+
+    if (typeof gamedata.fishLocked !== "undefined") {
+      for (i = 0; i < gamedata.fishLocked.length; i++) {
+        fish.locked[i] = gamedata.fishLocked[i];
+      }
+    }
+
+    if (typeof gamedata.robopLocked !== "undefined") {
+      for (i = 0; i < gamedata.robopLocked.length; i++) {
+        roboparts.locked[i] = gamedata.robopLocked[i];
       }
     }
 

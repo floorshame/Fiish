@@ -214,10 +214,59 @@ function updateinfotab() {
     if (infotab.active[i] == false) {
       document.getElementById("info-tab-" + infotab.name[i]).style.display = 'none';
     }
-    
+    for (j = 0; j < fish.locked.length; j++) {
+      if (fish.locked[j] == false ) {
+        document.getElementById(fish.name[j] + "-icon").innerHTML = "&#xe502;"
+        document.getElementById(fish.name[j] + "-icon").style = "color: white;"
+
+      } else {
+        document.getElementById(fish.name[j] + "-icon").innerHTML = "&#xe63f;"
+        document.getElementById(fish.name[j] + "-icon").style = "color: red;"
+
+      }  
+    }
+    for (jk = 0; jk < roboparts.locked.length; jk++) {
+      if (roboparts.locked[jk] == false ) {
+        document.getElementById(roboparts.name[jk] + "-icon").innerHTML = "&#xf06c;"
+        document.getElementById(roboparts.name[jk] + "-icon").style = "color: white;"
+        roboparts.locked[jk] = false;
+      } else {
+        document.getElementById(roboparts.name[jk] + "-icon").innerHTML = "&#xe63f;"
+        document.getElementById(roboparts.name[jk] + "-icon").style = "color: red;"
+        roboparts.locked[jk] = true;
+  
+      }  
+    }
   }
 }
 
+function lockswitch(id, type) {
+  if (type == "fish") {
+    if (fish.locked[id] == true ) {
+      document.getElementById(fish.name[id] + "-icon").innerHTML = "&#xe502;"
+      document.getElementById(fish.name[id] + "-icon").style = "color: white;"
+
+      fish.locked[id] = false;
+    } else {
+      document.getElementById(fish.name[id] + "-icon").innerHTML = "&#xe63f;"
+      document.getElementById(fish.name[id] + "-icon").style = "color: red;"
+
+      fish.locked[id] = true;
+
+    }
+  } else if (type == "robo") {
+    if (roboparts.locked[id] == true ) {
+      document.getElementById(roboparts.name[id] + "-icon").innerHTML = "&#xf06c;"
+      document.getElementById(roboparts.name[id] + "-icon").style = "color: white;"
+      roboparts.locked[id] = false;
+    } else {
+      document.getElementById(roboparts.name[id] + "-icon").innerHTML = "&#xe63f;"
+      document.getElementById(roboparts.name[id] + "-icon").style = "color: red;"
+      roboparts.locked[id] = true;
+
+    }
+  }
+}
 
 /* time */
 
@@ -337,14 +386,20 @@ function updateshoptab() {
 
 function sellfish() {
   var fishownedtmp = fish.owned[document.getElementById("shop-sell-fish").value]
-  if (fishownedtmp >= 1) {
+  if (fishownedtmp >= 1 && fish.locked[document.getElementById("shop-sell-fish").value] == false) {
     game.money = game.money + fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti;
     game.totalmoney += fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti;
     createNotification('Sold: ' + fishownedtmp + ' Fish', 3)
     fish.owned[document.getElementById("shop-sell-fish").value] = 0;
     updateInventory();
   } else {
-    createNotification("You don't have any fish!", 1)
+    if (fishownedtmp <= 1) {
+      createNotification("You don't have any fish!", 1)
+    } else if (fish.locked[document.getElementById("shop-sell-fish").value] == true) {
+      createNotification("You can't sell this fish!", 1)
+
+    }
+
 
   }
 }
@@ -525,7 +580,7 @@ setInterval(function() {
 setInterval(function() {
   if (workers.owned[1] >= 1) {
     for (c = 0; c < fish.owned.length; c++) {
-      if (fish.owned[c] >= 1) {
+      if (fish.owned[c] >= 1 && fish.locked[c] == false) {
         game.money = game.money + fish.owned[c] * fish.sellprice[c] * fish.sellmulti;
         game.totalmoney = game.money + fish.owned[c] * fish.sellprice[c] * fish.sellmulti;
         fish.owned[c] = 0;
@@ -586,6 +641,10 @@ function updateCraftable() {
 
 }
 
+function updateversion() {
+  document.getElementById("version-text").innerHTML = game.version
+}
+
 function updateall() {
   updateshoptab(); ////
   updateponds(); ////
@@ -595,6 +654,6 @@ function updateall() {
   updateactions();
   updateworkers();
   updatenavbar();
-
+  updateversion();
 }
 

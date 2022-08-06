@@ -93,39 +93,41 @@ function updateweather() {
 }
 
 setInterval(function() {
-    if (ponds.activeponds >= 1) {
-        for (i = 0; i < fish.pond.length; i++) { /* every fish */
-            var fishpondactive = fish.pond[i] /* gets the fish pond */
-            if (ponds.active[fishpondactive] == true) { /* need to check to see if that pond is active */
-                if (ponds.weatherboost[fishpondactive] == gameTDM.currentweather) {
-                  let x = Math.floor((Math.random() * 10) + 1);
-                  if (x == 5) {
-                    fish.owned[i] += 1 * fish.fishmulti[i] * 2;
-                    let g = Math.floor((Math.random() * 3) + 0);
+  for (lo = 0; lo < ponds.active.length; lo++) {
+    console.log(lo)
 
-                    roboparts.owned[g] += 1; 
-                    console.log("outcome number " + g + " part name: " + roboparts.name[g] + " parts owned: " + roboparts.owned[g])
-                    roboparts.unlocked[g] = true;
-                    updateInventory();
-                    document.getElementById("fish-bar").value = 0;
+    if (ponds.active[lo] === true) {
 
-                    
-                  } else {
-                    fish.owned[i] += 1 * fish.fishmulti[i];
-                    updateInventory();  
-                    document.getElementById("fish-bar").value = 0;
+      if (ponds.weatherboost[lo] == gameTDM.currentweather) {
 
-                  }
-                } else {
-                  fish.owned[i] += 1 * fish.fishmulti[i];
-                  updateInventory();
-                  document.getElementById("fish-bar").value = 0;
+        let xe = Math.floor((Math.random() * 10) + 1);
+        if (xe == 5) {
+          fish.owned[lo] += 1 * fish.fishmulti[lo] * 2;
+          let gran = Math.floor((Math.random() * 3) + 0);
 
-                }
-            }
+          roboparts.owned[gran] += 1; 
+          console.log("outcome number " + gran + " part name: " + roboparts.name[gran] + " parts owned: " + roboparts.owned[gran])
+          roboparts.unlocked[gran] = true;
+          updateInventory();
+          document.getElementById("fish-bar").value = 0;
+
+          
+        } else {
+          setfish(ponds.id[lo]);
         }
-    }
+      } else {
+        setfish(ponds.id[lo]);
+      }
+  }
+  }
 }, ponds.interval * 1000);
+
+function setfish(fishid) {
+  fish.owned[ponds.id[fishid]] += 1 * fish.fishmulti[fishid];
+  updateInventory();
+  document.getElementById("fish-bar").value = 0;
+
+}
 
 setInterval(function() {
   if (ponds.activeponds >= 1) {
@@ -404,6 +406,21 @@ function sellfish() {
   }
 }
 
+function sellallfish() {
+  var tempholder = 0;
+  for (m = 0; m < fish.owned.length; m++) {
+    if (fish.owned[m] >=1 && fish.locked[m] == false) {
+      game.money = game.money + fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
+      game.totalmoney += game.money + fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
+      tempholder += fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
+      fish.owned[m] = 0;
+      updateInventory();
+  
+    }
+  }
+  createNotification("Sold: $" + tempholder, 1)
+}
+
 // * ACTIONS * //
 function updateactions() {
   shortennum(actionssearch.price[0], "actions-searchforponds");
@@ -541,6 +558,7 @@ function updateworkers() {
     shortennum(workers.owned  [i], "workerowned-" + workers.id[i]);
 
   }
+  document.getElementById('workers-paytext').innerHTML = workers.timedown / 1000;
 }
 
 function workeraction(workerid) {
@@ -557,25 +575,37 @@ function workeraction(workerid) {
   }
 }
 
-setInterval(function() {
+function workersTime() {
+  for (i = 0; i < workers.newcost.length; i++) {
+    if (workers.owned[i] >= 1) {
+      var tempcost = workers.newcost[i] * workers.owned[i];
+      if (game.money >= tempcost) {
+        game.money -= tempcost;
+        updateInventory();
+        createNotification("Your workers have been paid for!", 1);
+        updateworkers();
+        workers.timedown = workers.timedownmax;
+      } else {
+        workers.owned[i] = 0;
+        createNotification("You didn't have enough money to pay for your workers!", 5);
+        updateInventory();
+        updateworkers();
+        workers.timedown = workers.timedownmax;
 
-    for (i = 0; i < workers.newcost.length; i++) {
-      if (workers.owned[i] >= 1) {
-        if (game.money >= workers.newcost[i] * workers.owned[i]) {
-          game.money -= workers.newcost[i] * workers.owned[i];
-          updateInventory();
-          createNotification("Your workers have been paid for!", 1);
-          updateworkers();
-
-        } else {
-          workers.owned[i] = 0;
-          createNotification("You didn't have enough money to pay for your workers!", 5);
-          updateInventory();
-          updateworkers();
-        }
       }
     }
-}, 60000);
+  }
+
+}
+setInterval(function() {
+  if (workers.timedown <= 0) {
+    workersTime()
+
+  } else {
+    workers.timedown -= 1000;
+    updateworkers();
+  }
+}, 1000);
 
 setInterval(function() {
   if (workers.owned[1] >= 1) {
@@ -592,6 +622,8 @@ setInterval(function() {
 }
 
 }, 10000);
+
+
 function workerfiretoggle() {
   if (workers.firemode) {
     document.getElementById('worker-fire-btn').style = ';'

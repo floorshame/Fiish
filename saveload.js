@@ -37,6 +37,7 @@ function saveGame() {
         /* workers data */
         workersNewCost: workers.newcost,
         workersOwned: workers.owned,
+        workerstime: workers.timedown, 
 
         /* robo parts */
         robopOwned: roboparts.owned,
@@ -66,6 +67,7 @@ function saveGame() {
         if (typeof gamedata.actionsNextPondID !== "undefined") actionssearch.nextpondid = gamedata.actionsNextPondID;    
         if (typeof gamedata.totalmoney !== "undefined") game.totalmoney = gamedata.totalmoney;    
         if (typeof gamedata.gameNavSetting !== "undefined") game.navdrop = gamedata.gameNavSetting;    
+        if (typeof gamedata.workerstime !== "undefined") workers.timedown = gamedata.workerstime;    
 
   
         if (typeof gamedata.fishOwned !== "undefined") {

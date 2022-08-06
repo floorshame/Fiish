@@ -3,7 +3,7 @@ var game = {
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    version: "0.1.2.0"
+    version: "0.1.2.5"
 }
 
 var gameTDM = {
@@ -256,6 +256,8 @@ var workers = {
     ],
 
     firemode: false,
+    timedownmax: 60000,
+    timedown: 60000,
 
 }
 

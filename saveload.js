@@ -168,8 +168,10 @@ function saveGame() {
     if (confirm("Are you sure!")) {
       var gamedata = {} ;
       localStorage.setItem("gamedata", JSON.stringify(gamedata));
-      location.reload();
+     }
   }
+  function resetcache() {
+    window.location.reload(true);
   }
   
   setInterval(function() {

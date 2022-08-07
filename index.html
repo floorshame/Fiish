@@ -14,74 +14,47 @@
   crossorigin="anonymous"></script>
 
 <html>
-  <div class="clocktext">
-    
-  <h1 class="">    <span style="color: var(--color-1);"  id="clock-text">6:00</span> <span id="cur-weather-icon" class="material-symbols-outlined">&#xE87C;</span> | Money: <span id="money-inv-text">0</span> </h1>
+  <div class="menu-popup" id="menu-popup">
+    <div class="menu-top-div">
+    <img class="menu-pfp" id="menu-pfpid" src="img/fiish.png" width="50px" height="50px">
+    <h1 class="menu-username" id="menu-usrid">fiish-fan</h1>
+    <button onclick="openwindow(2)" class="material-symbols-outlined menu-settings">&#xe8b8;</button>
+  </div>
+  </br>
+  <div class="menu-btn-div">
+    <center>
+      <button title="1" onclick="openwindow(1)" class="menu-popup-btn"> 
+        <span class="material-symbols-outlined">&#xe502;</span>
+      </br>
+        ponds
+      </button>
+      <button title="2" onclick="openwindow(3)" class="menu-popup-btn"> 
+        <span class="material-symbols-outlined">&#xe88e;</span>
+      </br>
+        info
+      </button>
+      <button title="3" onclick="openwindow(4)" class="menu-popup-btn"> 
+        <span class="material-symbols-outlined">&#xe8cc;</span>
+      </br>
+        market
+      </button>  
+    <button title="4" onclick="openwindow(5)" class="menu-popup-btn"> 
+      <span class="material-symbols-outlined">&#xe7fd;</span>
+    </br>
+      action
+    </button>
+
+  </br>
+  </center>
+  </div>
+  </div>
+  <div class="clocktext" style="width: 98.5%">
+    <button onclick="toggleMenu();" style="float: left; font-size: 30px;" class="material-symbols-outlined menu-button">&#xe5d2;</button> 
+    <div id="menu-bartask">
+  </div>
+  <h1 class="" style="  display: inline-block; float:right;">Money: <span id="money-inv-text">0</span> | <span style="color: var(--color-1);"  id="clock-text">6:00</span> <span id="cur-weather-icon" class="material-symbols-outlined">&#xE87C;</span></h1>
 
   </div>
-<div class="navbar"> 
-    <div id="nav-dropdown">
-    <div class="dropdown">
-        <button class="dropbtn">game 
-          <i class="fa fa-caret-down"></i>
-          
-        </button>
-        <div class="dropdown-content">
-          <a onclick="saveGame()">save</a>
-          <a onclick="resetGame();">reset</a>
-          <a onclick="openwindow(2)">settings</a>
-          <a onclick="resetcache()">cache reset</a>
-
-
-        </div>
-      </div>       
-      <div class="dropdown">
-        <button class="dropbtn">main 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        
-        <div class="dropdown-content">
-          <a onclick="openwindow(1)">ponds</a>
-          <a onclick="openwindow(3)">info</a>
-          <a onclick="openwindow(4)">market</a>
-          <a onclick="openwindow(5)">actions</a>
-
-        </div>
-      </div>   
-      <div class="dropdown">
-        <button class="dropbtn">extra 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        
-        <div class="dropdown-content">
-          <a onclick="openwindow(0)">welcome message</a>
-
-        </div>
-      </div>   
-    </div>
-    <div id="nav-sing">
-      <div class="dropdown">
-        <button class="dropbtn">game 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        
-        <div class="dropdown-content">
-          <a onclick="saveGame()">save</a>
-          <a onclick="resetGame()">reset</a>
-          <a onclick="openwindow(2)">settings</a>
-          <a onclick="resetcache()">cache reset</a>
-
-
-        </div>
-      </div>   
-    <button class="dropbtn" onclick="openwindow(1)">ponds</button>
-      <button class="dropbtn" onclick="openwindow(3)">info</button>
-      <button class="dropbtn" onclick="openwindow(4)">market</button>
-      <button class="dropbtn" onclick="openwindow(5)">actions</button>
-
-    </div>
-    
-</div>
 
 </br>
 
@@ -113,7 +86,7 @@
 </div>
 
 
-<div id="win-1" class="window" style="height: 45% !important; width: 45% !important; left: 0.5%;top: 5%;"> 
+<div id="win-1" class="window" style="height: 45% !important; width: 45% !important; left: 0.5%;top: 0.5%;"> 
   <div onmousedown="winChangeFocus(1);" id="" class="windowbar">
       ponds<button class="win-close" onclick="closewindow(1);">x</button><button class="win-close win-minimise" onclick="minimisewindow(1);">-</button> 
   </div>
@@ -192,11 +165,20 @@
 </br>
   <input type="checkbox" id="settings-ESounds" checked> <h1 class="settings-text">Enviromental Sounds</h1> </br>
   <input onclick="changenavbar();" type="checkbox" id="settings-navbar" checked> <h1 class="settings-text">Dropdown Navbar</h1>
+</br>
+<center>
+  <input style="margin-top: 5px" placeholder="username // fish-fan" type="text" id="settings-usern" class="settings-input" name="username" minlength="1" maxlength="15">
+  <input style="margin-top: 5px" placeholder="pfplink // img/fiish.png" type="text" id="settings-pfpli" class="settings-input"  name="username" minlength="1">
+</center>
+</br>
+  <button class="settings-btn" onclick="saveGame()" style="left: 0; margin-left: 10px; margin-bottom: 5px;">save</button>
+  <center><button class="settings-btn" onclick="resetGame()" style="margin-bottom: 5px;">reset</button></center>
+  <button class="settings-btn" onclick="resetcache()" style="right: 0; margin-right: 10px; margin-bottom: 5px;">cache reset</button>
 
   </div>
 </div>
 
-<div id="win-3" class="window" style="height: 45% !important; width: 45% !important; right: 0.5%;top: 5%;"> 
+<div id="win-3" class="window" style="height: 45% !important; width: 45% !important; right: 0.5%;top: 0.5%;"> 
   <div id="" onmousedown="winChangeFocus(3);" class="windowbar">
       info<button class="win-close" onclick="closewindow(3);">x</button><button class="win-close win-minimise" onclick="minimisewindow(3);">-</button> 
   </div>
@@ -233,7 +215,7 @@
   </div>
 </div>
 
-<div id="win-4" class="window" style="height: 45% !important; width: 45% !important;left: 0.5%;bottom: 0.5%;"> 
+<div id="win-4" class="window" style="height: 45% !important; width: 45% !important;left: 0.5%;bottom: 6%;"> 
   <div id="" onmousedown="winChangeFocus(4);" class="windowbar">
       market<button class="win-close" onclick="closewindow(4);">x</button><button class="win-close win-minimise" onclick="minimisewindow(4);">-</button> 
   </div>
@@ -277,7 +259,7 @@
   </div>
 </div>
 
-<div id="win-5" class="window" style="height: 45% !important; width: 45% !important;right: 0.5%;bottom: 0.5%;"> 
+<div id="win-5" class="window" style="height: 45% !important; width: 45% !important;right: 0.5%;bottom: 6%;"> 
   <div id="" onmousedown="winChangeFocus(5);" class="windowbar">
       actions<button class="win-close" onclick="closewindow(5);">x</button><button class="win-close win-minimise" onclick="minimisewindow(5);">-</button> 
   </div>

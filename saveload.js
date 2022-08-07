@@ -1,11 +1,27 @@
 function saveGame() {
+  var userset = document.getElementById('settings-usern')
+  var pfpset = document.getElementById('settings-pfpli')
+
+  if (userset.value !== '') {
+    game.username = document.getElementById('settings-usern').value;
+
+  }
+  if (pfpset.value !== '') {
+    game.pfp = document.getElementById('settings-pfpli').value;
+
+  }
+
+
     var gamedata = {
         /* main vars*/
         money: game.money,
         totalmoney: game.totalmoney,
         dev: game.dev,
         gameNavSetting: game.navdrop,
-  
+        saveVersion: game.saveversion,
+        username: game.username,
+        pfplink: game.pfp,
+
         /* weather time */
         currentWeather: gameTDM.currentweather,
         currentHour: gameTDM.hour,
@@ -46,6 +62,7 @@ function saveGame() {
 
     };
     localStorage.setItem("gamedata", JSON.stringify(gamedata));
+    updatenav();
     createNotification('Game has been saved', 3)
   
   }
@@ -68,6 +85,9 @@ function saveGame() {
         if (typeof gamedata.totalmoney !== "undefined") game.totalmoney = gamedata.totalmoney;    
         if (typeof gamedata.gameNavSetting !== "undefined") game.navdrop = gamedata.gameNavSetting;    
         if (typeof gamedata.workerstime !== "undefined") workers.timedown = gamedata.workerstime;    
+        if (typeof gamedata.saveVersion !== "undefined") game.saveversion = gamedata.saveVersion;    
+        if (typeof gamedata.username !== "undefined") game.username = gamedata.username;    
+        if (typeof gamedata.pfplink !== "undefined") game.pfp = gamedata.pfplink;    
 
   
         if (typeof gamedata.fishOwned !== "undefined") {
@@ -157,6 +177,16 @@ function saveGame() {
         }
         updateall();
         createNotification('game has loaded', 2)
+        if (game.saveversion !== game.version) {
+          if (confirm("Fiish has detected your on an older/newer version, would you like to change the save file version?")) {
+            game.saveversion = game.version;
+            saveGame();
+            window.location.reload(true);
+
+          } else {
+            alert('If you choose to change your mind please clcik the clear cache button!')
+          }
+        }
   }
   
   document.addEventListener("keydown", function(event) {
@@ -170,10 +200,13 @@ function saveGame() {
     if (confirm("Are you sure!")) {
       var gamedata = {} ;
       localStorage.setItem("gamedata", JSON.stringify(gamedata));
+      location.reload();
+
      }
-     location.reload();
   }
   function resetcache() {
+    game.saveversion = game.version;
+    saveGame();
     window.location.reload(true);
   }
   

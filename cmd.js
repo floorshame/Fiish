@@ -2,14 +2,14 @@ document.getElementById('command-bar').style.display = 'none';
 
 const cmdbardiv = document.getElementById('command-bar');
 const cmdbarinp = document.getElementById('cmd-bar-input');
-
+/*
 document.addEventListener("keydown", function(event) {
   if (event.which == 191) { 
       event.preventDefault();
       commandbar();
   }
 }, false);
-
+*/
 function commandbar() {
 
   cmdbardiv.style.display = '';

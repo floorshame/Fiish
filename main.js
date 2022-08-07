@@ -333,17 +333,20 @@ const NotificationConst = document.querySelector('.Notification')
 
 function createNotification(text, seconds){
   const NotificationN = document.createElement('div')
-  document.getElementById('Noti').style.animation = 'slidenotifaction 0.3s forwards'
   NotificationN.classList.add('toast')
   NotificationN.innerText = text
-  NotificationN.style = 'padding: 10px; backdrop-filter: blur(8px); border-bottom-left-radius: var(--borderradius); border-bottom-right-radius: var(--borderradius);';
+  NotificationN.style = 'padding: 10px; backdrop-filter: blur(8px); border-bottom-left-radius: var(--borderradius); border-bottom-right-radius: var(--borderradius); ';
+  NotificationN.style.animation = 'windowfadein var(--animationtime)'
   NotificationConst.appendChild(NotificationN);
 
-  setTimeout(() => {NotificationN.remove(); }, seconds * 1000)
+  setTimeout(() => {
+      NotificationN.remove(); 
+  
+
+  }, seconds * 1000)
 
   
 }
-
 
 /* SHOP SYSTEM */
 
@@ -639,26 +642,7 @@ function workerfiretoggle() {
 
 // * navbar *//
 
-function updatenavbar() {
-  document.getElementById('settings-navbar').checked = game.navdrop;
-  if (game.navdrop == true) {
-  
-    document.getElementById('nav-dropdown').style.display = '';
-    document.getElementById('nav-sing').style.display = 'none';
 
-  } else {
-  
-
-    document.getElementById('nav-sing').style.display = '';
-    document.getElementById('nav-dropdown').style.display = 'none';
-
-  }
-}
-
-function changenavbar() {
-  game.navdrop = document.getElementById('settings-navbar').checked;
-  updatenavbar();
-}
 
 //* craftables *//
 function updateCraftable() {
@@ -685,7 +669,7 @@ function updateall() {
   updateInventory();
   updateactions();
   updateworkers();
-  updatenavbar();
   updateversion();
+  updatenav();
 }
 

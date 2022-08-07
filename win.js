@@ -15,6 +15,22 @@ var windowsopened = {
         false,
         false,
     ],
+    taskbar: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+    winname: [
+        "welcome",
+        "ponds",
+        "settings",
+        "market",
+        "actions",
+
+    ]
     /*minimised: [
         false,
     ],*/
@@ -90,9 +106,50 @@ function winChangeFocus(focusedwin) {
 
         } else if (h == focusedwin) {
             document.getElementById('win-' + focusedwin).style.zIndex = 998;
+            
         }
     }
+    document.getElementById('menu-popup').style.display = 'none';
+    game.menutoggled = false;
+
 }
+
+document.addEventListener("keydown", function(event) {
+    if (event.which == 32) { //ctrl + s //
+        event.preventDefault();
+
+        toggleMenu();
+    }
+  }, false);
+
+  document.addEventListener("keydown", function(event) {
+    if (event.which == 49 && game.menutoggled == true) { 
+        event.preventDefault();
+
+        openwindow(1);
+    }
+  }, false);
+  document.addEventListener("keydown", function(event) {
+    if (event.which == 50 && game.menutoggled == true) { 
+        event.preventDefault();
+
+        openwindow(3);
+    }
+  }, false);
+  document.addEventListener("keydown", function(event) {
+    if (event.which == 51 && game.menutoggled == true) { 
+        event.preventDefault();
+
+        openwindow(4);
+    }
+  }, false);
+  document.addEventListener("keydown", function(event) {
+    if (event.which == 52 && game.menutoggled == true) { 
+        event.preventDefault();
+
+        openwindow(5);
+    }
+  }, false);
 
 function closewindow(id) {
     var localwindow = document.getElementById("win-" + id);
@@ -102,7 +159,7 @@ function closewindow(id) {
         localwindow.style.display = 'none';
         windowsopened.active[id] = false;
 
-        console.log(windowsopened.active[id]);}, 300)
+        console.log(windowsopened.active[id]);}, 250)
 
     }else {
 
@@ -122,10 +179,30 @@ function openwindow(id) {
 
         windowsopened.active[id] = true;
 
-        console.log(windowsopened.active[id]);
+        game.menutoggled = false;
+        document.getElementById('menu-popup').style.display = 'none';
 
     }
 
+}
+
+document.getElementById('menu-popup').style.display = 'none';
+
+function toggleMenu() {
+    if (game.menutoggled == false) {
+        
+        game.menutoggled = true;
+        document.getElementById('menu-popup').style.animation = 'windowfadein var(--animationtime)'
+        document.getElementById('menu-popup').style.display = '';
+
+    } else {
+        document.getElementById('menu-popup').style.animation = 'windowfadeout var(--animationtime)'
+
+        setTimeout(() => {
+        document.getElementById('menu-popup').style.display = 'none';
+        game.menutoggled = false;
+        }, 250);
+    }
 }
 /* 
 function minimisewindow(id) {
@@ -150,3 +227,58 @@ function minimisewindow(id) {
     }
 
 }*/
+
+function minimisewindow(id) {
+    var windowneeded = document.getElementById("win-" + id);
+
+    if (windowsopened.taskbar[id] == false) {
+
+        var taskbarwin = document.createElement("button");
+        taskbarwin.id = id + "-menu-wintask";
+        taskbarwin.className = "menu-wintask";
+        taskbarwin.onclick = function() {taskbarmin(id);};
+        taskbarwin.href = "#";
+
+        var textinside = document.createTextNode(windowsopened.winname[id]);
+        taskbarwin.appendChild(textinside);
+        var taskbarmenu = document.getElementById("menu-bartask");
+        taskbarmenu.appendChild(taskbarwin);
+
+        windowneeded.style.animation = 'windowfadeout var(--animationtime)'
+
+        setTimeout(() => {
+        windowneeded.style.display = 'none';
+        windowsopened.taskbar[id] = true;
+
+        }, 250)
+
+    
+    } else {
+        taskbarmin(id);
+    } 
+}
+
+function taskbarmin(id) {
+    var windowneeded = document.getElementById("win-" + id);
+
+    if (windowsopened.taskbar[id] == true) {
+        var idwin = document.getElementById(id + "-menu-wintask")
+
+        windowneeded.style.animation = 'windowfadein var(--animationtime)'
+        windowneeded.style.display = '';
+        document.getElementById(id + "-menu-wintask").remove();
+        windowsopened.taskbar[id] = false;
+
+    }
+}
+
+function updatenav() {
+    document.getElementById('menu-usrid').innerHTML = game.username;
+     document.getElementById('menu-pfpid').src = game.pfp;
+  
+}
+
+function navwin(createordestroy, id) {
+
+}
+

@@ -79,10 +79,71 @@ html {
   z-index: 999;
   background-color: var(--color-3);
   backdrop-filter: blur(8px); 
-padding: 10px;
+  vertical-align: main;
+  padding: 10px;
 }
 #money-inv-text {
   color: var(--color-1);
+}
+.menu-button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: white;
+  display: inline-block;
+  transition: 0.3s;
+
+}
+.menu-button:hover {
+  color: var(--color-1);
+  cursor: pointer;
+
+}
+.menu-wintask {
+  display: inline-block; 
+    background-color: var(--color-3);
+    padding: 5px;
+    border-radius: var(--borderradius);
+    color: white;
+    font-family: 'Comfortaa', cursive;
+    box-shadow: 0px 0px 4px var(--color-4);
+    border-color: transparent;
+    font-size: 15px;
+    float: left; 
+    transition: 0.3s;
+    margin-left: 15px;
+}
+.menu-wintask:hover {
+  color: var(--color-1);
+  box-shadow: 0px 0px 4px var(--color-2);
+  cursor: pointer;
+}
+.settings-btn {
+  bottom: 0;
+  position: fixed;
+  color: white;
+  background-color: var(--color-3);
+  border-radius: var(--borderradius);
+border-color: transparent;
+font-family: 'Comfortaa', cursive;
+  transition: 0.3s;
+  font-size: 15px;
+} 
+.settings-btn:hover {
+  color: var(--color-1);
+  cursor: pointer;
+}
+.settings-input {
+  background-color: var(--color-3);
+  color: white;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 5px var(--color-4);
+  border-radius: var(--borderradius);
+  font-family: 'Comfortaa', cursive;
+  padding: 3px;
+}
+.settings-input::placeholder {
+  color: var(--color-1);
+
 }
 .clock-text {
   font-family: 'Comfortaa', cursive;
@@ -96,6 +157,75 @@ padding: 10px;
     text-shadow: 2px 2px var(--color-5);
 margin-left: 5px;
 display: inline-block;
+}
+
+.menu-popup-btn {
+  width: 40%;
+  background-color: var(--color-3);
+  backdrop-filter: blur(8px); 
+  border-radius: var(--borderradius);
+  color:white;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 2px var(--color-4);
+  margin-top: 5px;
+  font-size: 15px;
+  font-family: 'Comfortaa', cursive;
+  height: 60px;
+  transition: 0.3s;
+}
+.menu-popup-btn:hover {
+  color: var(--color-1);
+  cursor: pointer;
+
+}
+.menu-settings {
+  float: right;
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+  transition: 0.3s;
+}
+.menu-settings:hover {
+  color: var(--color-1);
+  cursor: pointer;
+
+}
+.menu-top-div {
+  margin-bottom: 5px;
+  border-bottom: 2px solid white;
+  border-image: linear-gradient(120deg, var(--color-1), var(--color-2)) 1;
+
+}
+.menu-pfp {
+  border-top-left-radius: var(--borderradius);
+  border-top-right-radius: var(--borderradius);
+  display: inline-block;
+  vertical-align: top;
+
+}
+.menu-username {
+  font-family: 'Comfortaa', cursive;
+  display: inline-block;
+  color: white;
+  font-size: 20px;
+}
+.menu-btn-div {
+}
+.menu-openedwin {
+  display: inline-block;
+  vertical-align: middle;
+}
+.menu-popup {
+  bottom: 0;
+  position: fixed;
+  margin-bottom: 3%;
+  margin-left: 0.5%;
+  padding: 10px;
+  background-color: var(--color-3);
+  backdrop-filter: blur(8px); 
+  border-radius: var(--borderradius);
+  width: 20%;
+  z-index: 999;
 }
 .betatext {
   color: red;
@@ -385,7 +515,7 @@ border: 1px solid var(--color-2);
 
   bottom: 0;
   position: fixed;
-  right: -100px;
+  right: 0px;
   margin: 10px;
   color: white;
   background-color: var(--color-3);
@@ -393,7 +523,7 @@ border: 1px solid var(--color-2);
   border-bottom-right-radius: var(--borderradius);
   border-top: 2px solid;
   border-image: linear-gradient(var(--angle), var(--color-1), var(--color-2)) 1;
-
+  margin-bottom: 3%;
   font-family: 'Comfortaa', cursive;
   padding: 0px;
   z-index: 999;

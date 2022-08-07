@@ -3,7 +3,11 @@ var game = {
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    version: "0.1.2.6"
+    saveversion: "0.2.0.0",
+    version: "0.2.0.0",
+    menutoggled: false,
+    username: "fish-fan",
+    pfp: "img/fiish.png"
 }
 
 var gameTDM = {

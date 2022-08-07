@@ -27,10 +27,11 @@ var windowsopened = {
         "welcome",
         "ponds",
         "settings",
+        "info",
         "market",
         "actions",
 
-    ]
+    ],
     /*minimised: [
         false,
     ],*/

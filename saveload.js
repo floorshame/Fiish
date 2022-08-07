@@ -206,7 +206,6 @@ function saveGame() {
   }
   function resetcache() {
     game.saveversion = game.version;
-    saveGame();
     window.location.reload(true);
   }
   

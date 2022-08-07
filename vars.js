@@ -3,8 +3,8 @@ var game = {
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    saveversion: "0.2.0.2",
-    version: "0.2.0.2",
+    saveversion: "0.2.0.3",
+    version: "0.2.0.3",
     menutoggled: false,
     username: "fish-fan",
     pfp: "img/fiish.png"

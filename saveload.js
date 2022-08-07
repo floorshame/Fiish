@@ -184,7 +184,7 @@ function saveGame() {
             window.location.reload(true);
 
           } else {
-            alert('If you choose to change your mind please clcik the clear cache button!')
+            alert('If you choose to change your mind please click the clear cache button!')
           }
         }
   }

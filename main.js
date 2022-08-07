@@ -414,7 +414,7 @@ function sellallfish() {
   for (m = 0; m < fish.owned.length; m++) {
     if (fish.owned[m] >=1 && fish.locked[m] == false) {
       game.money = game.money + fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
-      game.totalmoney += game.money + fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
+      game.totalmoney += fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
       tempholder += fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
       fish.owned[m] = 0;
       updateInventory();

@@ -1,3 +1,4 @@
+document.getElementById('loading-screen').style.display = '';
 function saveGame() {
   var userset = document.getElementById('settings-usern')
   var pfpset = document.getElementById('settings-pfpli')
@@ -21,6 +22,7 @@ function saveGame() {
         saveVersion: game.saveversion,
         username: game.username,
         pfplink: game.pfp,
+        menuBTN: game.menukeycode,
 
         /* weather time */
         currentWeather: gameTDM.currentweather,
@@ -64,8 +66,10 @@ function saveGame() {
     localStorage.setItem("gamedata", JSON.stringify(gamedata));
     updatenav();
     createNotification('Game has been saved', 3)
-  
+    addLog('game', 'you have saved');
+
   }
+
   function loadGame() {
     var gamedata =  JSON.parse(localStorage.getItem("gamedata"));
     if (localStorage.getItem("gamedata") !== null) {
@@ -88,6 +92,7 @@ function saveGame() {
         if (typeof gamedata.saveVersion !== "undefined") game.saveversion = gamedata.saveVersion;    
         if (typeof gamedata.username !== "undefined") game.username = gamedata.username;    
         if (typeof gamedata.pfplink !== "undefined") game.pfp = gamedata.pfplink;    
+        if (typeof gamedata.menuBTN !== "undefined") game.menukeycode = gamedata.menuBTN;    
 
   
         if (typeof gamedata.fishOwned !== "undefined") {
@@ -176,17 +181,21 @@ function saveGame() {
 
         }
         updateall();
-        createNotification('game has loaded', 2)
+
+
         if (game.saveversion !== game.version) {
           if (confirm("Fiish has detected your on an older/newer version, would you like to change the save file version?")) {
             game.saveversion = game.version;
             saveGame();
             window.location.reload(true);
-
           } else {
             alert('If you choose to change your mind please click the clear cache button!')
           }
         }
+        game.loaded = true;
+        document.getElementById('loading-screen').style.display = 'none'
+        addLog('game', 'sev: ' + game.version + ' | sav:' + game.saveversion);
+
   }
   
   document.addEventListener("keydown", function(event) {

@@ -8,6 +8,13 @@
 <meta content="https://doeskitty.xyz" property="og:url" />
 <meta content="https://imgur.com/7bAJC6A.png" property="og:image" />
 <meta content="#0090c9" data-react-helmet="true" name="theme-color" />
+<div class="loading-screen" id="loading-screen">
+  <center>
+  <h1 class="loading-text" id="loading-text">loading</h1>
+</center>
+
+</div>
+
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -49,7 +56,6 @@
     </br>
       action
     </button>
-
   </br>
   </center>
   </div>
@@ -163,9 +169,6 @@
   <h1 class="settings-text">acsent 2:</h1> <input class="input-color-picker" type="color" 
     data-id="2" name="Colors" value="#003f91">
     </br>
-    <h1 class="settings-text">window background:</h1> <input class="input-color-picker" type="color" 
-    data-id="3" name="Colors" value="#14141475">
-  </br>
   <h1 class="settings-text">shadow color:</h1> <input class="input-color-picker" type="color" 
   data-id="4" name="Colors" value="#000000">
 </br>
@@ -174,7 +177,10 @@
 <center>
   <input style="margin-top: 5px" placeholder="username // fish-fan" type="text" id="settings-usern" class="settings-input" name="username" minlength="1" maxlength="15">
   <input style="margin-top: 5px" placeholder="pfplink // img/fiish.png" type="text" id="settings-pfpli" class="settings-input"  name="username" minlength="1">
+  <button id="settings-menbind" onclick="bindmenu();">click to bind</button>
+
 </center>
+
 </br>
   <button class="settings-btn" onclick="saveGame()" style="left: 0; margin-left: 10px; margin-bottom: 5px;">save</button>
   <center><button class="settings-btn" onclick="resetGame()" style="margin-bottom: 5px;">reset</button></center>
@@ -190,7 +196,7 @@
   <div id="win-cont-3" class="content">
     <div class="pond-tab-div">
       <button class="pond-tab-switcher" onclick="infotabswitch(0)">inventory</button>
-      <button class="pond-tab-switcher" onclick="infotabswitch(1)">weather</button>
+      <button class="pond-tab-switcher" onclick="infotabswitch(1)">log</button>
       <button class="pond-tab-switcher" onclick="infotabswitch(2)">stats</button>
 
     </div>
@@ -209,7 +215,11 @@
     </div>
 
     <div id="info-tab-weather">
-      <h1 id="weather-current"></h1>  
+
+      <div id="info-log-div">
+      </div>
+      <input class="log-input" id="log-input" type="text">
+
     </div>
 
 
@@ -290,12 +300,12 @@
       </div>
       <div id="action-tab-science">
         <div class="shop-section">
-          <select class="shop-drpdwn" id="action-craft-dropdown">
+          <select class="shop-drpdwn" id="action-craft-dropdown" onchange="craftabledrp()">
     
           </select>
-          <h1 class="stats-text">FMP: <span class="stats-innertext" id="pond-curactiv">0</span></h1>
-          <h1 class="stats-text">CRP: <span class="stats-innertext" id="pond-curactiv">0</span></h1>
-          <h1 class="stats-text">ARCP: <span class="stats-innertext" id="pond-curactiv">0</span></h1>
+          <h1 class="stats-text">FMP: <span class="stats-innertext" id="craft-FMP">0</span></h1>
+          <h1 class="stats-text">CRP: <span class="stats-innertext" id="craft-CRP">0</span></h1>
+          <h1 class="stats-text">ARCP: <span class="stats-innertext" id="craft-ARCP">0</span></h1>
 
           <center>
 
@@ -315,9 +325,6 @@
 
 
 <div id="Noti" class="Notification">
-</div>
-<div class="command-bar" id="command-bar">
-<input type="text" id="cmd-bar-input" class="cmd-bar-type" placeholder="type your command">
 </div>
 
 </html>

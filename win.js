@@ -114,41 +114,80 @@ function winChangeFocus(focusedwin) {
     game.menutoggled = false;
 
 }
+var boxdigi = document.getElementById("log-input");
 
 document.addEventListener("keydown", function(event) {
-    if (event.which == 32) { //ctrl + s //
-        event.preventDefault();
-
-        toggleMenu();
+    if (event.which == game.menukeycode && boxdigi !== document.activeElement) { 
+    toggleMenu();
     }
-  }, false);
+}, false);
 
+document.addEventListener("keydown", function(event) {
+    if (game.menubinding == true) {
+
+        game.menukeycode = event.keyCode;
+        game.menubinding = false;
+        document.getElementById('settings-menbind').innerHTML = 'click to bind';
+    }
+}, false);
   document.addEventListener("keydown", function(event) {
     if (event.which == 49 && game.menutoggled == true) { 
         event.preventDefault();
+        if (windowsopened.active[1] == true) {
+            closewindow(1);
+            toggleMenu();
 
-        openwindow(1);
+        } else {
+            openwindow(1);
+
+        }
     }
   }, false);
+
+  function bindmenu() {
+    game.menubinding = true;
+    document.getElementById('settings-menbind').innerHTML = 'listening for bind';
+
+  }
   document.addEventListener("keydown", function(event) {
     if (event.which == 50 && game.menutoggled == true) { 
         event.preventDefault();
 
-        openwindow(3);
+        if (windowsopened.active[3] == true) {
+            closewindow(3);
+            toggleMenu();
+
+        } else {
+            openwindow(3);
+
+        }
     }
   }, false);
   document.addEventListener("keydown", function(event) {
     if (event.which == 51 && game.menutoggled == true) { 
         event.preventDefault();
 
-        openwindow(4);
+        if (windowsopened.active[4] == true) {
+            closewindow(4);
+            toggleMenu();
+
+        } else {
+            openwindow(4);
+
+        }
     }
   }, false);
   document.addEventListener("keydown", function(event) {
     if (event.which == 52 && game.menutoggled == true) { 
         event.preventDefault();
 
-        openwindow(5);
+        if (windowsopened.active[5] == true) {
+            closewindow(5);
+            toggleMenu();
+        } else {
+            openwindow(5);
+
+        }
     }
   }, false);
 

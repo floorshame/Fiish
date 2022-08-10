@@ -3,11 +3,15 @@ var game = {
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    saveversion: "0.2.0.5",
-    version: "0.2.0.5",
+    saveversion: "0.2.1.0",
+    version: "0.2.1.0",
     menutoggled: false,
     username: "fish-fan",
-    pfp: "img/fiish.png"
+    pfp: "img/fiish.png",
+    loaded: false,
+    logamn: 0,
+    menukeycode: 69,
+    menubinding: false,
 }
 
 var gameTDM = {
@@ -324,12 +328,29 @@ var craftable = {
     ],
     FMP: [
         23,
+        46,
+        92,
+        184,
+        368,
+        736,
     ],
     CRP: [
         20,
+        40,
+        80,
+        160,
+        320,
+        640,
     ],
     ARCP: [
         18,
+        26,
+        52,
+        104,
+        208,
+        416,
     ],
+    set: false,
     pondset: false,
 }
+

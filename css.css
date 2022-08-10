@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 
 
 * {
@@ -26,7 +27,45 @@
   
 #nav-sing {
 }
+#info-log-div {
+  background-color: var(--color-3);
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  border-radius: var(--borderradius);
+}
 
+.log-text {
+  font-family: 'Space Mono', monospace;
+  color: white;
+
+}
+.log-input {
+  bottom: 0;
+  position: fixed;
+  margin: 6px;
+  width: 98%;
+  background-color: transparent;
+  border-radius: var(--borderradius);
+  font-family: 'Space Mono', monospace;
+  box-shadow: 0px 0px 3px white;
+  border: 0px solid white;
+  color: white;
+}
+.loading-screen {
+  background-color: rgb(49, 49, 49);
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+.loading-text {
+  z-index: 1000;
+  color: white;
+  font-family: 'Comfortaa', cursive;
+  margin-top: 10%;
+}
 :root {
     --color-1: #5da3ff; 
     --color-2: #045ccf;
@@ -286,6 +325,7 @@ border: 1px solid var(--color-2);
 .pond-tab-div {
   border-bottom: var(--borderwith) solid white;
   border-image: linear-gradient(120deg, var(--color-1), var(--color-2)) 1;
+  box-shadow: 0px -1px 5px var(--color-1);
 }
 .inventory-text {
   color: white;

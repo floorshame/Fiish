@@ -10,7 +10,7 @@
 <meta content="#0090c9" data-react-helmet="true" name="theme-color" />
 <div class="loading-screen" id="loading-screen">
   <center>
-  <h1 class="loading-text" id="loading-text">loading</h1>
+  <h1 class="loading-text" id="loading-text">loading...</h1>
 </center>
 
 </div>
@@ -108,7 +108,7 @@
       <button class="pond-tab-switcher" onclick="pondtabswitch(1)">stats</button>
     </div>
     <div id="pond-select-tab" class="pond-select-tab">
-
+      <center>
       <div class="pondbutton">
 
         <button onclick="pondswitch(0)" id="pond-btn-0" class="pond-selectbtn">
@@ -143,7 +143,7 @@
         </button>
 
       </div>
-
+    </center>
   </div>
   <div id="pond-fishing-tab" class="pond-fishing-tab">
       <h1 class="stats-text">active: <span class="stats-innertext" id="pond-curactiv">0</span> / <span class="stats-innertext" id="pond-maxactiv">1</span></h1>
@@ -182,10 +182,11 @@
 </center>
 
 </br>
-  <button class="settings-btn" onclick="saveGame()" style="left: 0; margin-left: 10px; margin-bottom: 5px;">save</button>
-  <center><button class="settings-btn" onclick="resetGame()" style="margin-bottom: 5px;">reset</button></center>
-  <button class="settings-btn" onclick="resetcache()" style="right: 0; margin-right: 10px; margin-bottom: 5px;">cache reset</button>
-
+<center>
+  <button class="settings-btn" onclick="saveGame()" style="">save</button>
+<button class="settings-btn" onclick="resetGame()" >reset</button>
+  <button class="settings-btn" onclick="resetcache()" >cache reset</button>
+</center>
   </div>
 </div>
 
@@ -309,7 +310,7 @@
 
           <center>
 
-          <button onclick="sellfish();" class="shop-button">craft</button>
+          <button onclick="craft('modifier');" class="shop-button">craft</button>
         </center>
           </div>
 
@@ -328,6 +329,8 @@
 </div>
 
 </html>
+<script type="text/javascript" src="sound.js" content='no-cache'></script>
+
 <script type="text/javascript" src="num.js" content='no-cache'></script>
 <script type="text/javascript" src="vars.js" content='no-cache'></script>
 <script type="text/javascript" src="main.js" content='no-cache'></script>

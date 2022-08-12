@@ -100,7 +100,6 @@ $("#win-5").mousedown(function(evt) {
 
 
 function winChangeFocus(focusedwin) {
-    console.log("his")
     for (h = 0; h < windowsopened.id.length; h++) {
         if (h !== focusedwin) {
             document.getElementById('win-' + h).style.zIndex = 1;
@@ -199,14 +198,13 @@ function closewindow(id) {
         localwindow.style.display = 'none';
         windowsopened.active[id] = false;
 
-        console.log(windowsopened.active[id]);}, 250)
+        }, 250)
 
     }else {
 
         localwindow.style.display = '';
         windowsopened.active[id] = true;
 
-        console.log(windowsopened.active[id]);
 
     }
 }
@@ -242,6 +240,11 @@ function toggleMenu() {
         document.getElementById('menu-popup').style.display = 'none';
         game.menutoggled = false;
         }, 250);
+    }
+    if (game.dev == true) {
+        document.getElementById('menu-pfpid').style = 'box-shadow: 0px 0px 5px red;'
+        document.getElementById('menu-usrid').style = 'color: red; text-shadow: 0px 0px 5px red;'
+
     }
 }
 /* 

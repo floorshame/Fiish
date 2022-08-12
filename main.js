@@ -117,7 +117,7 @@ setInterval(function() {
 }, ponds.interval * 1000);
 
 function setfish(fishid) {
-  fish.owned[ponds.id[fishid]] += 1 * fish.fishmulti[fishid];
+  fish.owned[ponds.id[fishid]] += 1 * fish.fishmulti[fishid] * ponds.fishper[fishid];
   updateInventory();
   document.getElementById("fish-bar").value = 0;
 
@@ -394,9 +394,10 @@ function sellfish() {
   } else {
     if (fishownedtmp <= 1) {
       addLog('fish', "you don't have any fish");
+      playaudio('error');
     } else if (fish.locked[document.getElementById("shop-sell-fish").value] == true) {
       addLog('fish', 'this fish is locked');
-
+      playaudio('error')
     }
 
 
@@ -466,6 +467,7 @@ function actionSearch(searchid) {
       updateactions();
     } else {
       addLog('search', 'your unable to search');
+      playaudio('error');
       updateactions();
 
     }
@@ -484,9 +486,11 @@ setInterval(function() {
         actionssearch.activejob[i] = false;
         actionssearch.timeleft[i] = 0;
         addLog('search', 'you have completed searching');
+        playaudio('good');
 
         updateactions();
         updateponds();
+        updateCraftable();
       }
     }
   }
@@ -515,31 +519,6 @@ function actiontabswitch(id) {
   }
 }
 
-
-// * SOUNDS * //
-
-var SOUNDrain = new Audio('sdns/rain.wav'); 
-SOUNDrain.loop = true;
-
-
-setInterval(function() {
-  if (document.getElementById("settings-ESounds").checked == true) {
-    if (gameTDM.currentweather == 2) {
-      
-      SOUNDrain.addEventListener('ended', function() {
-        SOUNDrain.currentTime = 0;
-        SOUNDrain.play();
-      }, true);
-      SOUNDrain.play();
-
-    }
-
-  } else   if (document.getElementById("settings-ESounds").checked == false) {
-    SOUNDrain.pause();
-    SOUNDrain.currentTime = 0;
-    
-  }
-}, 100);
 
 
 // * WORKERS * //
@@ -584,16 +563,17 @@ function workeraction(workerid) {
 function workersTime() {
   for (i = 0; i < workers.newcost.length; i++) {
     if (workers.owned[i] >= 1) {
-      var tempcost = workers.newcost[i] * workers.owned[i];
+      var tempcost = workers.basecost[i] * workers.owned[i];
       if (game.money >= tempcost) {
         game.money -= tempcost;
         updateInventory();
-        addLog('search', 'you have paid $' + tempcost + " for your workers");
+        addLog('workers', 'you have paid $' + tempcost + " for your workers");
         updateworkers();
         workers.timedown = workers.timedownmax;
       } else {
         workers.owned[i] = 0;
         addLog('workers', "you couldn't pay for your workers");
+        playaudio('error');
         updateInventory();
         updateworkers();
         workers.timedown = workers.timedownmax;
@@ -604,12 +584,19 @@ function workersTime() {
 
 }
 setInterval(function() {
-  if (workers.timedown <= 0) {
-    workersTime()
+  for (wox = 0; wox < workers.owned.length; wox++) {
+  if (workers.owned[wox] >= 1) {
+    if (workers.timedown == 0) {
+      workersTime()
+      break;
+    } else {
+      workers.timedown -= 1000;
+      updateworkers();
+      break;
 
-  } else {
-    workers.timedown -= 1000;
-    updateworkers();
+    }
+  
+  }
   }
 }, 1000);
 
@@ -649,16 +636,18 @@ function workerfiretoggle() {
 
 //* craftables *//
 function updateCraftable() {
-  if (craftable.set == false) {
+  $('#action-craft-dropdown').empty();
+
     for (ik = 0; ik < craftable.name.length; ik++) {
-      var craftabledrpdwn = document.createElement("option");
-      document.getElementById("action-craft-dropdown").appendChild(craftabledrpdwn);
-      craftabledrpdwn.value = ik;
-      craftabledrpdwn.innerText = craftable.name[ik] + " " + craftable.modifier[ik];
-      craftable.set = true;
-  
+      if (ponds.unlocked[craftable.modsp[ik]] == true && craftable.modifier[ik] == "pond") {
+        var craftabledrpdwn = document.createElement("option");
+        document.getElementById("action-craft-dropdown").appendChild(craftabledrpdwn);
+        craftabledrpdwn.value = ik;
+        craftabledrpdwn.innerText = craftable.name[ik] + " " + craftable.modifier[ik];
+        craftable.set = true;
+    
+      }
     }
-  }
 
 }
 
@@ -677,7 +666,26 @@ function updateversion() {
 
 function craft(craftitem) {
   if (craftitem == 'modifier') {
+    dropdown = document.getElementById("action-craft-dropdown");
+    if (roboparts.owned[0] >= craftable.FMP[dropdown.value] && roboparts.owned[1] >= craftable.CRP[dropdown.value] && roboparts.owned[2] >= craftable.ARCP[dropdown.value]) {
+      roboparts.owned[0] -= craftable.FMP[dropdown.value];
+      roboparts.owned[1] -= craftable.CRP[dropdown.value];
+      roboparts.owned[2] -= craftable.ARCP[dropdown.value];
+      if (craftable.modifier[dropdown.value] == "pond") {
+        ponds.fishper[dropdown.value] += 1;
+        addLog("craft", "crafted: " + craftable.name[dropdown.value]);
+        craftable.FMP[dropdown.value] *= 2;
+        craftable.CRP[dropdown.value] *= 2;
+        craftable.ARCP[dropdown.value] *= 2;
+        craftabledrp();
+        updateInventory();
+        playaudio('good')
+      }
+    } else {
+      addLog("err", "don't have enough roboparts")
+      playaudio('error')
 
+    }
   }
 }
 

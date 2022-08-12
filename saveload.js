@@ -23,6 +23,7 @@ function saveGame() {
         username: game.username,
         pfplink: game.pfp,
         menuBTN: game.menukeycode,
+        logMax: game.maxlog,
 
         /* weather time */
         currentWeather: gameTDM.currentweather,
@@ -62,10 +63,14 @@ function saveGame() {
         robopUnlocked: roboparts.unlocked,
         robopLocked: roboparts.locked,
 
+        craftFMP: craftable.FMP,
+        craftCRP: craftable.CRP,
+        craftARCP: craftable.ARCP,
+
+
     };
     localStorage.setItem("gamedata", JSON.stringify(gamedata));
     updatenav();
-    createNotification('Game has been saved', 3)
     addLog('game', 'you have saved');
 
   }
@@ -93,6 +98,7 @@ function saveGame() {
         if (typeof gamedata.username !== "undefined") game.username = gamedata.username;    
         if (typeof gamedata.pfplink !== "undefined") game.pfp = gamedata.pfplink;    
         if (typeof gamedata.menuBTN !== "undefined") game.menukeycode = gamedata.menuBTN;    
+        if (typeof gamedata.logMax !== "undefined") game.maxlog = gamedata.logMax;    
 
   
         if (typeof gamedata.fishOwned !== "undefined") {
@@ -179,6 +185,22 @@ function saveGame() {
       }
     }
 
+    if (typeof gamedata.craftFMP !== "undefined") {
+      for (i = 0; i < gamedata.craftFMP.length; i++) {
+        craftable.FMP[i] = gamedata.craftFMP[i];
+      }
+    }
+    if (typeof gamedata.craftCRP !== "undefined") {
+      for (i = 0; i < gamedata.craftCRP.length; i++) {
+        craftable.CRP[i] = gamedata.craftCRP[i];
+      }
+    }
+      if (typeof gamedata.craftARCP !== "undefined") {
+        for (i = 0; i < gamedata.craftARCP.length; i++) {
+          craftable.ARCP[i] = gamedata.craftARCP[i];
+        }
+      }
+  
         }
         updateall();
 

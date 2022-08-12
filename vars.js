@@ -3,8 +3,8 @@ var game = {
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    saveversion: "0.2.1.0",
-    version: "0.2.1.0",
+    saveversion: "0.2.2.0",
+    version: "0.2.2.0",
     menutoggled: false,
     username: "fish-fan",
     pfp: "img/fiish.png",
@@ -12,6 +12,7 @@ var game = {
     logamn: 0,
     menukeycode: 69,
     menubinding: false,
+    maxlog: 9,
 }
 
 var gameTDM = {

@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
+* {
+  text-shadow: 1px 1px black;
+
+}
+
 :root {
     --color-1: rgba(20, 20, 20, 0.726); 
     --borderr: 0px;
@@ -71,6 +76,8 @@ html {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     width: min-content;
+    text-shadow: 0px 0px transparent;
+
 }
 .version-text {
     font-family: 'Montserrat', sans-serif;
@@ -83,6 +90,7 @@ html {
     transition: 3s;
     background-size: 200% auto;
     animation: shine 8s linear infinite;
+    text-shadow: 0px 0px transparent;
 
 }
 @keyframes shine {
@@ -126,6 +134,7 @@ html {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     vertical-align: middle;
+    text-shadow: 0px 0px transparent;
 
   }
 .side-button-sub {

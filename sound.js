@@ -18,21 +18,3 @@ SOUNDrain.volume = 0.2;
 
 
 
-setInterval(function() {
-  if (document.getElementById("settings-ESounds").checked == true) {
-    if (gameTDM.currentweather == 2) {
-      
-      SOUNDrain.addEventListener('ended', function() {
-        SOUNDrain.currentTime = 0;
-        SOUNDrain.play();
-      }, true);
-      SOUNDrain.play();
-
-    }
-
-  } else   if (document.getElementById("settings-ESounds").checked == false) {
-    SOUNDrain.pause();
-    SOUNDrain.currentTime = 0;
-    
-  }
-}, 100);

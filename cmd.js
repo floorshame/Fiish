@@ -125,3 +125,9 @@ function errorcmd() {
   playaudio('error')
 
 }
+
+window.setInterval(function() {
+  var elem = document.getElementById('info-log-div');
+  elem.scrollTop = elem.scrollHeight;
+}, 5000);
+

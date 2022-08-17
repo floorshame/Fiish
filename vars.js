@@ -1,10 +1,35 @@
+var tabopened = {
+    name: [
+        'ponds',
+        'actions',
+        'info',
+        'market',
+        'settings',
+    ],
+    opened: [
+        true,
+        false,
+        false,
+        false,
+        false,
+    ],
+    extraname: [
+        'terminal',
+    ],
+    extraopened: [
+        true,
+    ]
+
+}
+
 var game = {
     money: 0,
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    saveversion: "0.2.2.1",
-    version: "0.2.2.1",
+    saveversion: "0.3.0.0",
+    version: "0.3.0.0",
+    versiontype: "beta",
     menutoggled: false,
     username: "fish-fan",
     pfp: "img/fiish.png",
@@ -12,9 +37,9 @@ var game = {
     logamn: 0,
     menukeycode: 69,
     menubinding: false,
-    maxlog: 9,
+    maxlog: 8,
+    
 }
-
 var gameTDM = {
     weatheroptions: [
         'Sunny', /* 0 */
@@ -109,58 +134,6 @@ var fish = {
         false,
     ],
     sellmulti: 1,
-}
-
-var pondtab = {
-    name: [
-        'pond-select',
-        'pond-fishing',
-    ],
-    active: [
-        true,
-        false,
-    ],
-    
-}
-
-var shoptab = {
-    name: [
-        'buy',
-        'sell',
-        'shipments',
-    ],
-    active: [
-        true,
-        false,
-        false,
-    ],
-}
-
-var infotab = {
-    name: [
-        'inventory',
-        'weather',
-        'stats',
-    ],
-    active: [
-        true,
-        false,
-        false,
-    ]
-}
-var actiontab = {
-    name: [
-        'ponds',
-        'workers',
-        'science',
-        'activejobs',
-    ],
-    active: [
-    true,
-    false,
-    false,
-    false,
-    ],
 }
 
 var actionssearch = {

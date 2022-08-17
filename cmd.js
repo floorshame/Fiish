@@ -115,13 +115,24 @@ function cmd(inputvalue) {
     }else {
       errorcmd()
     }
+  } else if (result[0] == "") {
+    
   }
+  
   else {
     errorcmd()
     }
+    document.getElementById('log-input').value = '';
+
 }
 function errorcmd() {
   addLog("err", "invalid command / no dev perms")
   playaudio('error')
 
 }
+
+window.setInterval(function() {
+  var elem = document.getElementById('info-log-div');
+  elem.scrollTop = elem.scrollHeight;
+}, 5000);
+

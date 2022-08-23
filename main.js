@@ -1,3 +1,10 @@
+
+function round(value, precision) {
+  var multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
+}
+
+
 function updatetabs() {
     for(tab = 0; tab < tabopened.opened.length; tab++) {
         if (tabopened.opened[tab] == true ) {
@@ -27,14 +34,14 @@ function pondswitch(id) {
     if (ponds.active[id] == true) {
         ponds.activeponds -= 1;
         ponds.active[id] = false;
-        document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid rgba(255, 255, 255, 0);"
+        document.getElementById("pond-btn-" + id).style = "border: 1px solid rgba(255, 255, 255, 0);"
         updateponds();
 
     } else {
         if (ponds.pondslimit > ponds.activeponds) {
             ponds.activeponds += 1;
             ponds.active[id] = true;
-            document.getElementById("pond-btn-" + id).style = "border: var(--borderwith) solid var(--color-1);"
+            document.getElementById("pond-btn-" + id).style = "box-shadow: 0px 0px 2px var(--color-3);"
             updateponds();
 
 
@@ -121,8 +128,7 @@ setInterval(function() {
           fish.owned[lo] += 1 * fish.fishmulti[lo] * 2;
           let gran = Math.floor((Math.random() * 3) + 0);
 
-          roboparts.owned[gran] += 1; 
-          roboparts.unlocked[gran] = true;
+          game.roboparts += 1 * ponds.fishper[lo]; 
           updateInventory();
 
           
@@ -149,6 +155,7 @@ function updateInventory() {
     for (i = 0; i < fish.name.length; i++) {
       shortennum(fish.owned[i], fish.name[i] + "-inv-text");
     }
+    
     for (i = 0; i < ponds.unlocked.length; i++) {
       if (ponds.unlocked[i] == false) {
         document.getElementById(fish.name[ponds.id[i]] + "-inv-text").style.display = 'none';
@@ -160,27 +167,16 @@ function updateInventory() {
   
       }
     }
-    shortennum(game.money, "money-inv-text")
-    for (r = 0; r < roboparts.name.length; r++) {
-      if (roboparts.unlocked[r] == false) {
-        document.getElementById(roboparts.name[r] + "-inv-text").style.display = 'none';
-        document.getElementById(roboparts.name[r] + "-outer-text").style.display = 'none';
-  
-      } else if (roboparts.unlocked[r] == true) {
-        document.getElementById(roboparts.name[r] + "-inv-text").style.display = '';
-        document.getElementById(roboparts.name[r] + "-outer-text").style.display = '';
-  
-      }
-      shortennum(roboparts.owned[r], roboparts.name[r] + "-inv-text");
-    }
-  
+    shortennum(game.money, "money-inv-text");
+    shortennum(game.roboparts, "roboparts-inv-text");
+
   }
   
 
   function updateinfotab() {
       for (j = 0; j < fish.locked.length; j++) {
         if (fish.locked[j] == false ) {
-          document.getElementById(fish.name[j] + "-icon").innerHTML = "&#xe502;"
+          document.getElementById(fish.name[j] + "-icon").innerHTML = "&#xead7;"
           document.getElementById(fish.name[j] + "-icon").style = "color: white;"
   
         } else {
@@ -189,22 +185,45 @@ function updateInventory() {
   
         }  
       }
-      for (jk = 0; jk < roboparts.locked.length; jk++) {
-        if (roboparts.locked[jk] == false ) {
-          document.getElementById(roboparts.name[jk] + "-icon").innerHTML = "&#xf06c;"
-          document.getElementById(roboparts.name[jk] + "-icon").style = "color: white;"
-          roboparts.locked[jk] = false;
+        if (game.robolocked == false ) {
+          document.getElementById("roboparts-icon").innerHTML = "&#xf06c;"
+          document.getElementById("roboparts-icon").style = "color: white;"
+          game.robolocked = false;
         } else {
-          document.getElementById(roboparts.name[jk] + "-icon").innerHTML = "&#xe63f;"
-          document.getElementById(roboparts.name[jk] + "-icon").style = "color: red;"
-          roboparts.locked[jk] = true;
+          document.getElementById("roboparts-icon").innerHTML = "&#xe63f;"
+          document.getElementById("roboparts-icon").style = "color: red;"
+          game.robolocked = true;
     
         }  
-      }
   }
   
+  document.addEventListener("keydown", function(shiftclick) {
+    if (shiftclick.which == 16) { //ctrl + s //
+      shiftclick.preventDefault();
+      if (tabopened.opened[2] == true) {
+        tabopened.quicksellinfo = true;
+        for (jo = 0; jo < fish.locked.length; jo++) {
+          document.getElementById(fish.name[jo] + "-icon").style = "color: var(--color-2);"
+        }
+      }
+    }
+  }, false);
+
+  document.addEventListener("keyup", function(shiftclick) {
+    if (shiftclick.which == 16) { //ctrl + s //
+      shiftclick.preventDefault();
+      tabopened.quicksellinfo = false;
+      updateinfotab();
+    }
+  }, false);
+
+
   function lockswitch(id, type) {
-    if (type == "fish") {
+    if (type == "fish" && tabopened.quicksellinfo) {
+      sellfish(id)
+    }
+    else if (type == "fish" && tabopened.quicksellinfo == false) {
+      
       if (fish.locked[id] == true ) {
         document.getElementById(fish.name[id] + "-icon").innerHTML = "&#xe502;"
         document.getElementById(fish.name[id] + "-icon").style = "color: white;"
@@ -218,14 +237,14 @@ function updateInventory() {
   
       }
     } else if (type == "robo") {
-      if (roboparts.locked[id] == true ) {
-        document.getElementById(roboparts.name[id] + "-icon").innerHTML = "&#xf06c;"
-        document.getElementById(roboparts.name[id] + "-icon").style = "color: white;"
-        roboparts.locked[id] = false;
+      if (game.robolocked == true ) {
+        document.getElementById("roboparts-icon").innerHTML = "&#xf06c;"
+        document.getElementById("roboparts-icon").style = "color: white;"
+        game.robolocked = false;
       } else {
-        document.getElementById(roboparts.name[id] + "-icon").innerHTML = "&#xe63f;"
-        document.getElementById(roboparts.name[id] + "-icon").style = "color: red;"
-        roboparts.locked[id] = true;
+        document.getElementById("roboparts-icon").innerHTML = "&#xe63f;"
+        document.getElementById("roboparts-icon").style = "color: red;"
+        game.robolocked = true;
   
       }
     }
@@ -264,7 +283,57 @@ function updateInventory() {
   
     }
   }
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! RANDOM POP UP !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+
+  document.getElementById('roboparts-icon2').style.display = 'none';
+  document.getElementById('money-icon2').style.display = 'none';
+  setInterval(function() {
+    if (gameTDM.popup == false) {
+      if (!document.hidden) {
+    
+        gameTDM.popupanswerone = Math.floor((Math.random() * 20) + 1);
+        gameTDM.popupanswertwo = Math.floor((Math.random() * 20) + 1);
+        addLog("???", "What is: " + gameTDM.popupanswerone + " + " + gameTDM.popupanswertwo, "popup");
+        gameTDM.popup = true;
+    
+        setTimeout(() => {
+          if (gameTDM.popup == true) {
+            gameTDM.popup = false;
+            addLog("unlucky", "time ran out", "red")
+          }
+        }, Math.floor((Math.random() * 5000) + 4000));
+    
   
+      }
+    }
+  }, Math.floor((Math.random() * 60000) + 60000));    
+
+  function randompopup(value) {
+    if (value == gameTDM.popupanswerone + gameTDM.popupanswertwo) {
+      var randomnumberpopup = Math.floor((Math.random() * 2) + 1);
+      if (randomnumberpopup == 1) {
+        var temppopup = Math.round(game.totalmoney / 16)
+        game.money += Math.round(game.totalmoney / 16);
+        game.totalmoney += Math.round(game.totalmoney / 16);
+        addLog('lucky', 'You got: $' + temppopup, "green")
+        gameTDM.popup = false;
+        updateInventory();
+      } else {
+        var temppopup = Math.round(craftable.roboparts[0] / 6)
+        game.roboparts += Math.round(craftable.roboparts[0] / 6)
+        addLog('lucky', 'You got: ' + temppopup + " Roboparts" , "green");
+        gameTDM.popup = false;
+        updateInventory();
+
+      }
+    } else {
+        addLog("unlucky", "wrong answer", "red")
+        gameTDM.popup = false;
+    }
+  }
+
+
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! SETTINGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
 
   const colorPicker = document.querySelectorAll("input.input-color-picker");
@@ -304,21 +373,21 @@ colorPicker.forEach((item) => {
   
   
   
-  function sellfish() {
-    var fishownedtmp = fish.owned[document.getElementById("shop-sell-fish").value]
-    if (fishownedtmp >= 1 && fish.locked[document.getElementById("shop-sell-fish").value] == false) {
-      game.money = game.money + fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti;
-      game.totalmoney += fishownedtmp * fish.sellprice[document.getElementById("shop-sell-fish").value] * fish.sellmulti;
-      addLog('fish', 'Sold: ' + fishownedtmp + ' Fish');
-  
-      fish.owned[document.getElementById("shop-sell-fish").value] = 0;
+  function sellfish(fishid) {
+    var fishownedtmp = fish.owned[fishid]
+    if (fishownedtmp >= 1 && fish.locked[fishid] == false) {
+      game.money = Math.round(game.money + fishownedtmp * fish.sellprice[fishid] * fish.sellmulti);
+      game.totalmoney += Math.round(fishownedtmp * fish.sellprice[fishid] * fish.sellmulti);
+      addLog('fish', 'Sold: ' + fishownedtmp + ' Fish', "green");
+
+      fish.owned[fishid] = 0;
       updateInventory();
     } else {
       if (fishownedtmp <= 1) {
-        addLog('fish', "you don't have any fish");
+        addLog('fish', "you don't have any fish", "red");
         playaudio('error');
-      } else if (fish.locked[document.getElementById("shop-sell-fish").value] == true) {
-        addLog('fish', 'this fish is locked');
+      } else if (fish.locked[fishid] == true) {
+        addLog('fish', 'this fish is locked', "red");
         playaudio('error')
       }
   
@@ -330,15 +399,15 @@ colorPicker.forEach((item) => {
     var tempholder = 0;
     for (m = 0; m < fish.owned.length; m++) {
       if (fish.owned[m] >=1 && fish.locked[m] == false) {
-        game.money = game.money + fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
-        game.totalmoney += fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
-        tempholder += fish.owned[m] * fish.sellprice[m] * fish.sellmulti;
+        game.money = Math.round(game.money + fish.owned[m] * fish.sellprice[m] * fish.sellmulti);
+        game.totalmoney += Math.round(fish.owned[m] * fish.sellprice[m] * fish.sellmulti);
+        tempholder += Math.round(fish.owned[m] * fish.sellprice[m] * fish.sellmulti);
         fish.owned[m] = 0;
         updateInventory();
     
       }
     }
-    addLog('fish', 'Sold: $' + tempholder + ' Fish');
+    addLog('fish', 'Sold: $' + tempholder + ' Fish', "green");
   
   }
   
@@ -380,13 +449,13 @@ colorPicker.forEach((item) => {
           if (game.money >= actionssearch.price[searchid] && actionssearch.activejob[searchid] == false && actionssearch.nextpondid <= ponds.totalponds) {
             actionssearch.activejob[searchid] = true;
             game.money -= actionssearch.price[searchid];
-            actionssearch.price[searchid] *= 6;
-            addLog('search', 'you have started searching');
+            actionssearch.price[searchid] *= 5;
+            addLog('search', 'you have started searching', "green");
       
             updateInventory();
             updateactions();
           } else {
-            addLog('search', 'your unable to search');
+            addLog('search', 'your unable to search', "red");
             playaudio('error');
             updateactions();
       
@@ -405,7 +474,7 @@ colorPicker.forEach((item) => {
               actionssearch.nextpondid += 1;
               actionssearch.activejob[i] = false;
               actionssearch.timeleft[i] = 0;
-              addLog('search', 'you have completed searching');
+              addLog('search', 'you have completed searching', "green");
               playaudio('good');
       
               updateactions();
@@ -474,18 +543,18 @@ colorPicker.forEach((item) => {
           }
           
           function workersTime() {
-            for (i = 0; i < workers.newcost.length; i++) {
-              if (workers.owned[i] >= 1) {
-                var tempcost = workers.basecost[i] * workers.owned[i];
+            for (wok = 0; wok < workers.newcost.length; wok++) {
+              if (workers.owned[wok] >= 1) {
+                var tempcost = workers.basecost[wok] * workers.owned[wok];
                 if (game.money >= tempcost) {
                   game.money -= tempcost;
                   updateInventory();
-                  addLog('workers', 'you have paid $' + tempcost + " for your workers");
+                  addLog('workers', 'you have paid $' + tempcost + " for your workers", "green");
                   updateworkers();
                   workers.timedown = workers.timedownmax;
                 } else {
-                  workers.owned[i] = 0;
-                  addLog('workers', "you couldn't pay for your workers");
+                  workers.owned[wok] = 0;
+                  addLog('workers', "you couldn't pay for your workers", "red");
                   playaudio('error');
                   updateInventory();
                   updateworkers();
@@ -517,12 +586,7 @@ colorPicker.forEach((item) => {
             if (workers.owned[1] >= 1) {
               for (c = 0; c < fish.owned.length; c++) {
                 if (fish.owned[c] >= 1 && fish.locked[c] == false) {
-                  game.money = game.money + fish.owned[c] * fish.sellprice[c] * fish.sellmulti;
-                  game.totalmoney = game.money + fish.owned[c] * fish.sellprice[c] * fish.sellmulti;
-                  fish.owned[c] = 0;
-          
-                  updateInventory();
-                  updateponds();
+                  sellallfish();
                 }
               }
           }
@@ -564,9 +628,7 @@ colorPicker.forEach((item) => {
           function craftabledrp() {
             dropdown = document.getElementById("action-craft-dropdown")
           
-            document.getElementById("craft-FMP").innerHTML = craftable.FMP[dropdown.value];
-            document.getElementById("craft-CRP").innerHTML = craftable.CRP[dropdown.value];
-            document.getElementById("craft-ARCP").innerHTML = craftable.ARCP[dropdown.value];
+            document.getElementById("craft-roboparts").innerHTML = craftable.roboparts[dropdown.value];
           
           }
           
@@ -577,22 +639,18 @@ colorPicker.forEach((item) => {
           function craft(craftitem) {
             if (craftitem == 'modifier') {
               dropdown = document.getElementById("action-craft-dropdown");
-              if (roboparts.owned[0] >= craftable.FMP[dropdown.value] && roboparts.owned[1] >= craftable.CRP[dropdown.value] && roboparts.owned[2] >= craftable.ARCP[dropdown.value]) {
-                roboparts.owned[0] -= craftable.FMP[dropdown.value];
-                roboparts.owned[1] -= craftable.CRP[dropdown.value];
-                roboparts.owned[2] -= craftable.ARCP[dropdown.value];
+              if (game.roboparts >= craftable.roboparts[dropdown.value]) {
+                game.roboparts -= craftable.roboparts[dropdown.value];
                 if (craftable.modifier[dropdown.value] == "pond") {
                   ponds.fishper[dropdown.value] += 1;
-                  addLog("craft", "crafted: " + craftable.name[dropdown.value]);
-                  craftable.FMP[dropdown.value] *= 2;
-                  craftable.CRP[dropdown.value] *= 2;
-                  craftable.ARCP[dropdown.value] *= 2;
+                  addLog("craft", "crafted: " + craftable.name[dropdown.value], "green");
+                  craftable.roboparts[dropdown.value] *= 2;
                   craftabledrp();
                   updateInventory();
                   playaudio('good')
                 }
               } else {
-                addLog("err", "don't have enough roboparts")
+                addLog("err", "don't have enough roboparts", "red")
                 playaudio('error')
           
               }
@@ -634,4 +692,3 @@ colorPicker.forEach((item) => {
               tabopened.extraopened[0] = true;
             }
           }
-          

@@ -18,17 +18,25 @@ var tabopened = {
     ],
     extraopened: [
         true,
-    ]
+    ],
+    quicksellinfo: false,
 
+}
+
+var popup = {
+    ispopup: false,
+    whichpopup: 'money',
 }
 
 var game = {
     money: 0,
+    roboparts: 0,
+    robolocked: false,
     dev: false,
     totalmoney: 0,
     navdrop: true,
-    saveversion: "0.3.0.1",
-    version: "0.3.0.1",
+    saveversion: "0.3.1.0",
+    version: "0.3.1.0",
     versiontype: "beta",
     menutoggled: false,
     username: "fish-fan",
@@ -38,7 +46,6 @@ var game = {
     menukeycode: 69,
     menubinding: false,
     maxlog: 8,
-    
 }
 var gameTDM = {
     weatheroptions: [
@@ -66,6 +73,9 @@ var gameTDM = {
     displayminute: 00,
     weatherset: false,
     weathernotifactions: true,
+    popupanswerone: 0,
+    popupanswertwo: 0,
+    popup: false,
 }
 
 var fish = {
@@ -75,7 +85,11 @@ var fish = {
         'salmon',
         'tuna',
         'shrimp',
-        'brill'
+        'brill',
+
+        'koi',
+        'piranha',
+        'shark',
     ],
     id: [
         0,
@@ -84,6 +98,10 @@ var fish = {
         3,
         4,
         5,
+
+        6,
+        7,
+        8,
     ],
     pond: [ /* ponds.id */
         0,
@@ -92,11 +110,19 @@ var fish = {
         3,
         4,
         5,
+
+        6,
+        7,
+        8,
     ],
     owned: [
         0,
         0,
         0,
+        0,
+        0,
+        0,
+
         0,
         0,
         0,
@@ -108,11 +134,19 @@ var fish = {
         8,
         11,
         13,
+
+        15,
+        17,
+        19,
     ],
     fishmulti: [
         1,
         1,
         1,
+        1,
+        1,
+        1,
+
         1,
         1,
         1,
@@ -124,11 +158,19 @@ var fish = {
         false,
         false,
         false,
+
+        false,
+        false,
+        false,
     ],
     locked: [
         false,
         false,
         false,
+        false,
+        false,
+        false,
+
         false,
         false,
         false,
@@ -156,6 +198,7 @@ var actionssearch = {
         false,
     ],
     nextpondid: 1,
+    moneyset: false,
 }
 
 var ponds = {
@@ -166,6 +209,10 @@ var ponds = {
         'groovy-pond',
         'cave-pond',
         'generic-pond',
+
+        'fresh-pond',
+        'hidden-pond',
+        'ice-pond'
     ],
     id: [
         0,
@@ -174,11 +221,19 @@ var ponds = {
         3,
         4,
         5,
+
+        6,
+        7,
+        8,
     ],
     active: [
         false,
         false,
         false,
+        false,
+        false,
+        false,
+
         false,
         false,
         false,
@@ -190,11 +245,19 @@ var ponds = {
         1,
         1,
         1,
+
+        1,
+        1,
+        1,
     ],
     unlocked: [
         true, /* DO NOT CHANGE */
         false,
         false,
+        false,
+        false,
+        false,
+
         false,
         false,
         false,
@@ -206,6 +269,10 @@ var ponds = {
         0,
         2,
         1,
+
+        1,
+        3,
+        2,
     ],
 
 
@@ -226,11 +293,11 @@ var workers = {
     ],
     basecost: [
         150,
-        500,
+        150,
     ],
     newcost: [
         150,
-        500,
+        300,
     ],
     owned: [
         0,
@@ -243,30 +310,6 @@ var workers = {
 
 }
 
-var roboparts = {
-    name: [
-        "FMP", //* fish modifying part *//
-        "CRP", //* chatoic reactive part *//
-        "ARCP", //* anti reactive coolent part*//
-        //* craftable ones past here *//
-    ],
-    owned: [
-        0,
-        0,
-        0,
-    ],
-    unlocked: [
-        false,
-        false,
-        false,
-    ],
-    locked: [
-        false,
-        false,
-        false,
-    ]
-}
-
 var craftable = {
     name: [
         "shallow-modifier",
@@ -275,6 +318,11 @@ var craftable = {
         "groovy-modifier",
         "cave-modifier",
         "generic-modifier",
+        
+        "fresh-modifier",
+        "hidden-modifier",
+        "ice-modifier",
+
     ],
     modifier: [
         "pond",
@@ -283,6 +331,11 @@ var craftable = {
         "pond",
         "pond",
         "pond",
+
+        "pond",
+        "pond",
+        "pond",
+
     ],
     modsp: [
         0,
@@ -291,6 +344,10 @@ var craftable = {
         3,
         4,
         5,
+
+        6,
+        7,
+        8,
     ],
     modamnt: [
         2,
@@ -299,30 +356,22 @@ var craftable = {
         2,
         2,
         2,
+
+        2,
+        2,
+        2,
     ],
-    FMP: [
+    roboparts: [
         23,
         46,
         92,
         184,
         368,
         736,
-    ],
-    CRP: [
-        20,
-        40,
-        80,
-        160,
-        320,
-        640,
-    ],
-    ARCP: [
-        18,
-        26,
-        52,
-        104,
-        208,
-        416,
+
+        1472,
+        2944,
+        5888,
     ],
     set: false,
     pondset: false,

@@ -9,7 +9,17 @@ function playaudio(name) {
         var error = new Audio('sdns/mouse-god.wav');
         error.play();
 
+    } else if (name == 'popup') {
+        var error = new Audio('sdns/popup-sound.wav');
+        error.play();
+
     }
+    else if (name == 'boom') {
+        var error = new Audio('sdns/boom.mp3');
+        error.play();
+
+    }
+    
 }
 
 var SOUNDrain = new Audio('sdns/rain.wav'); 

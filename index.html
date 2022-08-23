@@ -14,6 +14,7 @@
 
     
 </div>
+
 <link rel="icon" href="img/fiish.png">
 <div class="loading-screen" id="loading-screen">
   <center>
@@ -21,20 +22,28 @@
 </center>
 
 </div>
+<div id="random-popup" class="popup">
+  <span onclick="popupclicked();" id="roboparts-icon2" class="material-symbols-outlined">&#xf06c;</span>
+  <span onclick="popupclicked();" id="money-icon2" class="material-symbols-outlined">&#xef63;</span>
+
+</div>
 
 <div class="div-ponds">
-<button onclick="switchtabs(0)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe502;</span> ponds</button>
-<button onclick="switchtabs(1)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe7fd;</span> actions</button>
-<button onclick="switchtabs(2)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe88e;</span> info</button>
-<button onclick="switchtabs(3)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe8cc;</span> market</button>
-<button onclick="switchtabs(4)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe8b8;</span> settings</button>
+    <div class="nav-userinf" style="margin-top: 3px">
 
-  <div class="nav-userinf">
-    <h1 class="version-text" id="version-text"></h1> 
-
-    <img class="menu-pfp" id="menu-pfpid" src="img/fiish.png" width="50px" height="50px">
+    <img class="menu-pfp" onclick="boompfp()" id="menu-pfpid" src="img/fiish.png" width="50px" height="50px">
     <h1 class="menu-username" id="menu-usrid">fiish-fan</h1>
   </div>
+
+  <button onclick="switchtabs(2)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xf19c;</span> backpack</button>
+  <button onclick="switchtabs(3)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe8cc;</span> market</button>
+  <button onclick="switchtabs(1)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe7fd;</span> actions</button>
+
+<button onclick="switchtabs(0)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xead7;</span> ponds</button>
+
+<button onclick="switchtabs(4)" class="side-button-main"><span class="material-symbols-outlined side-icon">&#xe8b8;</span> settings</button>
+<h1 class="version-text" id="version-text" style="bottom: 0; position: fixed; margin-bottom: 6px"></h1> 
+
 </div>
 <div class="div-terminal" id="div-termouter">
   <div onclick="termopen()" class="topbar noselect">
@@ -53,7 +62,8 @@
         <center>
         <div class="div-cont-left div-contentbox">
             <h1 class="div-cont-cat">search</h1>
-            <button onclick="actionSearch(0);" class="action-btn">search for pond</br>$<span id="actions-searchforponds">150</span></br>2 hours</button>  
+            <button onclick="actionSearch(0);" class="action-btn">search for pond</br>$<span id="actions-searchforponds">150</span></br>2 hours</button>
+
         </div>
 
         <div class="div-cont-right div-contentbox">
@@ -64,12 +74,12 @@
 
         </div>
         <div class="div-cont-left div-contentbox">
+          <h1 class="div-cont-cat">craft</h1>
+
             <select class="shop-drpdwn" id="action-craft-dropdown" onchange="craftabledrp()">
     
             </select>
-            <h1 class="stats-text">FMP: <span class="stats-innertext" id="craft-FMP">0</span></h1>
-            <h1 class="stats-text">CRP: <span class="stats-innertext" id="craft-CRP">0</span></h1>
-            <h1 class="stats-text">ARCP: <span class="stats-innertext" id="craft-ARCP">0</span></h1>
+            <h1 class="stats-text">RoboParts: <span class="stats-innertext" id="craft-roboparts">0</span></h1>
   
             <center>
   
@@ -80,6 +90,9 @@
 
         <div class="div-cont-right div-contentbox">
             <h1 class="div-cont-cat">active</h1>
+            <div id="action-tab-activejobs">
+
+            </div>
             <h1 class="stats-text" style="bottom: 0; position: fixed">Workers Pay: <span class="stats-innertext" id="workers-paytext">60</span></h1>
 
         </div>
@@ -89,8 +102,8 @@
     <div id="cont-ponds">
         <center>
         <div class="div-cont-left div-contentbox">
-          
-                  <button onclick="pondswitch(0)" id="pond-btn-0" class="action-btn">
+        </br>
+                  <button onclick="pondswitch(0)" id="pond-btn-0" class="action-btn pond-btn">
                     Shallow Pond </br>
                     <span title="Weather boost" style="display: inline-block;" id="pond-weather-0" class="material-symbols-outlined">&#xE87C;</span>
                   
@@ -120,9 +133,29 @@
                     Generic Pond </br>
                     <span title="Weather boost" style="display: inline-block;" id="pond-weather-5" class="material-symbols-outlined">&#xE87C;</span>
                   </button>
+
+                  <button onclick="pondswitch(6)" id="pond-btn-6" class="action-btn pond-btn">
+                    Fresh Pond </br>
+                    <span title="Weather boost" style="display: inline-block;" id="pond-weather-6" class="material-symbols-outlined">&#xE87C;</span>
+                  </button>
+
+                  <button onclick="pondswitch(7)" id="pond-btn-7" class="action-btn pond-btn">
+                    Hidden Pond </br>
+                    <span title="Weather boost" style="display: inline-block;" id="pond-weather-7" class="material-symbols-outlined">&#xE87C;</span>
+                  </button>
+
+                  <button onclick="pondswitch(8)" id="pond-btn-8" class="action-btn pond-btn">
+                    Ice Pond </br>
+                    <span title="Weather boost" style="display: inline-block;" id="pond-weather-8" class="material-symbols-outlined">&#xE87C;</span>
+                  </button>
+
                   <h1 style=" " class="stats-text">active ponds: <span class="stats-innertext" id="pond-curactiv"></span> / <span class="stats-innertext" id="pond-maxactiv"></span></h1>
 
         </div>
+        <div class="div-cont-right div-contentbox">
+
+        </div>
+  
     </center>
 
     </div>
@@ -133,13 +166,16 @@
         <div id="info-tab-inventory" class="noselect info-tab-inventory">
           <h1 class="shop-section-text">fish</h1>
   
-          <h1 onclick="lockswitch(0, 'fish')" class="stats-text" id="cod-outer-text"><span id="cod-icon" class="material-symbols-outlined">&#xe502;</span> Cod: <span class="stats-innertext" id="cod-inv-text">0</span></h1>
-          <h1 onclick="lockswitch(1, 'fish')" class="stats-text" id="bass-outer-text"><span id="bass-icon" class="material-symbols-outlined">&#xe502;</span> Bass: <span class="stats-innertext" id="bass-inv-text">0</span></h1>
-          <h1 onclick="lockswitch(2, 'fish')" class="stats-text" id="salmon-outer-text"><span id="salmon-icon" class="material-symbols-outlined">&#xe502;</span> Salmon: <span class="stats-innertext" id="salmon-inv-text">0</span></h1>
-          <h1 onclick="lockswitch(3, 'fish')" class="stats-text" id="tuna-outer-text"><span id="tuna-icon" class="material-symbols-outlined">&#xe502;</span> Tuna: <span class="stats-innertext" id="tuna-inv-text">0</span></h1>
-          <h1 onclick="lockswitch(4, 'fish')" class="stats-text" id="shrimp-outer-text"><span id="shrimp-icon" class="material-symbols-outlined">&#xe502;</span> Shrimp: <span class="stats-innertext" id="shrimp-inv-text">0</span></h1>
-          <h1 onclick="lockswitch(5, 'fish')" class="stats-text" id="brill-outer-text"><span id="brill-icon" class="material-symbols-outlined">&#xe502;</span> Brill: <span class="stats-innertext" id="brill-inv-text">0</span></h1>
-    
+          <h1 onclick="lockswitch(0, 'fish')" class="stats-text" id="cod-outer-text"><span id="cod-icon" class="material-symbols-outlined">&#xead7;</span> Cod: <span class="stats-innertext" id="cod-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(1, 'fish')" class="stats-text" id="bass-outer-text"><span id="bass-icon" class="material-symbols-outlined">&#xead7;</span> Bass: <span class="stats-innertext" id="bass-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(2, 'fish')" class="stats-text" id="salmon-outer-text"><span id="salmon-icon" class="material-symbols-outlined">&#xead7;</span> Salmon: <span class="stats-innertext" id="salmon-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(3, 'fish')" class="stats-text" id="tuna-outer-text"><span id="tuna-icon" class="material-symbols-outlined">&#xead7;</span> Tuna: <span class="stats-innertext" id="tuna-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(4, 'fish')" class="stats-text" id="shrimp-outer-text"><span id="shrimp-icon" class="material-symbols-outlined">&#xead7;</span> Shrimp: <span class="stats-innertext" id="shrimp-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(5, 'fish')" class="stats-text" id="brill-outer-text"><span id="brill-icon" class="material-symbols-outlined">&#xead7;</span> Brill: <span class="stats-innertext" id="brill-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(6, 'fish')" class="stats-text" id="koi-outer-text"><span id="koi-icon" class="material-symbols-outlined">&#xead7;</span> Koi: <span class="stats-innertext" id="koi-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(7, 'fish')" class="stats-text" id="piranha-outer-text"><span id="piranha-icon" class="material-symbols-outlined">&#xead7;</span>Piranha: <span class="stats-innertext" id="piranha-inv-text">0</span></h1>
+          <h1 onclick="lockswitch(8, 'fish')" class="stats-text" id="shark-outer-text"><span id="shark-icon" class="material-symbols-outlined">&#xead7;</span>Shark: <span class="stats-innertext" id="shark-inv-text">0</span></h1>
+
     
         </div>
         </div>
@@ -147,9 +183,7 @@
         <div class="div-cont-right div-contentbox">
           <div id="info-tab-inventory" class="noselect info-tab-inventory">
             <h1 class="shop-section-text">other</h1>
-            <h1 onclick="lockswitch(0, 'robo')" class="stats-text" id="FMP-outer-text"><span id="FMP-icon" class="material-symbols-outlined">&#xf06c;</span> FMP: <span class="stats-innertext" id="FMP-inv-text">0</span></h1>
-            <h1 onclick="lockswitch(1, 'robo')" class="stats-text" id="CRP-outer-text"><span id="CRP-icon" class="material-symbols-outlined">&#xf06c;</span> CRP: <span class="stats-innertext" id="CRP-inv-text">0</span></h1>
-            <h1 onclick="lockswitch(2, 'robo')" class="stats-text" id="ARCP-outer-text"><span id="ARCP-icon" class="material-symbols-outlined">&#xf06c;</span> ARCP: <span class="stats-innertext" id="ARCP-inv-text">0</span></h1>
+            <h1 onclick="lockswitch(0, 'robo')" class="stats-text" id="roboparts-outer-text"><span id="roboparts-icon" class="material-symbols-outlined">&#xf06c;</span> RoboParts: <span class="stats-innertext" id="roboparts-inv-text">0</span></h1>
     
           </div>
         </div>
@@ -168,9 +202,10 @@
           <select class="shop-drpdwn" id="shop-sell-fish">
 
           </select>
-          <button onclick="sellfish();" class="shop-button">sell fish </button>
+          <button onclick="sellfish(document.getElementById('shop-sell-fish').value);" class="shop-button">sell fish </button>
           <button onclick="sellallfish();" class="shop-button">sell all </button>
     
+          <h1 class="sellmulti" id="fish-sellmultiouter"><span id="fish-sellmulti">-1.24</span>%</h1>
         </br>
         </div>
 
@@ -210,6 +245,7 @@
 
 <div id="Noti" class="Notification">
 </div>
+
 
 <script type="text/javascript" src="sound.js" content='no-cache'></script>
 <script type="text/javascript" src="cmd.js" content='no-cache'></script>

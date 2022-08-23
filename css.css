@@ -5,12 +5,18 @@
   text-shadow: 1px 1px black;
 
 }
+*:focus {
+  outline: none;
+
+}
 
 :root {
     --color-1: rgba(20, 20, 20, 0.726); 
     --borderr: 0px;
     --color-2: rgb(111, 226, 255);
     --color-3: rgb(128, 140, 255);
+    --boxshadow: 3px;
+    --boxshadowcolor: black;
 }
 ::-webkit-scrollbar {
     width: 0px;
@@ -23,6 +29,7 @@ html {
 * {
     margin: 0;
     padding: 0;
+
 }
 .navbar {
     margin: 5px;
@@ -30,6 +37,8 @@ html {
     overflow: hidden;
     border-top: 1px solid white;
     border-image: linear-gradient(120deg, var(--color-2), var(--color-3)) 1;
+  box-shadow: 0px 0px var(--boxshadow) var(--boxshadowcolor);
+  backdrop-filter: blur(8px); 
 
 }
 .div-ponds {
@@ -40,6 +49,9 @@ html {
     position: fixed;
     bottom: 0;
     border-radius: var(--borderr);
+    box-shadow: 0px 0px var(--boxshadow) var(--boxshadowcolor);
+    backdrop-filter: blur(8px); 
+
 }
 .div-terminal {
     background-color: var(--color-1);
@@ -53,6 +65,8 @@ html {
     bottom: 0;
     z-index: 999;
     border-radius: var(--borderr);
+    box-shadow: 0px 0px var(--boxshadow) var(--boxshadowcolor);
+    backdrop-filter: blur(8px); 
 
 }
 
@@ -66,6 +80,14 @@ html {
     margin: 5px;
     border-radius: var(--borderr);
     overflow: scroll;
+    box-shadow: 0px 0px var(--boxshadow) var(--boxshadowcolor);
+    backdrop-filter: blur(8px); 
+
+}
+.sellmulti {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+
 }
 .fiish {
     font-family: 'Montserrat', sans-serif;
@@ -122,7 +144,8 @@ html {
     box-shadow: 0px 0px 3px black;
     transition: 0.3s;
     text-align: left;
-
+    box-shadow: 0px 0px var(--boxshadow) var(--boxshadowcolor);
+  margin-top: 5px;
 }
 .side-button-main:hover {
     box-shadow: 0px 0px 3px var(--color-2);
@@ -167,6 +190,8 @@ html {
     height: 400px;
     vertical-align: top;
     overflow: scroll;
+    box-shadow: 0px 0px var(--boxshadow) var(--boxshadowcolor);
+
 }
 .div-cont-cat {
     color: white;
@@ -195,6 +220,7 @@ html {
 }
 .pond-btn {
     margin-top: 5px;
+    width: 45%;
 }
 .log-input {
     bottom: 0;
@@ -209,8 +235,6 @@ html {
     color: white;
 }
 .nav-userinf {
-    bottom: 0;
-    position: fixed;
     margin-bottom: 10px;
     margin-left: 5px;
 }
@@ -321,9 +345,13 @@ html {
   color: white;
   font-family: 'Montserrat', sans-serif;
   margin-top: 5px;
+  transition: 0.3s;
 }
 .shop-button:hover {
   cursor: pointer;
+  box-shadow: 0px 0px 2px var(--color-2);
+  cursor: pointer;
+
 }
 .shop-section-text {
   color: white;
@@ -364,4 +392,32 @@ overflow: hidden;
   .log-input:focus {
     outline: none;
   }
-  
+  .popup {
+    z-index: 1000;
+    position: fixed;
+  }
+  #roboparts-icon2 {
+    font-size: 100px;
+    transition: 0.3s;
+    color: white;
+  }
+  #roboparts-icon2:hover {
+    color: var(--color-3) !important;
+    box-shadow: 0px 0px 2px var(--color-2);
+    border-radius: 5px;
+  }
+  #money-icon2 {
+    font-size: 100px;
+    transition: 0.3s;
+    color: white;
+
+  }
+  #money-icon2:hover {
+    color: var(--color-3) !important;
+    box-shadow: 0px 0px 2px var(--color-2);
+    border-radius: 5px;
+
+  }
+  .popup:hover {
+    cursor: copy;
+  }

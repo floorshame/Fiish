@@ -168,21 +168,6 @@ function saveGame() {
     }
 
 
-    if (typeof gamedata.craftFMP !== "undefined") {
-      for (i = 0; i < gamedata.craftFMP.length; i++) {
-        craftable.FMP[i] = gamedata.craftFMP[i];
-      }
-    }
-    if (typeof gamedata.craftCRP !== "undefined") {
-      for (i = 0; i < gamedata.craftCRP.length; i++) {
-        craftable.CRP[i] = gamedata.craftCRP[i];
-      }
-    }
-      if (typeof gamedata.craftARCP !== "undefined") {
-        for (i = 0; i < gamedata.craftARCP.length; i++) {
-          craftable.ARCP[i] = gamedata.craftARCP[i];
-        }
-      }
   
         }
         updateall();

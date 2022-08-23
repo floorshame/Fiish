@@ -24,6 +24,7 @@ function saveGame() {
         pfplink: game.pfp,
         menuBTN: game.menukeycode,
         logMax: game.maxlog,
+        roboParts: game.roboparts,
 
         /* weather time */
         currentWeather: gameTDM.currentweather,
@@ -58,20 +59,11 @@ function saveGame() {
         workersOwned: workers.owned,
         workerstime: workers.timedown, 
 
-        /* robo parts */
-        robopOwned: roboparts.owned,
-        robopUnlocked: roboparts.unlocked,
-        robopLocked: roboparts.locked,
-
-        craftFMP: craftable.FMP,
-        craftCRP: craftable.CRP,
-        craftARCP: craftable.ARCP,
-
+        craftRobo: craftable.roboparts,
 
     };
     localStorage.setItem("gamedata", JSON.stringify(gamedata));
     updatenav();
-    addLog('game', 'you have saved');
 
   }
 
@@ -99,6 +91,7 @@ function saveGame() {
         if (typeof gamedata.pfplink !== "undefined") game.pfp = gamedata.pfplink;    
         if (typeof gamedata.menuBTN !== "undefined") game.menukeycode = gamedata.menuBTN;    
         if (typeof gamedata.logMax !== "undefined") game.maxlog = gamedata.logMax;    
+        if (typeof gamedata.roboParts !== "undefined") game.roboparts = gamedata.roboParts;    
 
   
         if (typeof gamedata.fishOwned !== "undefined") {
@@ -149,18 +142,6 @@ function saveGame() {
       }
     }
   
-    if (typeof gamedata.robopOwned !== "undefined") {
-      for (i = 0; i < gamedata.robopOwned.length; i++) {
-        roboparts.owned[i] = gamedata.robopOwned[i];
-      }
-    }
-
-    if (typeof gamedata.robopUnlocked !== "undefined") {
-      for (i = 0; i < gamedata.robopUnlocked.length; i++) {
-        roboparts.unlocked[i] = gamedata.robopUnlocked[i];
-      }
-    }
-
     if (typeof gamedata.workersNewCost !== "undefined") {
       for (i = 0; i < gamedata.workersNewCost.length; i++) {
         workers.newcost[i] = gamedata.workersNewCost[i];
@@ -173,33 +154,20 @@ function saveGame() {
       }
     }
 
+    if (typeof gamedata.craftRobo !== "undefined") {
+      for (i = 0; i < gamedata.craftRobo.length; i++) {
+        craftable.roboparts[i] = gamedata.craftRobo[i];
+      }
+    }
+
+
     if (typeof gamedata.fishLocked !== "undefined") {
       for (i = 0; i < gamedata.fishLocked.length; i++) {
         fish.locked[i] = gamedata.fishLocked[i];
       }
     }
 
-    if (typeof gamedata.robopLocked !== "undefined") {
-      for (i = 0; i < gamedata.robopLocked.length; i++) {
-        roboparts.locked[i] = gamedata.robopLocked[i];
-      }
-    }
 
-    if (typeof gamedata.craftFMP !== "undefined") {
-      for (i = 0; i < gamedata.craftFMP.length; i++) {
-        craftable.FMP[i] = gamedata.craftFMP[i];
-      }
-    }
-    if (typeof gamedata.craftCRP !== "undefined") {
-      for (i = 0; i < gamedata.craftCRP.length; i++) {
-        craftable.CRP[i] = gamedata.craftCRP[i];
-      }
-    }
-      if (typeof gamedata.craftARCP !== "undefined") {
-        for (i = 0; i < gamedata.craftARCP.length; i++) {
-          craftable.ARCP[i] = gamedata.craftARCP[i];
-        }
-      }
   
         }
         updateall();
@@ -216,7 +184,7 @@ function saveGame() {
         }
         game.loaded = true;
         document.getElementById('loading-screen').style.display = 'none'
-        addLog('game', 'sev: ' + game.version + ' | sav:' + game.saveversion);
+        addLog('game', 'sev: ' + game.version + ' | sav:' + game.saveversion, "fiish");
 
   }
   
@@ -224,6 +192,8 @@ function saveGame() {
     if (event.ctrlKey && event.which == 83) { //ctrl + s //
         event.preventDefault();
         saveGame();
+        addLog('game', 'you have saved');
+
     }
   }, false);
   
